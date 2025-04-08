@@ -1,0 +1,523 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;700&display=swap');
+
+:root {
+    /* === Colors === */
+    --color-primary: #3AB9B1;
+    /* Бірюзовий */
+    --color-secondary: #D08D6A;
+    /* Пильний теракотовий */
+    --color-light: #F3E7CF;
+    /* Пісочно-бежевий */
+    --color-background: #FDF9F0;
+    /* Теплий білий */
+    --color-dark: #3B4E51;
+    /* Графітовий сірий */
+    --color-accent-1: #9FDCE0;
+    /* Світло-бірюзовий */
+    --color-accent-2: #F6C2A1;
+    /* Світлий теракотовий */
+    --color-accent-3: #ECEAD4;
+    /* Дуже світлий пісочний */
+
+    /* === Fonts === */
+    --font-thin: 300;
+    --font-regular: 400;
+    --font-bold: 700;
+
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-md: 16px;
+    --text-lg: 20px;
+    --text-xl: 28px;
+    --text-xxl: 40px;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-dark);
+    font-weight: var(--font-regular);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+/* === Buttons === */
+.btn-primary {
+    background-color: var(--color-dark);
+    color: var(--color-background);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: var(--font-bold);
+    font-family: "Poppins", sans-serif;
+    font-size: var(--text-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    /* Added for <a> tags used as buttons */
+    display: inline-block;
+    /* Added for proper padding/margin */
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+}
+
+/* === Product Card === */
+.product-card {
+    /* background-color: var(--color-light); /* Removed default background */
+    border-radius: 16px;
+    padding: 24px;
+    /* box-shadow: var(--shadow-sm); /* Removed default shadow */
+    transition: transform 0.4s ease;
+    /* Styles for content alignment, etc. can be added here */
+}
+
+.product-card:hover {
+    /* transform: scale(1.02); /* Keep or adjust hover effect? */
+    /* Maybe add shadow on hover? */
+    /* box-shadow: var(--shadow-md); */
+}
+
+.product-card .product-image-placeholder {
+    height: 150px;
+    /* Example height, adjust as needed */
+    border-radius: 8px;
+    /* Match design */
+    margin-bottom: 16px;
+    /* Background color will be set inline or via modifier classes */
+    background-color: rgba(0, 0, 0, 0.05);
+    /* Light overlay */
+}
+
+/* Example modifier classes for card backgrounds based on design */
+.product-card.bg-accent-1 {
+    background-color: var(--color-accent-1);
+}
+
+.product-card.bg-accent-2 {
+    background-color: var(--color-accent-2);
+}
+
+.product-card.bg-accent-3 {
+    background-color: var(--color-accent-3);
+}
+
+/* New modifier for primary background color */
+.product-card.bg-primary {
+    background-color: var(--color-primary);
+}
+
+/* Styles for text inside the card */
+.product-card .product-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    color: var(--color-dark);
+    /* Ensure dark text on light background */
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.product-card .product-description {
+    font-size: var(--text-sm);
+    color: var(--color-dark);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.product-card .product-price {
+    font-size: var(--text-sm);
+    font-weight: var(--font-regular);
+    color: var(--color-dark);
+    margin-bottom: 16px;
+}
+
+/* === Shadows (Utilities) === */
+.shadow-sm {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-md {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-lg {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* === Container === */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* === Header === */
+header {
+    background-color: var(--color-dark);
+    /* From design */
+    padding: 15px 0;
+    /* Restored padding */
+    color: var(--color-background);
+    position: relative;
+    /* Added back for mobile nav positioning */
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    min-height: 50px;
+    padding: 0 16px;
+    /* Increased left padding again for larger logo */
+    padding-left: 160px;
+}
+
+.logo {
+    position: absolute;
+    left: 16px;
+    top: -30px;
+    /* Increased overlap slightly more */
+    z-index: 10;
+    line-height: 0;
+}
+
+.logo img {
+    height: 120px;
+    /* Made logo significantly larger */
+    width: auto;
+    display: block;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+/* Keep display: flex for main-nav on desktop */
+.main-nav ul {
+    display: flex;
+}
+
+/* Added styles for positioning the main navigation */
+.main-nav {
+    margin-left: auto;
+    /* Push nav to the right */
+    margin-right: 5%;
+}
+
+nav li {
+    margin-left: 25px;
+}
+
+nav a {
+    color: var(--color-background);
+    text-decoration: none;
+    font-size: var(--text-lg);
+    /* Increased font size */
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--color-primary);
+}
+
+.burger-menu {
+    display: none;
+    /* Keep it hidden on desktop by default */
+    width: 36px;
+    /* Made icon wider */
+    /* height: 22px; */
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: 10px;
+    /* Added margin to push it left from the edge */
+    padding: 5px;
+    position: relative;
+    /* display: flex; */
+    /* Removed flex from default state again! */
+    flex-direction: column;
+}
+
+/* Styles for the lines inside the burger */
+.burger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-background);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Add margin to create space between lines */
+.burger-menu span:not(:last-child) {
+    margin-bottom: 5px;
+    /* Adjust this value for desired gap */
+}
+
+/* === Mobile Navigation === */
+.mobile-nav {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    /* Should now position correctly below the header */
+    left: 0;
+    width: 100%;
+    background-color: rgba(59, 78, 81, 0.95);
+    /* Slightly darker/transparent dark color */
+    z-index: 1000;
+    padding: 15px 0;
+    box-shadow: var(--shadow-md);
+    /* Add shadow for separation */
+}
+
+.mobile-nav.is-open {
+    display: block;
+    /* Show when open */
+}
+
+.mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    /* Center links */
+}
+
+.mobile-nav li {
+    margin: 15px 0;
+    /* Vertical spacing */
+}
+
+.mobile-nav a {
+    color: var(--color-background);
+    text-decoration: none;
+    font-size: var(--text-lg);
+    /* Slightly larger text for mobile */
+    display: block;
+    /* Make links full width */
+    padding: 5px 0;
+}
+
+.mobile-nav a:hover {
+    color: var(--color-primary);
+}
+
+/* === Footer === */
+footer {
+    background-color: var(--color-dark);
+    /* From design */
+    color: var(--color-light);
+    /* Light text on dark background */
+    padding: 20px 0;
+    /* margin-top: 40px; */
+    /* Removed top margin */
+}
+
+footer p {
+    text-align: center;
+    margin: 0;
+    font-size: var(--text-sm);
+}
+
+/* === Utility Classes === */
+.text-lg {
+    font-size: var(--text-lg);
+}
+
+.text-xl {
+    font-size: var(--text-xl);
+}
+
+.text-bold {
+    font-weight: var(--font-bold);
+}
+
+/* === Basic Product Grid === */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Responsive grid */
+    gap: 30px;
+    /* Spacing between cards */
+    /* padding: 40px 0; /* Padding for the section - Moved to .products-section */
+}
+
+/* === Titles === */
+.section-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 80px;
+    font-weight: var(--font-bold);
+    color: var(--color-light);
+    text-align: center;
+    margin-bottom: 10px;
+    /* border: 1px solid var(--color-dark); */
+    /* Removed box border */
+    -webkit-text-stroke: 0.5px var(--color-dark);
+    /* Made text stroke thinner */
+    text-stroke: 0.5px var(--color-dark);
+    /* Standard property (less support) */
+}
+
+.section-subtitle {
+    font-size: var(--text-md);
+    color: var(--color-light);
+    /* Matching design text color */
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Blinking cursor effect for typewriter */
+.section-subtitle::after {
+    content: '|';
+    display: inline-block;
+    animation: blink 1s step-start infinite;
+    opacity: 1;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Removed class .title-section-bg as the background is now on .products-section */
+/* .title-section-bg {
+    background-color: var(--color-accent-1);
+    padding: 40px 0;
+    margin-bottom: 30px;
+    border-radius: 16px;
+} */
+
+/* New style for the entire products section background */
+.products-section {
+    background-color: var(--color-accent-1);
+    padding: 40px 0 40px 0;
+    /* Top and bottom padding for the whole section */
+    /* border-radius: 16px; */
+    /* Removed rounded corners */
+    /* margin-bottom: 40px; */
+    /* Removed bottom margin */
+}
+
+/* Ensure section titles inside this background are dark - removed title from this rule */
+/* .products-section .section-title, */
+.products-section .section-subtitle {
+    color: var(--color-dark);
+    /* Subtitle remains dark */
+}
+
+/* === Adaptability (Example from stylerules, adjust as needed) === */
+@media (max-width: 1024px) {
+    header .container {
+        padding: 0 12px;
+        /* Reset padding for mobile */
+        padding-left: 12px;
+    }
+
+    .btn-primary {
+        font-size: var(--text-sm);
+        padding: 10px 20px;
+    }
+
+    .product-card {
+        padding: 20px;
+    }
+
+    /* Hide main nav on tablet/mobile */
+    .main-nav {
+        display: none;
+        margin-left: 0;
+        /* Reset margin */
+    }
+
+    /* nav ul { 
+        display: none; /* Hide nav links */
+    /* } */
+
+    .burger-menu {
+        display: flex;
+        /* Change from block to flex to show correctly */
+        /* Show burger */
+    }
+}
+
+@media (max-width: 768px) {
+    .btn-primary {
+        font-size: var(--text-sm);
+        /* Keep sm or make xs? */
+        padding: 10px 18px;
+        /* Adjust padding */
+    }
+
+    .product-card {
+        padding: 16px;
+    }
+
+    .section-title {
+        font-size: 60px;
+    }
+
+    .section-subtitle {
+        font-size: var(--text-sm);
+    }
+}
+
+/* === Preloader Styles === */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+#preloader img {
+    width: 150px;
+    /* Adjust size as needed */
+    height: auto;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Style to hide preloader when body has 'loaded' class */
+body.loaded #preloader {
+    opacity: 0;
+    pointer-events: none;
+    /* Disable interactions */
+}

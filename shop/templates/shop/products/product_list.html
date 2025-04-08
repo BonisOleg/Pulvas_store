@@ -1,0 +1,28 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+{# Тепер обгортка .products-section знаходиться ЗОВНІ головного .container #}
+<div class="products-section">
+    {# А вже всередині неї є свій .container для контенту #}
+    <div class="container">
+        {# Заголовок тепер без окремої фонової обгортки #}
+        <h1 class="section-title">Pulvas Store</h1>
+        <p class="section-subtitle">Ми працюємо щоб Ви виглядали розкішно!</p>
+
+        <div class="product-grid">
+            {# Приклад виводу кількох карток з різними кольорами #}
+            {% for product in products %}
+            {% include 'shop/includes/product_card.html' with product=product card_color_class=product.color_class %}
+            {% endfor %}
+
+            {# Приклад без циклу, якщо немає даних #}
+            {% if not products %}
+            {% include 'shop/includes/product_card.html' with card_color_class='bg-primary' %}
+            {% include 'shop/includes/product_card.html' with card_color_class='bg-accent-2' %}
+            {% include 'shop/includes/product_card.html' with card_color_class='bg-accent-3' %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% load static %} {# Завантажуємо тег static #}
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <link rel="stylesheet" href="{% static 'shop/styles.css' %}">
+</head>
+
+<body>
+    {# Preloader Start #}
+    <div id="preloader">
+        <img src="{% static 'shop/img/logo.png' %}" alt="Loading...">
+    </div>
+    {# Preloader End #}
+
+    {% include 'shop/includes/header.html' %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include 'shop/includes/footer.html' %}
+
+    <script src="{% static 'shop/script.js' %}"></script> {# Виправлено шлях з 'shop/shop/script.js' #}
+</body>
+
+</html>
