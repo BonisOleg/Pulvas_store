@@ -1,0 +1,25 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="container" style="padding-top: 40px; padding-bottom: 40px;">
+    <h1 class="section-title" style="font-size: 60px;">{{ product.name }}</h1>
+
+    <div style="display: flex; gap: 30px; margin-top: 30px;">
+        <div style="flex: 1;">
+            {# Тут буде зображення товару #}
+            <div
+                style="height: 400px; background-color: #eee; border-radius: 8px; display:flex; align-items:center; justify-content:center;">
+                Зображення товару</div>
+        </div>
+        <div style="flex: 1;">
+            <h2>Опис</h2>
+            <p>{{ product.description }}</p>
+            <h3 style="margin-top: 20px;">Ціна: {{ product.price }} грн</h3>
+            {# Кнопки "Зв'язатися", "Схожі товари" тощо #}
+            <a href="{% url 'shop:contact' %}" class="btn-primary" style="margin-top: 20px;">Зв'язатися</a>
+            {# <a href="#" class="btn-secondary">Схожі товари</a> #}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

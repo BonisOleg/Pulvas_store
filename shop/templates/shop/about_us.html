@@ -1,0 +1,54 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container contact-page-padding">
+    <h1 class="section-title">Про нас</h1>
+
+    {# Section 1: Image Left #}
+    <div class="about-section">
+        <div class="about-column about-image">
+            <div class="about-image-placeholder"><span>Зображення 1</span></div>
+        </div>
+        <div class="about-column about-text">
+            <h2 class="section-title">Наша Історія</h2>
+            <p>
+                Pulvas Store народився з пристрасті до моди та бажання пропонувати лише найкращий одяг.
+                Ми почали як невеликий бутик, але завдяки вашій довірі виросли у повноцінний магазин,
+                що пропонує стильні та якісні речі для кожного.
+            </p>
+        </div>
+    </div>
+
+    {# Section 2: Text Left (Image Right) - ДОДАЄМО КЛАС image-right #}
+    <div class="about-section image-right">
+        <div class="about-column about-text">
+            <h2 class="section-title">Наша Місія</h2>
+            <p>
+                Ми прагнемо, щоб кожен наш клієнт виглядав розкішно та відчував себе впевнено.
+                Наша мета - надавати не просто одяг, а натхнення для створення вашого унікального стилю,
+                пропонуючи лише актуальні тренди та перевірену якість.
+            </p>
+        </div>
+        <div class="about-column about-image">
+            <div class="about-image-placeholder"><span>Зображення 2</span></div>
+        </div>
+    </div>
+
+    {# Section 3: Image Left #}
+    <div class="about-section">
+        <div class="about-column about-image">
+            <div class="about-image-placeholder"><span>Зображення 3</span></div>
+        </div>
+        <div class="about-column about-text">
+            <h2 class="section-title">Чому Ми?</h2>
+            <p>
+                Ми ретельно відбираємо кожну річ у нашій колекції, співпрацюючи з надійними виробниками.
+                Ми цінуємо ваш час та комфорт, пропонуючи зручний сервіс та швидку доставку.
+                Ваша задоволеність - наш головний пріоритет.
+            </p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

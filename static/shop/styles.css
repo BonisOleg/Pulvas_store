@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+:root {
+    /* Кольори (вже є, переконуємось) */
+    --color-primary: #3AB9B1;
+    --color-secondary: #D08D6A;
+    --color-light: #F3E7CF;
+    --color-background: #FDF9F0;
+    --color-dark: #3B4E51;
+    --color-accent-1: #9FDCE0;
+    --color-accent-2: #F6C2A1;
+    --color-accent-3: #ECEAD4;
+
+    /* Шрифти */
+    --font-thin: 300;
+    --font-regular: 400;
+    --font-bold: 700;
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-md: 16px;
+    --text-lg: 20px;
+    --text-xl: 28px;
+    --text-xxl: 40px;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-dark);
+    font-weight: var(--font-regular);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+/* --- Заголовки секцій (Єдине визначення!) --- */
+html body main .section-title,
+.section-title {
+    font-family: "Poppins", sans-serif !important;
+    font-weight: var(--font-bold);
+    color: var(--color-dark);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+/* --- Бренд/Лого --- */
+html body main #brand-title,
+#brand-title {
+    font-family: "Poppins", sans-serif;
+    font-size: 72px;
+    text-align: center;
+    color: var(--color-dark);
+    margin-bottom: 10px;
+    font-weight: var(--font-bold);
+}
+
+.section-subtitle {}
+
+/* --- Сторінка Контакти --- */
+.contact-page-padding {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    /* Трохи збільшив відступ */
+    /* border: 1px solid #eee; */
+    /* Прибрав рамку, зробимо краще тінню? */
+    border-radius: 16px;
+    /* Збільшив заокруглення */
+    background-color: var(--color-background);
+    /* Фон як у сторінки */
+    box-shadow: var(--shadow-md);
+    /* Додав тінь */
+}
+
+.form-group {
+    margin-bottom: 20px;
+    /* Збільшив відступ */
+}
+
+.form-group label {
+    display: block;
+    /* Label над полем */
+    margin-bottom: 8px;
+    font-weight: var(--font-bold);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    /* Збільшив падінг */
+    border: 1px solid var(--color-accent-3);
+    /* Використовуємо колір з палітри */
+    border-radius: 8px;
+    /* Стандартне заокруглення */
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--text-md);
+    background-color: var(--color-background);
+    color: var(--color-dark);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(58, 185, 177, 0.2);
+    /* Тінь при фокусі */
+}
+
+/* --- Загальні утиліти --- */
+.text-center {
+    text-align: center;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+/* --- Кінець сторінки Контакти --- */

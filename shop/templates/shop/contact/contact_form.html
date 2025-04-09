@@ -1,0 +1,27 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="container contact-page-padding">
+    <h1 class="section-title">Контакти</h1>
+    <p class="text-center mb-30">Маєте запитання? Зв'яжіться з нами!</p>
+
+    {# Тут буде форма контактів #}
+    <form action="" method="post" class="contact-form">
+        {% csrf_token %}
+        {# Приклад полів форми #}
+        <div class="form-group">
+            <label for="name">Ваше ім'я:</label><br>
+            <input type="text" id="name" name="name" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="email">Ваш Email:</label><br>
+            <input type="email" id="email" name="email" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="message">Повідомлення:</label><br>
+            <textarea id="message" name="message" rows="5" required class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Надіслати</button>
+    </form>
+</div>
+{% endblock %}

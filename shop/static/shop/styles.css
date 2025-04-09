@@ -8,8 +8,8 @@
     /* Пильний теракотовий */
     --color-light: #F3E7CF;
     /* Пісочно-бежевий */
-    --color-background: #FDF9F0;
-    /* Теплий білий */
+    --color-background: #FFFFFF;
+    /* Чистий білий */
     --color-dark: #3B4E51;
     /* Графітовий сірий */
     --color-accent-1: #9FDCE0;
@@ -67,8 +67,9 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: var(--color-primary);
-    color: var(--color-dark);
+    background-color: #6c7a7c;
+    /* Lighter grey hover */
+    color: var(--color-background);
 }
 
 /* === Product Card === */
@@ -77,14 +78,16 @@ body {
     border-radius: 16px;
     padding: 24px;
     /* box-shadow: var(--shadow-sm); /* Removed default shadow */
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    /* Added box-shadow to transition */
     /* Styles for content alignment, etc. can be added here */
 }
 
 .product-card:hover {
-    /* transform: scale(1.02); /* Keep or adjust hover effect? */
-    /* Maybe add shadow on hover? */
-    /* box-shadow: var(--shadow-md); */
+    transform: scale(1.03);
+    /* Slightly scale up the card */
+    box-shadow: var(--shadow-md);
+    /* Add medium shadow on hover */
 }
 
 .product-card .product-image-placeholder {
@@ -356,24 +359,20 @@ footer p {
 
 /* === Titles === */
 .section-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: 80px;
+    font-family: "Poppins", sans-serif;
+    font-size: 32px;
     font-weight: var(--font-bold);
-    color: var(--color-light);
+    color: var(--color-dark);
     text-align: center;
-    margin-bottom: 10px;
-    /* border: 1px solid var(--color-dark); */
-    /* Removed box border */
-    -webkit-text-stroke: 0.5px var(--color-dark);
-    /* Made text stroke thinner */
-    text-stroke: 0.5px var(--color-dark);
-    /* Standard property (less support) */
+    margin-bottom: 50px;
+    /* Removed text stroke as it won't be visible on dark text */
+    /* -webkit-text-stroke: 0.5px var(--color-dark); */
+    /* text-stroke: 0.5px var(--color-dark); */
 }
 
 .section-subtitle {
     font-size: var(--text-md);
-    color: var(--color-light);
-    /* Matching design text color */
+    /* color: var(--color-light); /* Color now set by .products-section rule */
     text-align: center;
     margin-bottom: 40px;
 }
@@ -403,7 +402,7 @@ footer p {
 
 /* New style for the entire products section background */
 .products-section {
-    background-color: var(--color-accent-1);
+    background-color: var(--color-background);
     padding: 40px 0 40px 0;
     /* Top and bottom padding for the whole section */
     /* border-radius: 16px; */
@@ -521,3 +520,265 @@ body.loaded #preloader {
     pointer-events: none;
     /* Disable interactions */
 }
+
+/* === About Us Page Styles === */
+.about-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+    gap: 40px;
+    /* --- Animation --- */
+    opacity: 0;
+    transform: translateX(-80px);
+    /* Start from Left by default */
+    transition-property: opacity, transform;
+    /* Animate these properties */
+    transition-duration: 1.4s;
+    /* Default duration (for 3rd section onwards) */
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    /* Default easing */
+}
+
+/* Modifier for slower animation */
+.about-section.animate-slow {
+    transition-duration: 2.8s;
+    /* Slower duration for first two sections */
+}
+
+.about-section.image-right {
+    /* Animation start from Right */
+    transform: translateX(80px);
+}
+
+.about-section.is-visible {
+    /* Animation end state */
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.about-column {
+    flex: 1;
+    /* Make columns share space equally */
+}
+
+.about-text h2 {
+    font-family: "Poppins", sans-serif;
+    font-size: 36px;
+    font-weight: var(--font-bold);
+    color: var(--color-secondary);
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.about-text p {
+    line-height: 1.7;
+    color: var(--color-dark);
+}
+
+.about-image-placeholder {
+    background-color: var(--color-light);
+    /* Light background for placeholder */
+    border-radius: 12px;
+    height: 300px;
+    /* Example height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-dark);
+    font-weight: bold;
+}
+
+/* Adaptability for About Us sections */
+@media (max-width: 768px) {
+
+    .about-section,
+    .about-section.image-right {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        /* Reset animation transforms for mobile if needed, or adjust */
+        /* transform: translateX(0); /* Example: disable horizontal animation on mobile */
+        /* opacity: 1; /* Make visible by default on mobile if animation is disabled */
+    }
+
+    .about-image-placeholder {
+        height: 200px;
+        /* Reduce image height on mobile */
+        margin-bottom: 15px;
+    }
+
+    .about-text h2 {
+        font-size: 40px;
+    }
+}
+
+/* --- Бренд/Лого --- */
+html body main #brand-title,
+/* Додаємо специфічності */
+#brand-title {
+    font-family: "Great Vibes", cursive;
+    /* ПОВЕРТАЄМО Great Vibes */
+    font-size: 72px;
+    text-align: center;
+    color: var(--color-dark);
+    margin-bottom: 10px;
+    font-weight: normal;
+    /* Повертаємо normal для Great Vibes */
+}
+
+/* --- Заголовки секцій (Єдине визначення!) --- */
+html body main .section-title,
+.section-title {
+    font-family: "Poppins", sans-serif !important;
+}
+
+/* --- Сторінка Контакти --- */
+/* Також використовується для відступів на інших сторінках, як 'Про нас' */
+.contact-page-padding {
+    padding-top: 60px;
+    /* Збільшено */
+    padding-bottom: 60px;
+    /* Збільшено */
+}
+
+/* === Catalog Page: Category Folders === */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Адаптивна сітка */
+    gap: 40px;
+    /* Відстань між папками */
+    margin-top: 40px;
+}
+
+.category-folder {
+    display: block;
+    text-decoration: none;
+    border-radius: 16px;
+    overflow: hidden;
+    /* Щоб зображення не вилазило */
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    /* Для позиціонування тексту */
+}
+
+.category-folder:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.category-folder:hover .category-image-placeholder {
+    transform: scale(1.05);
+}
+
+/* Стилі для центрального емоджі */
+.category-emoji {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    /* Центруємо і трохи піднімаємо */
+    z-index: 1;
+    font-size: 100px;
+    /* Великий емоджі */
+    line-height: 1;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease-out;
+}
+
+.category-folder:hover .category-emoji {
+    transform: translate(-50%, -60%) scale(1.15);
+    /* Збільшуємо при наведенні */
+}
+
+.category-image-placeholder {
+    height: 400px;
+    background-color: var(--color-accent-3);
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.4s ease-out;
+    position: relative;
+    /* Потрібно для псевдоелемента */
+    overflow: hidden;
+    /* Щоб патерн не вилазив при зумі */
+}
+
+/* Псевдоелемент для фонового патерну */
+.category-image-placeholder::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Повертаємо патерн */
+    background-repeat: repeat;
+    background-size: 25px 25px;
+    opacity: 0.35;
+    z-index: 0;
+    transition: opacity 0.4s ease-out;
+    /* Видаляємо тестовий фон */
+    /* background-color: rgba(255, 0, 0, 0.35); */
+}
+
+/* Змінюємо ефект hover для патерну */
+.category-folder:hover .category-image-placeholder::before {
+    opacity: 0.5;
+    /* Видаляємо тестовий фон */
+    /* background-color: rgba(255, 0, 0, 0.5); */
+}
+
+/* Патерн для жіночої папки (іконка Venus) */
+.category-folder.female .category-image-placeholder::before {
+    /* background-image відновлюється нижче */
+    /* background-color: rgba(0, 0, 255, 0.35); */
+    /* Спрощений SVG Венери */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cline x1='12' y1='17' x2='12' y2='22'/%3E%3Cline x1='9' y1='19' x2='15' y2='19'/%3E%3C/svg%3E");
+}
+
+/* Патерн для чоловічої папки (іконка Mars) */
+.category-folder.male .category-image-placeholder::before {
+    /* background-image відновлюється нижче */
+    /* Спрощений SVG Марса */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='5'/%3E%3Cline x1='16.2' y1='7.8' x2='21' y2='3'/%3E%3Cpolyline points='17 3 21 3 21 7'/%3E%3C/svg%3E");
+}
+
+.category-folder.female .category-image-placeholder {
+    /* background-image: url('path/to/female-image.jpg'); */
+    /* Додати шлях до картинки */
+    background-color: var(--color-accent-2);
+    /* Рожевий фон для прикладу */
+}
+
+.category-folder.male .category-image-placeholder {
+    /* background-image: url('path/to/male-image.jpg'); */
+    /* Додати шлях до картинки */
+    background-color: var(--color-accent-1);
+    /* Бірюзовий фон для прикладу */
+}
+
+.category-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* background-color: rgba(59, 78, 81, 0.8); */
+    /* Замінено на градієнт */
+    background: linear-gradient(to top, rgba(59, 78, 81, 0.9) 10%, rgba(59, 78, 81, 0) 100%);
+    color: var(--color-background);
+    padding: 25px 20px 15px 20px;
+    /* Збільшено відступ зверху */
+    margin: 0;
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.category-title span {
+    margin-right: 8px;
+    /* Відступ для емоджі */
+}
+
+/* === End Catalog Page === */
