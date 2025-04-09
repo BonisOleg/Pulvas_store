@@ -1,0 +1,26 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title|default:"Наявність" }} - Pulvas{% endblock %}
+
+{% block content %}
+<section class="products-section contact-page-padding">
+    <div class="container">
+        <h1 class="section-title">{{ page_title|default:"Товари в наявності" }}</h1>
+        <p class="section-subtitle">Ознайомтеся з товарами, які доступні для замовлення прямо зараз.</p>
+
+        {% if products %}
+        <div class="product-grid">
+            {% for product in products %}
+            {# Тепер клас кольору задається всередині product_card.html через змінну context #}
+            {# <div class="product-card {{ product.color_class|default:'bg-accent-3' }}"> #}
+                {% include 'shop/includes/product_card.html' with product=product card_color_class=product.color_class %}
+                {# </div> #}
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-center">Наразі немає товарів у наявності.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

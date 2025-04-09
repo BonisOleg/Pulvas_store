@@ -65,3 +65,19 @@ def product_detail_view(request: HttpRequest, product_id: int) -> HttpResponse:
         'product': product
     }
     return render(request, 'shop/products/product_detail.html', context) 
+
+# НОВА ФУНКЦІЯ
+def availability_view(request: HttpRequest) -> HttpResponse:
+    """Відображає сторінку з товарами, які є в наявності (поки що всі тестові).
+    
+    Використовує ті ж тестові дані, що й головна сторінка.
+    """
+    # TODO: Замінити на реальне отримання товарів В НАЯВНОСТІ з бази даних
+    products_data = [p.copy() for p in TEST_PRODUCTS_DATA]
+    products_with_color = _assign_color_classes(products_data)
+
+    context = {
+        'products': products_with_color,
+        'page_title': "Товари в наявності" # Можна передати заголовок
+    }
+    return render(request, 'shop/availability/availability.html', context) 

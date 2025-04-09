@@ -9,22 +9,24 @@
             <ul>
                 <li><a href="{% url 'shop:about_us' %}">Про нас</a></li>
                 <li><a href="{% url 'shop:catalog' %}">Каталог</a></li>
+                <li><a href="{% url 'shop:availability' %}">Наявність</a></li>
                 <li><a href="{% url 'shop:contact' %}">Контакти</a></li>
-                <li><a href="{% url 'shop:review_list' %}">Відгуки</a></li>
+                <li><a href="{% url 'shop:reviews' %}">Відгуки</a></li>
             </ul>
         </nav>
-        <div class="burger-menu">
+        <div class="burger-menu" id="burger-menu">
             <span></span>
             <span></span>
             <span></span>
         </div> {# Замінено символ на три span #}
     </div>
-    <div class="mobile-nav">
+    <div class="mobile-nav" id="mobile-nav">
         <ul>
             <li><a href="{% url 'shop:about_us' %}">Про нас</a></li>
             <li><a href="{% url 'shop:catalog' %}">Каталог</a></li>
+            <li><a href="{% url 'shop:availability' %}">Наявність</a></li>
             <li><a href="{% url 'shop:contact' %}">Контакти</a></li>
-            <li><a href="{% url 'shop:review_list' %}">Відгуки</a></li>
+            <li><a href="{% url 'shop:reviews' %}">Відгуки</a></li>
         </ul>
     </div>
 </header>

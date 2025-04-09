@@ -14,7 +14,7 @@ urlpatterns = [
     path('catalog/', views.catalog_view, name='catalog'),
 
     # Відгуки
-    path('reviews/', views.reviews_view, name='review_list'),
+    path('reviews/', views.reviews_view, name='reviews'),
     # Маршрут для додавання відгуку поки не активний
     # path('reviews/add/', views.add_review_view, name='add_review'), 
 
@@ -28,4 +28,5 @@ urlpatterns = [
     path('about-us/', views.about_us_view, name='about_us'),
 
     # Додайте інші шляхи тут
+    path('availability/', views.availability_view, name='availability'),
 ] 

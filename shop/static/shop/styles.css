@@ -1,7 +1,8 @@
+/* === IMPORTS & VARIABLES === */
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;700&display=swap');
 
 :root {
-    /* === Colors === */
+    /* --- Colors --- */
     --color-primary: #3AB9B1;
     /* Бірюзовий */
     --color-secondary: #D08D6A;
@@ -19,7 +20,7 @@
     --color-accent-3: #ECEAD4;
     /* Дуже світлий пісочний */
 
-    /* === Fonts === */
+    /* --- Fonts --- */
     --font-thin: 300;
     --font-regular: 400;
     --font-bold: 700;
@@ -27,11 +28,16 @@
     --text-xs: 12px;
     --text-sm: 14px;
     --text-md: 16px;
+    /* Базовий */
     --text-lg: 20px;
+    /* Посилання в хедері / Заголовки карток */
     --text-xl: 28px;
+    /* Заголовки категорій */
     --text-xxl: 40px;
+    /* Старий розмір заголовка секції */
 }
 
+/* === BASE & RESET === */
 body {
     font-family: "Poppins", sans-serif;
     background-color: var(--color-background);
@@ -43,298 +49,41 @@ body {
 }
 
 *,
-*::before,
-*::after {
+\n*::before,
+\n*::after {
     box-sizing: inherit;
 }
 
-/* === Buttons === */
-.btn-primary {
-    background-color: var(--color-dark);
-    color: var(--color-background);
-    border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-weight: var(--font-bold);
-    font-family: "Poppins", sans-serif;
-    font-size: var(--text-md);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    /* Added for <a> tags used as buttons */
-    display: inline-block;
-    /* Added for proper padding/margin */
-}
+/* === UTILITIES === */
 
-.btn-primary:hover {
-    background-color: #6c7a7c;
-    /* Lighter grey hover */
-    color: var(--color-background);
-}
-
-/* === Product Card === */
-.product-card {
-    /* background-color: var(--color-light); /* Removed default background */
-    border-radius: 16px;
-    padding: 24px;
-    /* box-shadow: var(--shadow-sm); /* Removed default shadow */
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    /* Added box-shadow to transition */
-    /* Styles for content alignment, etc. can be added here */
-}
-
-.product-card:hover {
-    transform: scale(1.03);
-    /* Slightly scale up the card */
-    box-shadow: var(--shadow-md);
-    /* Add medium shadow on hover */
-}
-
-.product-card .product-image-placeholder {
-    height: 150px;
-    /* Example height, adjust as needed */
-    border-radius: 8px;
-    /* Match design */
-    margin-bottom: 16px;
-    /* Background color will be set inline or via modifier classes */
-    background-color: rgba(0, 0, 0, 0.05);
-    /* Light overlay */
-}
-
-/* Example modifier classes for card backgrounds based on design */
-.product-card.bg-accent-1 {
-    background-color: var(--color-accent-1);
-}
-
-.product-card.bg-accent-2 {
-    background-color: var(--color-accent-2);
-}
-
-.product-card.bg-accent-3 {
-    background-color: var(--color-accent-3);
-}
-
-/* New modifier for primary background color */
-.product-card.bg-primary {
-    background-color: var(--color-primary);
-}
-
-/* Styles for text inside the card */
-.product-card .product-title {
-    font-size: var(--text-lg);
-    font-weight: var(--font-bold);
-    color: var(--color-dark);
-    /* Ensure dark text on light background */
-    margin-top: 0;
-    margin-bottom: 8px;
-}
-
-.product-card .product-description {
-    font-size: var(--text-sm);
-    color: var(--color-dark);
-    margin-bottom: 12px;
-    line-height: 1.4;
-}
-
-.product-card .product-price {
-    font-size: var(--text-sm);
-    font-weight: var(--font-regular);
-    color: var(--color-dark);
-    margin-bottom: 16px;
-}
-
-/* === Shadows (Utilities) === */
+/* --- Shadows --- */
 .shadow-sm {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .shadow-md {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    /* Використовується для моб. меню та форм */
 }
 
 .shadow-lg {
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    /* Використовується для hover папок категорій */
 }
 
-/* === Container === */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 16px;
-}
-
-/* === Header === */
-header {
-    background-color: var(--color-dark);
-    /* From design */
-    padding: 15px 0;
-    /* Restored padding */
-    color: var(--color-background);
-    position: relative;
-    /* Added back for mobile nav positioning */
-}
-
-header .container {
-    display: flex;
-    align-items: center;
-    position: relative;
-    min-height: 50px;
-    padding: 0 16px;
-    /* Increased left padding again for larger logo */
-    padding-left: 160px;
-}
-
-.logo {
-    position: absolute;
-    left: 16px;
-    top: -30px;
-    /* Increased overlap slightly more */
-    z-index: 10;
-    line-height: 0;
-}
-
-.logo img {
-    height: 120px;
-    /* Made logo significantly larger */
-    width: auto;
-    display: block;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-
-/* Keep display: flex for main-nav on desktop */
-.main-nav ul {
-    display: flex;
-}
-
-/* Added styles for positioning the main navigation */
-.main-nav {
-    margin-left: auto;
-    /* Push nav to the right */
-    margin-right: 5%;
-}
-
-nav li {
-    margin-left: 25px;
-}
-
-nav a {
-    color: var(--color-background);
-    text-decoration: none;
-    font-size: var(--text-lg);
-    /* Increased font size */
-    transition: color 0.3s ease;
-}
-
-nav a:hover {
-    color: var(--color-primary);
-}
-
-.burger-menu {
-    display: none;
-    /* Keep it hidden on desktop by default */
-    width: 36px;
-    /* Made icon wider */
-    /* height: 22px; */
-    cursor: pointer;
-    margin-left: auto;
-    margin-right: 10px;
-    /* Added margin to push it left from the edge */
-    padding: 5px;
-    position: relative;
-    /* display: flex; */
-    /* Removed flex from default state again! */
-    flex-direction: column;
-}
-
-/* Styles for the lines inside the burger */
-.burger-menu span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: var(--color-background);
-    border-radius: 3px;
-    transition: all 0.3s ease;
-}
-
-/* Add margin to create space between lines */
-.burger-menu span:not(:last-child) {
-    margin-bottom: 5px;
-    /* Adjust this value for desired gap */
-}
-
-/* === Mobile Navigation === */
-.mobile-nav {
-    display: none;
-    /* Hidden by default */
-    position: absolute;
-    top: 100%;
-    /* Should now position correctly below the header */
-    left: 0;
-    width: 100%;
-    background-color: rgba(59, 78, 81, 0.95);
-    /* Slightly darker/transparent dark color */
-    z-index: 1000;
-    padding: 15px 0;
-    box-shadow: var(--shadow-md);
-    /* Add shadow for separation */
-}
-
-.mobile-nav.is-open {
-    display: block;
-    /* Show when open */
-}
-
-.mobile-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+/* --- Text Alignment & Margin --- */
+.text-center {
     text-align: center;
-    /* Center links */
 }
 
-.mobile-nav li {
-    margin: 15px 0;
-    /* Vertical spacing */
+/* .mb-30 { Використовується? Якщо ні, можна видалити
+    margin-bottom: 30px;
+} */
+.mb-40 {
+    margin-bottom: 40px;
 }
 
-.mobile-nav a {
-    color: var(--color-background);
-    text-decoration: none;
-    font-size: var(--text-lg);
-    /* Slightly larger text for mobile */
-    display: block;
-    /* Make links full width */
-    padding: 5px 0;
-}
-
-.mobile-nav a:hover {
-    color: var(--color-primary);
-}
-
-/* === Footer === */
-footer {
-    background-color: var(--color-dark);
-    /* From design */
-    color: var(--color-light);
-    /* Light text on dark background */
-    padding: 20px 0;
-    /* margin-top: 40px; */
-    /* Removed top margin */
-}
-
-footer p {
-    text-align: center;
-    margin: 0;
-    font-size: var(--text-sm);
-}
-
-/* === Utility Classes === */
+/* --- Font Size & Weight --- */
 .text-lg {
     font-size: var(--text-lg);
 }
@@ -347,134 +96,39 @@ footer p {
     font-weight: var(--font-bold);
 }
 
-/* === Basic Product Grid === */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    /* Responsive grid */
-    gap: 30px;
-    /* Spacing between cards */
-    /* padding: 40px 0; /* Padding for the section - Moved to .products-section */
+/* === CORE COMPONENTS === */
+
+/* --- Container --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
 }
 
-/* === Titles === */
-.section-title {
-    font-family: "Poppins", sans-serif;
-    font-size: 32px;
+/* --- Buttons --- */
+.btn-primary {
+    background-color: var(--color-dark);
+    color: var(--color-background);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
     font-weight: var(--font-bold);
-    color: var(--color-dark);
-    text-align: center;
-    margin-bottom: 50px;
-    /* Removed text stroke as it won't be visible on dark text */
-    /* -webkit-text-stroke: 0.5px var(--color-dark); */
-    /* text-stroke: 0.5px var(--color-dark); */
-}
-
-.section-subtitle {
+    font-family: "Poppins", sans-serif;
     font-size: var(--text-md);
-    /* color: var(--color-light); /* Color now set by .products-section rule */
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-/* Blinking cursor effect for typewriter */
-.section-subtitle::after {
-    content: '|';
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
     display: inline-block;
-    animation: blink 1s step-start infinite;
-    opacity: 1;
-    margin-left: 2px;
+    /* Для правильних відступів та використання з <a> */
 }
 
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
+.btn-primary:hover {
+    background-color: #6c7a7c;
+    /* Трохи світліший сірий при наведенні */
+    color: var(--color-background);
 }
 
-/* Removed class .title-section-bg as the background is now on .products-section */
-/* .title-section-bg {
-    background-color: var(--color-accent-1);
-    padding: 40px 0;
-    margin-bottom: 30px;
-    border-radius: 16px;
-} */
-
-/* New style for the entire products section background */
-.products-section {
-    background-color: var(--color-background);
-    padding: 40px 0 40px 0;
-    /* Top and bottom padding for the whole section */
-    /* border-radius: 16px; */
-    /* Removed rounded corners */
-    /* margin-bottom: 40px; */
-    /* Removed bottom margin */
-}
-
-/* Ensure section titles inside this background are dark - removed title from this rule */
-/* .products-section .section-title, */
-.products-section .section-subtitle {
-    color: var(--color-dark);
-    /* Subtitle remains dark */
-}
-
-/* === Adaptability (Example from stylerules, adjust as needed) === */
-@media (max-width: 1024px) {
-    header .container {
-        padding: 0 12px;
-        /* Reset padding for mobile */
-        padding-left: 12px;
-    }
-
-    .btn-primary {
-        font-size: var(--text-sm);
-        padding: 10px 20px;
-    }
-
-    .product-card {
-        padding: 20px;
-    }
-
-    /* Hide main nav on tablet/mobile */
-    .main-nav {
-        display: none;
-        margin-left: 0;
-        /* Reset margin */
-    }
-
-    /* nav ul { 
-        display: none; /* Hide nav links */
-    /* } */
-
-    .burger-menu {
-        display: flex;
-        /* Change from block to flex to show correctly */
-        /* Show burger */
-    }
-}
-
-@media (max-width: 768px) {
-    .btn-primary {
-        font-size: var(--text-sm);
-        /* Keep sm or make xs? */
-        padding: 10px 18px;
-        /* Adjust padding */
-    }
-
-    .product-card {
-        padding: 16px;
-    }
-
-    .section-title {
-        font-size: 60px;
-    }
-
-    .section-subtitle {
-        font-size: var(--text-sm);
-    }
-}
-
-/* === Preloader Styles === */
+/* --- Preloader --- */
 #preloader {
     position: fixed;
     top: 0;
@@ -492,7 +146,6 @@ footer p {
 
 #preloader img {
     width: 150px;
-    /* Adjust size as needed */
     height: auto;
     animation: pulse 2s infinite ease-in-out;
 }
@@ -514,73 +167,426 @@ footer p {
     }
 }
 
-/* Style to hide preloader when body has 'loaded' class */
 body.loaded #preloader {
     opacity: 0;
     pointer-events: none;
-    /* Disable interactions */
+    /* Вимикаємо взаємодію після зникнення */
 }
 
-/* === About Us Page Styles === */
+/* --- Header & Navigation --- */
+header {
+    background-color: var(--color-dark);
+    padding: 15px 0;
+    color: var(--color-background);
+    position: relative;
+    /* Для позиціонування лого та моб. меню */
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* Для абсолютного позиціонування лого */
+    min-height: 50px;
+    padding: 0 16px;
+    padding-left: 160px;
+    /* Відступ зліва для великого лого */
+}
+
+.logo {
+    position: absolute;
+    left: 16px;
+    top: -30px;
+    /* Винос логотипу вгору */
+    z-index: 10;
+    line-height: 0;
+    /* Прибираємо зайву висоту */
+}
+
+.logo img {
+    height: 120px;
+    /* Великий логотип */
+    width: auto;
+    display: block;
+}
+
+/* Desktop Navigation */
+.main-nav {
+    margin-left: auto;
+    /* Притискаємо до правого краю */
+    margin-right: 5%;
+}
+
+nav ul {
+    /* Стилі для всіх списків навігації */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    /* Горизонтальне розташування */
+}
+
+nav li {
+    margin-left: 25px;
+    /* Відстань між пунктами */
+}
+
+nav a {
+    color: var(--color-background);
+    text-decoration: none;
+    font-size: var(--text-lg);
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--color-primary);
+}
+
+/* Burger Menu (Hidden on Desktop) */
+.burger-menu {
+    display: none;
+    /* Переконуємось, що приховано за замовчуванням */
+    width: 36px;
+    cursor: pointer;
+    margin-left: auto;
+    /* Притискаємо до правого краю */
+    margin-right: 10px;
+    padding: 5px;
+    /* Зона кліку */
+    position: relative;
+    flex-direction: column;
+    /* Лінії одна під одною */
+}
+
+.burger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-background);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.burger-menu span:not(:last-child) {
+    margin-bottom: 5px;
+    /* Відстань між лініями */
+}
+
+/* Mobile Navigation (Hidden on Desktop) */
+.mobile-nav {
+    display: none;
+    /* Приховано за замовчуванням */
+    position: absolute;
+    top: 100%;
+    /* Під хедером */
+    left: 0;
+    width: 100%;
+    background-color: rgba(59, 78, 81, 0.95);
+    /* Напівпрозорий темний фон */
+    z-index: 1000;
+    padding: 15px 0;
+    box-shadow: var(--shadow-md);
+}
+
+.mobile-nav.is-open {
+    display: block;
+    /* Показуємо при відкритті */
+}
+
+.mobile-nav ul {
+    text-align: center;
+    /* Центруємо посилання */
+    display: block;
+    /* Перебиваємо flex */
+}
+
+.mobile-nav li {
+    margin: 15px 0;
+    /* Вертикальні відступи */
+    margin-left: 0;
+    /* Скидаємо відступ */
+}
+
+.mobile-nav a {
+    font-size: var(--text-lg);
+    display: block;
+    /* Посилання на всю ширину */
+    padding: 5px 0;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    padding: 20px 0;
+}
+
+footer p {
+    text-align: center;
+    margin: 0;
+    font-size: var(--text-sm);
+}
+
+/* --- Product Card & Grid --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Адаптивна сітка */
+    gap: 30px;
+    /* Відстань між картками */
+}
+
+.product-card {
+    border-radius: 16px;
+    padding: 24px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-md);
+}
+
+.product-card .product-image-placeholder {
+    height: 150px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    background-color: rgba(0, 0, 0, 0.05);
+    /* Легкий оверлей для плейсхолдера */
+}
+
+/* Фонові кольори для карток */
+.product-card.bg-accent-1 {
+    background-color: var(--color-accent-1);
+}
+
+.product-card.bg-accent-2 {
+    background-color: var(--color-accent-2);
+}
+
+.product-card.bg-accent-3 {
+    background-color: var(--color-accent-3);
+}
+
+.product-card.bg-primary {
+    background-color: var(--color-primary);
+}
+
+/* Текст всередині картки */
+.product-card .product-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    color: var(--color-dark);
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.product-card .product-description {
+    font-size: var(--text-sm);
+    color: var(--color-dark);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.product-card .product-price {
+    font-size: var(--text-sm);
+    font-weight: var(--font-regular);
+    /* Змінено на regular */
+    color: var(--color-dark);
+    margin-bottom: 16px;
+}
+
+/* --- Forms --- */
+.contact-form {
+    /* Використовується на contact_form.html */
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 16px;
+    background-color: var(--color-background);
+    box-shadow: var(--shadow-md);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: var(--font-bold);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-accent-3);
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--text-md);
+    background-color: var(--color-background);
+    color: var(--color-dark);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    /* Додано перехід */
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(58, 185, 177, 0.2);
+}
+
+textarea.form-control {
+    resize: vertical;
+    /* Дозволяємо змінювати висоту */
+    min-height: 100px;
+    /* Мінімальна висота */
+}
+
+
+/* === PAGE SPECIFIC STYLES === */
+
+/* --- Загальні стилі для заголовків сторінок/секцій --- */
+/* Заголовок логотипу (Great Vibes) */
+#brand-title {
+    font-family: "Great Vibes", cursive;
+    font-size: 72px;
+    /* Дуже великий */
+    text-align: center;
+    color: var(--color-dark);
+    margin-bottom: 10px;
+    font-weight: normal;
+    /* Курсивні шрифти часто краще виглядають з normal */
+}
+
+/* Заголовок секції (Poppins) */
+.section-title {
+    font-family: "Poppins", sans-serif;
+    /* Переконуємось, що це Poppins */
+    font-size: 32px;
+    /* Великий, але менший за бренд */
+    font-weight: var(--font-bold);
+    color: var(--color-dark);
+    text-align: center;
+    margin-bottom: 20px;
+    /* Стандартний відступ для заголовка секції */
+}
+
+/* Підзаголовок секції */
+.section-subtitle {
+    font-size: var(--text-md);
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--color-dark);
+}
+
+/* Додаємо більш специфічне правило для сторінки Про нас */
+.contact-page-padding>.section-subtitle {
+    font-size: var(--text-md) !important;
+    /* Примусово встановлюємо розмір */
+    color: var(--color-dark) !important;
+    /* Примусово встановлюємо колір */
+    opacity: 1 !important;
+    /* Переконуємось, що не прозорий */
+    display: block !important;
+    /* Переконуємось, що відображається */
+}
+
+/* Миготливий курсор для ефекту друкарської машинки (використовується в script.js) */
+/* ТИМЧАСОВО КОМЕНТУЄМО ДЛЯ ДІАГНОСТИКИ:
+.section-subtitle::after {
+    content: '|';
+    display: inline-block;
+    animation: blink 1s step-start infinite;
+    opacity: 1;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+*/
+
+/* --- Products Page (Home) --- */
+.products-section {
+    /* Контейнер для сітки товарів */
+    background-color: var(--color-background);
+    /* Збігається з фоном body */
+    padding: 40px 0;
+    /* Вертикальні відступи */
+}
+
+/* .products-section .section-subtitle { /* Немає потреби перебивати колір */
+/* Видалено зайву дужку */
+*/
+
+/* --- About Us Page --- */
+/* Відступи для сторінки (використовується і для Контактів) */
+.contact-page-padding {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
 .about-section {
     display: flex;
     align-items: center;
     margin-bottom: 60px;
+    /* Більший відступ між секціями */
     gap: 40px;
-    /* --- Animation --- */
+    /* Анімація появи */
     opacity: 0;
     transform: translateX(-80px);
-    /* Start from Left by default */
+    /* Починаємо зліва за замовчуванням */
     transition-property: opacity, transform;
-    /* Animate these properties */
     transition-duration: 1.4s;
-    /* Default duration (for 3rd section onwards) */
+    /* Стандартна швидкість */
     transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-    /* Default easing */
 }
 
-/* Modifier for slower animation */
+/* Модифікатор для повільної анімації (перші секції) */
 .about-section.animate-slow {
     transition-duration: 2.8s;
-    /* Slower duration for first two sections */
 }
 
+/* Модифікатор для зображення справа (анімація справа) */
 .about-section.image-right {
-    /* Animation start from Right */
     transform: translateX(80px);
 }
 
+/* Клас, що додається JS, коли секція видима */
 .about-section.is-visible {
-    /* Animation end state */
     opacity: 1;
     transform: translateX(0);
 }
 
 .about-column {
     flex: 1;
-    /* Make columns share space equally */
+    /* Колонки займають рівний простір */
 }
 
 .about-text h2 {
     font-family: "Poppins", sans-serif;
+    /* Явно вказуємо шрифт */
     font-size: 36px;
     font-weight: var(--font-bold);
     color: var(--color-secondary);
+    /* Акцентний колір для заголовків */
     margin-top: 0;
     margin-bottom: 25px;
 }
 
 .about-text p {
     line-height: 1.7;
+    /* Краща читабельність */
     color: var(--color-dark);
 }
 
 .about-image-placeholder {
     background-color: var(--color-light);
-    /* Light background for placeholder */
     border-radius: 12px;
     height: 300px;
-    /* Example height */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -588,120 +594,100 @@ body.loaded #preloader {
     font-weight: bold;
 }
 
-/* Adaptability for About Us sections */
-@media (max-width: 768px) {
-
-    .about-section,
-    .about-section.image-right {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-        /* Reset animation transforms for mobile if needed, or adjust */
-        /* transform: translateX(0); /* Example: disable horizontal animation on mobile */
-        /* opacity: 1; /* Make visible by default on mobile if animation is disabled */
-    }
-
-    .about-image-placeholder {
-        height: 200px;
-        /* Reduce image height on mobile */
-        margin-bottom: 15px;
-    }
-
-    .about-text h2 {
-        font-size: 40px;
-    }
+/* --- Contact Page --- */
+/* Стилі для самої форми .contact-form див. у секції Forms */
+/* Блок швидких контактів */
+.quick-contact-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    /* Перенос на мобільних */
+    justify-content: center;
+    gap: 15px;
+    /* Відстань між кнопками */
+    margin-bottom: 40px;
 }
 
-/* --- Бренд/Лого --- */
-html body main #brand-title,
-/* Додаємо специфічності */
-#brand-title {
-    font-family: "Great Vibes", cursive;
-    /* ПОВЕРТАЄМО Great Vibes */
-    font-size: 72px;
-    text-align: center;
-    color: var(--color-dark);
-    margin-bottom: 10px;
-    font-weight: normal;
-    /* Повертаємо normal для Great Vibes */
+.btn-contact {
+    /* Стилізація кнопок контактів */
+    display: inline-flex;
+    /* Для вирівнювання іконки і тексту */
+    align-items: center;
+    gap: 8px;
+    /* Відстань між іконкою і текстом */
+    min-width: 150px;
+    justify-content: center;
 }
 
-/* --- Заголовки секцій (Єдине визначення!) --- */
-html body main .section-title,
-.section-title {
-    font-family: "Poppins", sans-serif !important;
+.btn-contact i {
+    /* Іконки Font Awesome всередині кнопок */
+    font-size: 1.2em;
+    /* Трохи більша іконка */
 }
 
-/* --- Сторінка Контакти --- */
-/* Також використовується для відступів на інших сторінках, як 'Про нас' */
-.contact-page-padding {
-    padding-top: 60px;
-    /* Збільшено */
-    padding-bottom: 60px;
-    /* Збільшено */
+/* Кастомні кольори при наведенні */
+.btn-viber:hover {
+    background-color: #7360F2;
+    /* Фіолетовий Viber */
+    color: white;
 }
 
-/* === Catalog Page: Category Folders === */
+.btn-whatsapp:hover {
+    background-color: #25D366;
+    /* Зелений WhatsApp */
+    color: white;
+}
+
+/* --- Catalog Page --- */
 .category-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    /* Адаптивна сітка */
+    /* Адаптивна сітка папок */
     gap: 40px;
-    /* Відстань між папками */
     margin-top: 40px;
+    /* Відступ від підзаголовка */
+    margin-bottom: 60px;
+    /* ДОДАНО: Відступ знизу, щоб не прилипало до футера */
 }
 
 .category-folder {
     display: block;
+    /* Щоб <a> був блочним */
     text-decoration: none;
     border-radius: 16px;
     overflow: hidden;
-    /* Щоб зображення не вилазило */
+    /* Обрізаємо все, що виходить за межі */
     box-shadow: var(--shadow-md);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
-    /* Для позиціонування тексту */
+    /* Для позиціонування внутрішніх елементів */
 }
 
 .category-folder:hover {
     transform: translateY(-10px);
+    /* Ефект підняття */
     box-shadow: var(--shadow-lg);
+}
+
+/* Зображення/плейсхолдер всередині папки */
+.category-image-placeholder {
+    height: 400px;
+    /* Висота папки */
+    background-color: var(--color-accent-3);
+    /* Базовий фон, якщо немає картинки */
+    background-size: cover;
+    /* Масштабування фонового зображення */
+    background-position: center;
+    transition: transform 0.4s ease-out;
+    /* Анімація зуму */
+    position: relative;
+    /* Для позиціонування ::before */
+    overflow: hidden;
+    /* Щоб патерн не вилазив при зумі зображення */
 }
 
 .category-folder:hover .category-image-placeholder {
     transform: scale(1.05);
-}
-
-/* Стилі для центрального емоджі */
-.category-emoji {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    /* Центруємо і трохи піднімаємо */
-    z-index: 1;
-    font-size: 100px;
-    /* Великий емоджі */
-    line-height: 1;
-    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.4s ease-out;
-}
-
-.category-folder:hover .category-emoji {
-    transform: translate(-50%, -60%) scale(1.15);
-    /* Збільшуємо при наведенні */
-}
-
-.category-image-placeholder {
-    height: 400px;
-    background-color: var(--color-accent-3);
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.4s ease-out;
-    position: relative;
-    /* Потрібно для псевдоелемента */
-    overflow: hidden;
-    /* Щоб патерн не вилазив при зумі */
+    /* Зум фону при наведенні на папку */
 }
 
 /* Псевдоелемент для фонового патерну */
@@ -712,73 +698,245 @@ html body main .section-title,
     left: 0;
     right: 0;
     bottom: 0;
-    /* Повертаємо патерн */
     background-repeat: repeat;
     background-size: 25px 25px;
+    /* Розмір іконок патерну */
     opacity: 0.35;
+    /* Прозорість патерну */
     z-index: 0;
+    /* Патерн під емоджі */
     transition: opacity 0.4s ease-out;
-    /* Видаляємо тестовий фон */
-    /* background-color: rgba(255, 0, 0, 0.35); */
+    pointer-events: none;
+    /* Не перехоплює кліки */
 }
 
-/* Змінюємо ефект hover для патерну */
 .category-folder:hover .category-image-placeholder::before {
     opacity: 0.5;
-    /* Видаляємо тестовий фон */
-    /* background-color: rgba(255, 0, 0, 0.5); */
+    /* Патерн стає яскравішим */
 }
 
-/* Патерн для жіночої папки (іконка Venus) */
+/* Патерни для конкретних категорій */
 .category-folder.female .category-image-placeholder::before {
-    /* background-image відновлюється нижче */
-    /* background-color: rgba(0, 0, 255, 0.35); */
-    /* Спрощений SVG Венери */
+    /* Спрощений SVG Венери ♀️ */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cline x1='12' y1='17' x2='12' y2='22'/%3E%3Cline x1='9' y1='19' x2='15' y2='19'/%3E%3C/svg%3E");
 }
 
-/* Патерн для чоловічої папки (іконка Mars) */
 .category-folder.male .category-image-placeholder::before {
-    /* background-image відновлюється нижче */
-    /* Спрощений SVG Марса */
+    /* Спрощений SVG Марса ♂️ */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='5'/%3E%3Cline x1='16.2' y1='7.8' x2='21' y2='3'/%3E%3Cpolyline points='17 3 21 3 21 7'/%3E%3C/svg%3E");
 }
 
+/* Фонові кольори папок (якщо немає зображень) */
 .category-folder.female .category-image-placeholder {
-    /* background-image: url('path/to/female-image.jpg'); */
-    /* Додати шлях до картинки */
     background-color: var(--color-accent-2);
-    /* Рожевий фон для прикладу */
+    /* Рожевий фон */
 }
 
 .category-folder.male .category-image-placeholder {
-    /* background-image: url('path/to/male-image.jpg'); */
-    /* Додати шлях до картинки */
     background-color: var(--color-accent-1);
-    /* Бірюзовий фон для прикладу */
+    /* Бірюзовий фон */
 }
 
+/* Центральний емоджі */
+.category-emoji {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    /* Центруємо і трохи піднімаємо */
+    z-index: 1;
+    /* Над патерном */
+    font-size: 100px;
+    line-height: 1;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    /* Тінь для об'єму */
+    transition: transform 0.4s ease-out;
+    pointer-events: none;
+    /* Не перехоплює кліки */
+}
+
+.category-folder:hover .category-emoji {
+    transform: translate(-50%, -60%) scale(1.15);
+    /* Збільшуємо емоджі */
+}
+
+/* Заголовок категорії */
 .category-title {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    /* background-color: rgba(59, 78, 81, 0.8); */
-    /* Замінено на градієнт */
     background: linear-gradient(to top, rgba(59, 78, 81, 0.9) 10%, rgba(59, 78, 81, 0) 100%);
+    /* Градієнт знизу */
     color: var(--color-background);
     padding: 25px 20px 15px 20px;
-    /* Збільшено відступ зверху */
     margin: 0;
     font-size: var(--text-xl);
     font-weight: var(--font-bold);
     text-align: center;
     box-sizing: border-box;
+    /* Щоб падінг не впливав на ширину */
 }
 
 .category-title span {
+    /* Відступ для емоджі в заголовку */
     margin-right: 8px;
-    /* Відступ для емоджі */
 }
 
-/* === End Catalog Page === */
+
+/* === MEDIA QUERIES (Adaptability) === */
+
+/* --- Tablet (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+
+    /* Header & Navigation */
+    header .container {
+        padding: 0 12px;
+        /* Скидаємо відступ для лого */
+        padding-left: 12px;
+    }
+
+    .main-nav {
+        /* Приховуємо десктопну навігацію */
+        display: none;
+    }
+
+    .burger-menu {
+        /* Показуємо бургер */
+        display: flex;
+    }
+
+    /* Buttons */
+    .btn-primary {
+        font-size: var(--text-sm);
+        padding: 10px 20px;
+    }
+
+    /* Product Card */
+    .product-card {
+        padding: 20px;
+    }
+}
+
+/* --- Mobile (max-width: 768px) --- */
+@media (max-width: 768px) {
+
+    /* Titles */
+    /* #brand-title { font-size: 60px; } Залишаємо великим */
+    .section-title {
+        font-size: 28px;
+    }
+
+    /* Зменшуємо заголовок секції */
+    .section-subtitle {
+        font-size: var(--text-sm);
+    }
+
+    /* Зменшуємо підзаголовок */
+
+    /* Buttons */
+    /* Коментар про .btn-primary: /* Вже змінено на 1024px */
+    /* Видалено зайву дужку звідси */
+
+    /* Правило для .btn-primary на мобільних */
+    .btn-primary {
+        padding: 10px 18px;
+        /* Трохи менший падінг */
+    }
+
+    /* Product Card */
+    .product-card {
+        padding: 16px;
+    }
+
+    /* About Us Page - Переносимо стилі сюди */
+    body .about-section,
+    body .about-section.image-right {
+        flex-direction: column;
+        /* БЕЗ !important */
+        gap: 20px;
+        text-align: center;
+    }
+
+    .about-image-placeholder {
+        height: 200px;
+        /* Менша висота зображення */
+        margin-bottom: 15px;
+    }
+
+    .about-text h2 {
+        font-size: 28px;
+        /* Зменшуємо заголовок в секції */
+    }
+
+    /* Contact Page */
+    .quick-contact-buttons {
+        /* Кнопки швидких контактів */
+        flex-direction: column;
+        /* Одна під одною */
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-contact {
+        /* Робимо кнопки ширшими */
+        width: 80%;
+        max-width: 300px;
+    }
+
+    /* Catalog Page */
+    .category-grid {
+        grid-template-columns: 1fr;
+        /* Одна папка в ряд */
+        gap: 25px;
+    }
+
+    .category-image-placeholder {
+        height: 300px;
+        /* Зменшуємо висоту папки */
+    }
+
+    .category-emoji {
+        font-size: 80px;
+        /* Зменшуємо емоджі */
+    }
+
+    .category-title {
+        font-size: var(--text-lg);
+        /* Зменшуємо заголовок категорії */
+    }
+}
+
+/* --- Smaller Mobile (Optional, e.g., max-width: 480px) --- */
+@media (max-width: 480px) {
+    #brand-title {
+        font-size: 56px;
+        /* Ще трохи зменшуємо лого */
+    }
+
+    header .container {
+        padding-left: 120px;
+        /* Зменшуємо відступ для меншого лого, якщо потрібно */
+    }
+
+    .logo img {
+        height: 100px;
+        /* Менший логотип */
+        /* top: -20px; /* Менший винос - вирішив залишити як є */
+    }
+
+    .category-image-placeholder {
+        height: 250px;
+        /* Ще менша папка */
+    }
+
+    .category-emoji {
+        font-size: 60px;
+        /* Ще менший емоджі */
+    }
+
+    .contact-form {
+        padding: 20px;
+        /* Менші падінги у форми */
+    }
+}

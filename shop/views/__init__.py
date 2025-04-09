@@ -1,7 +1,7 @@
 # shop/views/__init__.py
 
 # Імпортуємо функції view з кожного модуля
-from .products import product_list_view, product_detail_view
+from .products import product_list_view, product_detail_view, availability_view
 from .reviews import reviews_view 
 from .contact import contact_view
 # Модуль availability видалено
@@ -12,6 +12,7 @@ from .catalog import catalog_view
 __all__ = [
     'product_list_view',
     'product_detail_view',
+    'availability_view',
     'reviews_view',
     'contact_view',
     # Функція check_availability_view видалена
