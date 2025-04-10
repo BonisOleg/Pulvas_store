@@ -497,6 +497,12 @@ textarea.form-control {
     display: none !important;
 }
 
+/* Стилізація ТІЛЬКИ першого вступного абзацу (зменшуємо відступ знизу) */
+.section-subtitle.about-intro-text {
+    margin-bottom: 0.5em;
+    /* ЗМЕНШЕНО ВІДСТУП ЗНИЗУ */
+}
+
 /* Миготливий курсор для ефекту друкарської машинки (використовується в script.js) */
 .section-subtitle::after {
     content: '|';
@@ -586,15 +592,21 @@ textarea.form-control {
     color: var(--color-dark);
 }
 
-.about-image-placeholder {
-    background-color: var(--color-light);
-    border-radius: 12px;
+/* Замінюємо стилі для div-плейсхолдера на стилі для img */
+img.about-image-placeholder {
+    display: block;
+    /* Робимо блочним елементом */
+    width: 100%;
+    /* Займає всю ширину колонки */
     height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--color-dark);
-    font-weight: bold;
+    /* Зберігаємо висоту з десктопа */
+    border-radius: 12px;
+    /* Заокруглення кутів */
+    object-fit: cover;
+    /* Масштабування із збереженням пропорцій */
+    /* Прибираємо непотрібні стилі для div:
+       background-color, display: flex, justify-content, align-items, color, font-weight
+    */
 }
 
 /* --- Contact Page --- */
@@ -786,6 +798,70 @@ textarea.form-control {
     margin-right: 8px;
 }
 
+/* --- Стилізація вступного тексту на сторінці "Про нас" --- */
+.about-intro-text {
+    font-family: "Poppins", sans-serif;
+    font-size: var(--text-md);
+    line-height: 1.7;
+    text-align: justify;
+    max-width: 800px;
+    margin: 0.5em auto 2.5em auto;
+
+    /* Магія градієнтного тексту (тепер рухомі смуги) */
+    /* Градієнт: темний фон зі смугами бірюзового та помаранчевого */
+    background: linear-gradient(90deg,
+            var(--color-dark) 25%,
+            var(--color-accent-1) 40%,
+            /* Світло-бірюзова смуга */
+            var(--color-secondary) 60%,
+            /* Помаранчева смуга */
+            var(--color-dark) 75%);
+    background-size: 400% 100%;
+    /* Значно ширший фон */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: animate-stripes 7s linear infinite;
+    /* Використовуємо нову анімацію */
+}
+
+/* --- Стилізація головного заголовка H1 ТІЛЬКИ на сторінках типу "Про нас", "Контакти" --- */
+.contact-page-padding>h1.section-title {
+    font-family: "Poppins", sans-serif;
+    font-size: 36px;
+    font-weight: var(--font-bold);
+    text-align: center;
+    margin-bottom: 30px;
+    /* Градієнт та анімація, як у .about-intro-text (тепер рухомі смуги) */
+    background: linear-gradient(90deg,
+            var(--color-dark) 25%,
+            var(--color-accent-1) 40%,
+            var(--color-secondary) 60%,
+            var(--color-dark) 75%);
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: animate-stripes 7s linear infinite;
+    /* Використовуємо нову анімацію */
+}
+
+/* --- Ключові кадри для анімації РУХОМИХ СМУГ --- */
+@keyframes animate-stripes {
+    0% {
+        background-position: 100% 50%;
+        /* Початкова позиція (зміщено вправо) */
+    }
+
+    100% {
+        background-position: 0% 50%;
+        /* Кінцева позиція (зміщено вліво, що рухає хвилю вправо) */
+    }
+
+    /* Анімація зациклюється */
+}
 
 /* === MEDIA QUERIES (Adaptability) === */
 
@@ -861,19 +937,19 @@ textarea.form-control {
         text-align: center;
     }
 
-    .about-image-placeholder {
+    /* Оновлені стилі для img на мобільних */
+    img.about-image-placeholder {
         height: 200px;
-        width: calc(100vw - 54px);
-        /* Ширина = 100% екрану мінус 27px*2 */
-        position: relative;
-        /* Потрібно для left */
-        left: 50%;
-        /* Зміщуємо лівий край в центр */
-        transform: translateX(-50%);
-        /* Зміщуємо блок на половину його ширини назад */
-        border-radius: 0;
+        /* Зменшена висота на мобільних */
+        width: 100%;
+        /* Завжди на всю ширину колонки */
+        /* Прибираємо складну логіку позиціонування (left, transform) та calc для ширини */
+        border-radius: 12px;
+        /* Залишаємо заокруглення (або 0, якщо треба на всю ширину) */
         margin-bottom: 15px;
-        /* Видаляємо попередні margin-left/right */
+        /* Залишаємо відступ */
+        object-fit: cover;
+        /* Залишаємо */
     }
 
     .about-text h2 {

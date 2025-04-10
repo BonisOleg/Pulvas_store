@@ -23,30 +23,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const allAboutSections = document.querySelectorAll('.about-section');
 
             if (isMobile) {
-                // --- Мобільна логіка: тільки перша секція --- 
+                // --- Мобільна логіка: залишається без змін (тільки перша) --- 
                 allAboutSections.forEach((section, index) => {
                     if (index === 0) {
                         section.classList.add('animate-slow');
                         setTimeout(() => {
                             section.classList.add('is-visible');
-                        }, 0); // Без затримки для першої
+                        }, 0);
                     }
                 });
             } else {
-                // --- Десктоп/Планшет логіка: перші дві секції --- 
+                // --- Десктоп/Планшет логіка: ТІЛЬКИ перша секція --- 
                 allAboutSections.forEach((section, index) => {
-                    if (index < 2) {
+                    if (index < 1) {
                         section.classList.add('animate-slow');
-                        // Затримка для послідовної появи
                         setTimeout(() => {
                             section.classList.add('is-visible');
-                        }, index * 200);
+                        }, 0);
                     }
                 });
             }
             // --- Кінець запуску анімації --- 
 
-        }, delayNeeded + fadeOutDelay); // Total delay = remaining time + fade out buffer
+        }, delayNeeded + fadeOutDelay);
     });
 
     const burger = document.querySelector('.burger-menu');
@@ -122,12 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const intersectionObserver = new IntersectionObserver(observerCallback, observerOptions);
 
     // Визначаємо, з якої секції починати спостереження
-    const startIndexToObserve = isMobile ? 1 : 2;
+    const startIndexToObserve = isMobile ? 1 : 1;
 
     const sectionsToObserve = document.querySelectorAll('.about-section');
     sectionsToObserve.forEach((section, index) => {
         if (index >= startIndexToObserve) {
-            // Напрямок анімації визначається класом .image-right в HTML/CSS
             intersectionObserver.observe(section);
         }
     });
