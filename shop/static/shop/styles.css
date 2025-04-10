@@ -492,8 +492,12 @@ textarea.form-control {
     /* Переконуємось, що відображається */
 }
 
+/* Приховуємо миготливий курсор ТІЛЬКИ для підзаголовка на сторінці "Про нас" */
+.contact-page-padding>.section-subtitle::after {
+    display: none !important;
+}
+
 /* Миготливий курсор для ефекту друкарської машинки (використовується в script.js) */
-/* ТИМЧАСОВО КОМЕНТУЄМО ДЛЯ ДІАГНОСТИКИ:
 .section-subtitle::after {
     content: '|';
     display: inline-block;
@@ -507,7 +511,6 @@ textarea.form-control {
         opacity: 0;
     }
 }
-*/
 
 /* --- Products Page (Home) --- */
 .products-section {
@@ -860,8 +863,17 @@ textarea.form-control {
 
     .about-image-placeholder {
         height: 200px;
-        /* Менша висота зображення */
+        width: calc(100vw - 54px);
+        /* Ширина = 100% екрану мінус 27px*2 */
+        position: relative;
+        /* Потрібно для left */
+        left: 50%;
+        /* Зміщуємо лівий край в центр */
+        transform: translateX(-50%);
+        /* Зміщуємо блок на половину його ширини назад */
+        border-radius: 0;
         margin-bottom: 15px;
+        /* Видаляємо попередні margin-left/right */
     }
 
     .about-text h2 {

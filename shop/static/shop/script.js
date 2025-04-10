@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ensure preloader is visible initially if JS is enabled
     body.classList.remove('loaded');
 
+    // --- Визначаємо, чи це мобільний пристрій (за шириною вікна) --- 
+    const isMobile = window.innerWidth < 768;
+
     window.addEventListener('load', () => {
         const loadTime = Date.now();
         const elapsedTime = loadTime - startTime;
@@ -16,22 +19,32 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             body.classList.add('loaded');
 
-            // --- Trigger animations for the FIRST TWO About Us sections AFTER preloader --- 
+            // --- Запуск анімації секцій "Про нас" ПІСЛЯ прелоадера --- 
             const allAboutSections = document.querySelectorAll('.about-section');
-            allAboutSections.forEach((section, index) => {
-                if (index < 2) { // Only animate the first two sections here
-                    section.classList.add('animate-slow'); // ADD slow animation class
-                    // Check if the index is odd (1) to apply right animation
-                    if (index % 2 !== 0) {
-                        section.classList.add('from-right'); // Гарантовано додаємо клас
+
+            if (isMobile) {
+                // --- Мобільна логіка: тільки перша секція --- 
+                allAboutSections.forEach((section, index) => {
+                    if (index === 0) {
+                        section.classList.add('animate-slow');
+                        setTimeout(() => {
+                            section.classList.add('is-visible');
+                        }, 0); // Без затримки для першої
                     }
-                    // Stagger the animation start time
-                    setTimeout(() => {
-                        section.classList.add('is-visible');
-                    }, index * 200); // Stagger delay
-                }
-            });
-            // --- End Trigger for first two ---
+                });
+            } else {
+                // --- Десктоп/Планшет логіка: перші дві секції --- 
+                allAboutSections.forEach((section, index) => {
+                    if (index < 2) {
+                        section.classList.add('animate-slow');
+                        // Затримка для послідовної появи
+                        setTimeout(() => {
+                            section.classList.add('is-visible');
+                        }, index * 200);
+                    }
+                });
+            }
+            // --- Кінець запуску анімації --- 
 
         }, delayNeeded + fadeOutDelay); // Total delay = remaining time + fade out buffer
     });
@@ -45,78 +58,76 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const subtitleElement = document.querySelector('.section-subtitle');
-    const textToType = "Ми працюємо щоб Ви виглядали розкішно!";
-    const typingSpeed = 100; // Milliseconds per character
-    const erasingSpeed = 50;
-    const delayBeforeErase = 4000; // 4 seconds
-    const delayBeforeRestart = 500; // Delay after erasing before restart
+    // --- Typewriter effect for subtitle ON THE HOME PAGE ONLY --- 
+    // Шукаємо підзаголовок ТІЛЬКИ всередині секції товарів
+    const subtitleElement = document.querySelector('.products-section .section-subtitle');
 
-    let charIndex = 0;
-    let isDeleting = false;
-
-    function typeWriter() {
-        if (!subtitleElement) return; // Exit if element not found
-
-        const currentText = textToType.substring(0, charIndex);
-        subtitleElement.textContent = currentText;
-
-        if (!isDeleting && charIndex < textToType.length) {
-            // Typing
-            charIndex++;
-            setTimeout(typeWriter, typingSpeed);
-        } else if (isDeleting && charIndex > 0) {
-            // Erasing
-            charIndex--;
-            setTimeout(typeWriter, erasingSpeed);
-        } else if (!isDeleting && charIndex === textToType.length) {
-            // Finished typing, wait before erasing
-            isDeleting = true;
-            subtitleElement.classList.remove('typing'); // Optional: remove cursor style
-            setTimeout(typeWriter, delayBeforeErase);
-        } else if (isDeleting && charIndex === 0) {
-            // Finished erasing, wait before restarting
-            isDeleting = false;
-            subtitleElement.classList.add('typing'); // Optional: add cursor style back
-            setTimeout(typeWriter, delayBeforeRestart);
-        }
-    }
-
-    // Start the animation
+    // Запускаємо анімацію тільки якщо знайшли цей специфічний підзаголовок
     if (subtitleElement) {
-        subtitleElement.classList.add('typing'); // Optional: initial cursor
-        typeWriter();
-    }
+        const textToType = "Ми працюємо щоб Ви виглядали розкішно!"; // Цей текст актуальний для головної
+        const typingSpeed = 100;
+        const erasingSpeed = 50;
+        const delayBeforeErase = 4000;
+        const delayBeforeRestart = 500;
 
-    // --- Intersection Observer for animations from the THIRD section onwards ---
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeWriter() {
+            if (!subtitleElement) return;
+
+            const currentText = textToType.substring(0, charIndex);
+            subtitleElement.textContent = currentText;
+
+            if (!isDeleting && charIndex < textToType.length) {
+                charIndex++;
+                setTimeout(typeWriter, typingSpeed);
+            } else if (isDeleting && charIndex > 0) {
+                charIndex--;
+                setTimeout(typeWriter, erasingSpeed);
+            } else if (!isDeleting && charIndex === textToType.length) {
+                isDeleting = true;
+                subtitleElement.classList.remove('typing');
+                setTimeout(typeWriter, delayBeforeErase);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                subtitleElement.classList.add('typing');
+                setTimeout(typeWriter, delayBeforeRestart);
+            }
+        }
+
+        // Start the animation
+        subtitleElement.classList.add('typing');
+        typeWriter();
+    } // Кінець умови if (subtitleElement)
+
+    // --- Intersection Observer для анімації решти секцій при прокрутці ---
     const observerOptions = {
-        root: null, // relative to document viewport
+        root: null,
         rootMargin: '0px',
-        threshold: 0.2 // Trigger when 20% is visible (Adjust if needed)
+        threshold: 0.2
     };
 
     const observerCallback = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Use requestAnimationFrame to ensure the initial state is rendered first
                 requestAnimationFrame(() => {
                     entry.target.classList.add('is-visible');
                 });
-                observer.unobserve(entry.target); // Stop observing once triggered
+                observer.unobserve(entry.target);
             }
         });
     };
 
     const intersectionObserver = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Observe sections starting from the third one (index 2)
+    // Визначаємо, з якої секції починати спостереження
+    const startIndexToObserve = isMobile ? 1 : 2;
+
     const sectionsToObserve = document.querySelectorAll('.about-section');
     sectionsToObserve.forEach((section, index) => {
-        if (index >= 2) { // Start observing from the third section
-            // Check if the index is odd (3, 5, ...) to apply right animation
-            if (index % 2 !== 0) {
-                section.classList.add('from-right'); // Гарантовано додаємо клас
-            }
+        if (index >= startIndexToObserve) {
+            // Напрямок анімації визначається класом .image-right в HTML/CSS
             intersectionObserver.observe(section);
         }
     });
