@@ -7,6 +7,7 @@ from .contact import contact_view
 # Модуль availability видалено
 from .general import about_us_view
 from .catalog import catalog_view
+from .availability import availability_view
 
 # Визначаємо, що експортується
 __all__ = [
@@ -18,4 +19,5 @@ __all__ = [
     # Функція check_availability_view видалена
     'about_us_view',
     'catalog_view',
+    'availability_view',
 ] 

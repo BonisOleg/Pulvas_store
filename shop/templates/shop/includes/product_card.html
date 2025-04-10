@@ -3,14 +3,19 @@
 <!-- product_card.html -->
 {# Приймає 'product' та 'card_color_class' (наприклад, 'bg-accent-1') як контекст #}
 <div class="product-card {{ card_color_class|default:'bg-accent-1' }}">
-    {# Плейсхолдер для зображення, можна замінити на img tag #}
-    <div class="product-image-placeholder"></div>
-    {# Можна додати сюди <img src="{{ product.image.url }}" alt="{{ product.name }}"> #}
+    {# Зображення товару #}
+    {% if product.image %}
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image-placeholder">
+    {% else %}
+    <div class="product-image-placeholder"><span>Фото відсутнє</span></div> {# Якщо немає зображення #}
+    {% endif %}
 
     <h3 class="product-title">{{ product.name|default:'Назва товару' }}</h3>
     <p class="product-description">{{ product.description|truncatewords:10|default:'Короткий опис товару...' }}</p>
+    {# Тут можна додати розмір, якщо потрібно #}
     <p class="product-price">Ціна: {{ product.price|default:'100' }} грн</p>
 
     {# Кнопка "Детальніше" #}
-    <a href="#" class="btn-primary">Детальніше</a> {# Placeholder link #}
+    <a href="#" class="btn-primary">Детальніше</a> {# Placeholder link - пізніше замінити на {% url 'product_detail'
+    product.id %} #}
 </div>
