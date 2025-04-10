@@ -1,7 +1,7 @@
 # admin.py
 
 from django.contrib import admin
-from .models import Category, Product, ContactMessage
+from .models import Category, Product, ContactMessage, ProductImage
 
 # Register your models here.
 
@@ -10,6 +10,12 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
 
+# Створюємо інлайн для фотографій
+class ProductImageInline(admin.TabularInline): # Або admin.StackedInline для іншого вигляду
+    model = ProductImage
+    extra = 1 # Кількість порожніх форм для додавання нових фото
+    fields = ('image', 'is_main', 'order') # Поля для відображення
+    # readonly_fields = ('thumbnail',) # Можна додати показ мініатюри
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -17,6 +23,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ['available', 'season', 'gender', 'category', 'updated']
     list_editable = ['price', 'size', 'season', 'gender', 'available']
     search_fields = ['name', 'description']
+    inlines = [ProductImageInline] # Додаємо інлайн фотографій сюди
 
     fieldsets = (
         ('Основна інформація', {
@@ -25,13 +32,14 @@ class ProductAdmin(admin.ModelAdmin):
         ('Класифікація', {
             'fields': ('season', 'gender')
         }),
-        ('Опис та Зображення', {
-            'fields': ('description', 'image')
+        ('Опис', { # Замінено "Опис та Зображення"
+            'fields': ('description',)
         }),
         ('Статус', {
             'fields': ('available',)
         }),
     )
+    # Поле image тепер не потрібне у fieldsets
 
     # Можна також використовувати readonly_fields, щоб приховати системні поля
     # readonly_fields = ('created', 'updated') # Якщо потрібно приховати їх зовсім 

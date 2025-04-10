@@ -1,19 +1,13 @@
 # products.py
 
-from django.shortcuts import render # Видалено get_object_or_404, поки не використовується
+from django.shortcuts import render, get_object_or_404 # Додано get_object_or_404
 from django.http import HttpRequest, HttpResponse
 from typing import List, Dict, Any
 from ..utils.card_utils import _assign_color_classes # Додано імпорт
+from ..models import Product, ProductImage # Додаємо ProductImage
 
-# Тестові дані (можна винести в окремий файл/сервіс пізніше)
-TEST_PRODUCTS_DATA: List[Dict[str, Any]] = [
-    {'id': 1, 'name': 'Товар 1', 'description': 'Опис товару 1', 'price': 150},
-    {'id': 2, 'name': 'Товар 2', 'description': 'Дуже довгий опис товару 2...', 'price': 250},
-    {'id': 3, 'name': 'Товар 3', 'description': 'Опис товару 3', 'price': 350},
-    {'id': 4, 'name': 'Товар 4', 'description': 'Опис товару 4', 'price': 160},
-    {'id': 5, 'name': 'Товар 5', 'description': 'Опис товару 5', 'price': 260},
-    {'id': 6, 'name': 'Товар 6', 'description': 'Опис товару 6', 'price': 360},
-]
+# Тестові дані більше не використовуються
+# TEST_PRODUCTS_DATA: List[Dict[str, Any]] = [...]
 
 # Функцію _assign_color_classes перенесено до shop/utils/card_utils.py
 # def _assign_color_classes(products: List[Dict[str, Any]], num_columns: int = 3) -> List[Dict[str, Any]]:
@@ -41,11 +35,13 @@ TEST_PRODUCTS_DATA: List[Dict[str, Any]] = [
 def product_list_view(request: HttpRequest) -> HttpResponse:
     """Відображає головну сторінку зі списком товарів.
     
-    Використовує тестові дані та призначає карткам кольори для візуалізації.
+    Отримує реальні товари з бази даних та призначає карткам кольори.
     """
-    # Копіюємо тестові дані, щоб не змінювати оригінал
-    products_data = [p.copy() for p in TEST_PRODUCTS_DATA] 
-    products_with_color = _assign_color_classes(products_data) # Використовуємо імпортовану функцію
+    # Отримуємо доступні товари з бази даних, сортуємо за датою створення (новіші спочатку)
+    all_available_products = Product.objects.filter(available=True).order_by('-created')
+    
+    # Призначаємо кольори карткам
+    products_with_color = _assign_color_classes(all_available_products) # Передаємо QuerySet
     
     context = {
         'products': products_with_color
@@ -53,17 +49,14 @@ def product_list_view(request: HttpRequest) -> HttpResponse:
     return render(request, 'shop/products/product_list.html', context)
 
 def product_detail_view(request: HttpRequest, product_id: int) -> HttpResponse:
-    """Відображає сторінку з детальною інформацією про товар (заглушка)."""
-    # TODO: Замінити на реальне отримання товару з бази даних
-    # product = get_object_or_404(Product, pk=product_id) 
-    # Наразі використовуємо тестові дані
-    product = {
-        'id': product_id, 
-        'name': f'Товар {product_id}', 
-        'description': f'Детальний опис товару {product_id}', 
-        'price': 150 + product_id * 10
-    }
+    """Відображає сторінку з детальною інформацією про товар та галереєю фото."""
+    product = get_object_or_404(Product, pk=product_id)
+    # Отримуємо всі зображення для цього товару, відсортовані за полем order
+    # .select_related('product') тут не потрібен, бо ми вже маємо product
+    product_images = product.images.all() # Використовуємо related_name='images'
+    
     context = {
-        'product': product
+        'product': product,
+        'product_images': product_images # Додаємо список зображень у контекст
     }
     return render(request, 'shop/products/product_detail.html', context) 

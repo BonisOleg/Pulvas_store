@@ -1,15 +1,19 @@
 {% load static %}
 
 <!-- product_card.html -->
-{# Приймає 'product' та 'card_color_class' (наприклад, 'bg-accent-1') як контекст #}
-{# ВАЖЛИВО: Очікує, що product має атрибут/ключ 'id' #}
+{# Приймає 'product' (словник) та 'card_color_class' #}
+{# Очікує, що product має ключі 'id', 'name', 'description', 'price', 'image_obj' #}
 <div class="product-card {{ card_color_class|default:'bg-accent-1' }}">
-    {# Зображення товару #}
-    {% if product.image %}
-    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image-placeholder">
+    {# Зображення товару - використовуємо product.image_obj #}
+    {% with main_image=product.image_obj %}
+    {% if main_image and main_image.image %}
+    <div class="product-image-placeholder">
+        <img src="{{ main_image.image.url }}" alt="{{ product.name }}">
+    </div>
     {% else %}
-    <div class="product-image-placeholder"><span>Фото відсутнє</span></div> {# Якщо немає зображення #}
+    <div class="product-image-placeholder"><span>Фото відсутнє</span></div>
     {% endif %}
+    {% endwith %}
 
     <h3 class="product-title">{{ product.name|default:'Назва товару' }}</h3>
     <p class="product-description">{{ product.description|truncatewords:10|default:'Короткий опис товару...' }}</p>

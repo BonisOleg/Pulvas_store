@@ -1,29 +1,79 @@
 {% extends 'shop/base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="container contact-page-padding">
     <h1 class="section-title">{{ product.name }}</h1>
 
     <div class="product-detail-layout">
-        <div class="product-detail-column">
-            <div class="product-detail-image-placeholder">
-                {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <div class="product-detail-column product-gallery-column">
+            <div class="product-main-image">
+                {% with main_image=product.get_main_image %}
+                {% if main_image and main_image.image %}
+                <img id="mainProductImage" src="{{ main_image.image.url }}" alt="{{ product.name }} - Головне фото">
                 {% else %}
-                <span>Зображення товару</span>
+                <div class="product-detail-image-placeholder"><span>Фото відсутнє</span></div>
                 {% endif %}
+                {% endwith %}
             </div>
+
+            {% if product_images|length > 1 %}
+            <div class="product-thumbnails">
+                {% for img_obj in product_images %}
+                {% if img_obj.image %}
+                <div class="thumbnail-item {% if img_obj.is_main %}active{% endif %}">
+                    <img src="{{ img_obj.image.url }}" alt="{{ product.name }} - фото {{ forloop.counter }}"
+                        onclick="changeMainImage('{{ img_obj.image.url }}', this)">
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
-        <div class="product-detail-column">
+
+        <div class="product-detail-column product-info-column">
             <h2>Опис</h2>
             <p>{{ product.description }}</p>
             <h3 class="product-detail-price">Ціна: {{ product.price }} грн</h3>
+
             <div class="product-detail-actions">
-                <a href="{% url 'shop:contact' %}" class="btn-primary">Зв'язатися</a>
-                {# <a href="#" class="btn-secondary">Схожі товари</a> #}
+                <p class="order-instruction">
+                    Для замовлення зробіть скріншот сторінки і відправте нам:
+                </p>
+                <div class="quick-contact-buttons align-start">
+                    <a href="https://t.me/DanaAfanasenko" target="_blank" class="btn-primary btn-contact btn-telegram">
+                        <i class="fab fa-telegram-plane"></i>
+                        <span>Telegram</span>
+                    </a>
+                    <a href="viber://chat?number=%2B380982709679" class="btn-primary btn-contact btn-viber">
+                        <i class="fab fa-viber"></i>
+                        <span>Viber</span>
+                    </a>
+                    <a href="https://wa.me/380982709679" target="_blank" class="btn-primary btn-contact btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
 </div>
+
+<script>
+    function changeMainImage(newImageUrl, thumbnailElement) {
+        const mainImage = document.getElementById('mainProductImage');
+        if (mainImage) {
+            mainImage.src = newImageUrl;
+        }
+
+        const currentActive = document.querySelector('.thumbnail-item.active');
+        if (currentActive) {
+            currentActive.classList.remove('active');
+        }
+        if (thumbnailElement && thumbnailElement.parentElement.classList.contains('thumbnail-item')) {
+            thumbnailElement.parentElement.classList.add('active');
+        }
+    }
+</script>
 {% endblock %}
