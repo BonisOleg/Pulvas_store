@@ -22,40 +22,23 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             body.classList.add('loaded');
 
-            // --- Запуск анімації секцій "Про нас" ПІСЛЯ прелоадера --- 
-            const allAboutSections = document.querySelectorAll('.about-section');
+            // --- Анімація перших блоків після прелоадера --- 
+            const highlightBlock = document.querySelector('.about-highlight-block');
+            const firstAboutSection = document.querySelector('.about-section');
 
-            if (isMobile) {
-                // --- Мобільна логіка: залишається без змін (тільки перша) --- 
-                allAboutSections.forEach((section, index) => {
-                    if (index === 0) {
-                        section.classList.add('animate-slow');
-                        setTimeout(() => {
-                            section.classList.add('is-visible');
-                        }, 0);
-                    }
-                });
-            } else {
-                // --- Десктоп/Планшет логіка: ТІЛЬКИ перша секція --- 
-                allAboutSections.forEach((section, index) => {
-                    if (index < 1) {
-                        section.classList.add('animate-slow');
-                        setTimeout(() => {
-                            section.classList.add('is-visible');
-                        }, 0);
-                    }
-                });
+            // Запуск анімації для виділеного блоку
+            if (highlightBlock) {
+                setTimeout(() => { highlightBlock.classList.add('is-visible'); }, 0);
             }
-            // --- Кінець запуску анімації --- 
+            // Запуск анімації для першої секції .about-section
+            if (firstAboutSection) {
+                setTimeout(() => { firstAboutSection.classList.add('is-visible'); }, 0);
+            }
 
-            // --- Запуск анімації ФОРМИ КОНТАКТІВ (якщо вона є) ПІСЛЯ прелоадера --- 
+            // --- Анімація форми контактів після прелоадера --- 
             if (contactForm) {
-                contactForm.classList.add('animate-slow'); // Додаємо повільну анімацію
-                setTimeout(() => {
-                    contactForm.classList.add('is-visible'); // Робимо видимою
-                }, 0); // Затримка 0, щоб відбулося після додавання класу анімації
+                setTimeout(() => { contactForm.classList.add('is-visible'); }, 0);
             }
-            // --- Кінець анімації форми --- 
 
         }, delayNeeded + fadeOutDelay);
     });
@@ -132,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         typeWriter();
     } // Кінець умови if (subtitleElement)
 
-    // --- Intersection Observer для анімації решти секцій при прокрутці ---
+    // --- Intersection Observer для анімації секцій при скролі --- 
     const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -152,24 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const intersectionObserver = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Визначаємо, з якої секції починати спостереження
-    const startIndexToObserve = isMobile ? 1 : 1;
-
+    // Спостерігаємо за всіма .about-section, починаючи з другого (індекс 1)
     const sectionsToObserve = document.querySelectorAll('.about-section');
     sectionsToObserve.forEach((section, index) => {
-        if (index >= startIndexToObserve) {
+        if (index >= 1) { // Починаємо з індексу 1
             intersectionObserver.observe(section);
         }
     });
-
-    // --- ВИДАЛЯЄМО СПОСТЕРЕЖЕННЯ ЗА ФОРМОЮ КОНТАКТІВ --- 
-    /* 
-    const contactForm = document.querySelector('.contact-form-animate');
-    if (contactForm) {
-        intersectionObserver.observe(contactForm);
-    }
-    */
-    // --- Кінець видалення спостереження ---
 
     // --- End Intersection Observer ---
 

@@ -606,7 +606,8 @@ textarea.form-control {
 /* --- About Us Page --- */
 /* Відступи для сторінки (використовується і для Контактів) */
 .contact-page-padding {
-    padding-top: 60px;
+    padding-top: 80px;
+    /* ЗБІЛЬШЕНО ВІДСТУП ЗВЕРХУ */
     padding-bottom: 60px;
 }
 
@@ -616,20 +617,14 @@ textarea.form-control {
     margin-bottom: 60px;
     /* Більший відступ між секціями */
     gap: 40px;
-    /* Анімація появи */
+    /* Анімація появи (оновлено) */
     opacity: 0;
     transform: translateX(-80px);
-    /* Починаємо зліва за замовчуванням */
     transition-property: opacity, transform;
-    transition-duration: 1.4s;
-    /* Стандартна швидкість */
-    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-/* Модифікатор для повільної анімації (для різних елементів) */
-.animate-slow {
-    transition-duration: 2.8s !important;
-    /* Зробимо важливим, щоб перебило інші тривалості */
+    transition-duration: 0.8s;
+    /* ЗРОБЛЕНО ШВИДШЕ */
+    transition-timing-function: ease-out;
+    /* СТАНДАРТНА ФУНКЦІЯ */
 }
 
 /* Модифікатор для зображення справа (анімація справа) */
@@ -661,8 +656,8 @@ textarea.form-control {
 
 .about-text p {
     line-height: 1.7;
-    /* Краща читабельність */
     color: var(--color-dark);
+    text-align: justify;
 }
 
 /* Замінюємо стилі для div-плейсхолдера на стилі для img */
@@ -676,6 +671,126 @@ img.about-image-placeholder {
     border-radius: 12px;
     /* Заокруглення кутів */
     object-fit: cover;
+}
+
+/* === Стилі для виділеного блоку "Про нас" (перероблено під стиль .about-section) === */
+.about-highlight-block {
+    display: flex;
+    /* Використовуємо Flexbox як .about-section */
+    align-items: center;
+    /* Вирівнюємо по центру вертикально */
+    gap: 40px;
+    /* Відступ між колонками */
+    background-color: var(--color-background);
+    /* Стандартний білий фон */
+    color: var(--color-dark);
+    /* Стандартний темний колір тексту */
+    padding: 0;
+    /* Прибираємо внутрішні падінги блоку, вони будуть у колонок */
+    border-radius: 0;
+    /* Прибираємо заокруглення блоку */
+    border: none;
+    /* ПРИБРАНО РАМКУ */
+    margin-bottom: 60px;
+    /* Зберігаємо відступ знизу */
+    box-shadow: none;
+    /* ПРИБРАНО ТІНЬ */
+    /* Анімація появи (синхронізовано з .about-section) */
+    opacity: 0;
+    transform: translateX(80px);
+    /* Починаємо справа */
+    transition-property: opacity, transform;
+    /* Додано для ясності */
+    transition-duration: 0.8s;
+    /* ТАКА Ж ШВИДКІСТЬ */
+    transition-timing-function: ease-out;
+    /* ТАКА Ж ФУНКЦІЯ */
+}
+
+.about-highlight-block.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ВИДАЛЕНО стилі для .highlight-icon-area та .highlight-text-area */
+
+/* Стилі для ЗАГОЛОВКУ H1 всередині (стандартні, але застосовуються до h1) */
+.about-highlight-block .about-text h1.section-title {
+    color: var(--color-secondary);
+    /* Зробимо як інші заголовки секцій - теракотовий */
+    text-shadow: none;
+    text-align: left;
+    margin-bottom: 15px;
+    font-size: 36px;
+    /* Повертаємо більший розмір, як у h2 в інших секціях */
+    font-family: "Poppins", sans-serif;
+    /* На всяк випадок */
+    font-weight: var(--font-bold);
+    margin-top: 0;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Стилі для ПАРАГРАФІВ всередині (стандартні) */
+.about-highlight-block .about-text p {
+    color: var(--color-dark);
+    opacity: 1;
+    font-weight: var(--font-regular);
+    font-size: var(--text-md);
+    line-height: 1.7;
+    max-width: 100%;
+    margin: 0 0 1em 0;
+    text-align: justify;
+}
+
+/* Прибираємо миготливий курсор */
+.about-highlight-block .about-text p::after {
+    display: none !important;
+}
+
+/* Стилі для ЗАГОЛОВКІВ H2 всередині (якщо будуть) */
+.about-highlight-block .about-text h2 {
+    color: var(--color-secondary);
+    font-size: 24px;
+    text-align: left;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+}
+
+/* Прибираємо анімацію з інтро-тексту і повертаємо колір (ЦЕ СТОСУЄТЬСЯ ТЕКСТУ ПОЗА БЛОКОМ) */
+.about-intro-text {
+    font-family: "Poppins", sans-serif;
+    font-size: var(--text-md);
+    line-height: 1.7;
+    text-align: justify;
+    max-width: 800px;
+    margin: 0.5em auto 2.5em auto;
+    /* Прибираємо стилі градієнту та анімації */
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: unset;
+    color: var(--color-dark);
+    /* Повертаємо стандартний темний колір */
+    animation: none;
+}
+
+/* Прибираємо анімацію з заголовка H1 (СТОСУЄТЬСЯ H1 ПОЗА БЛОКОМ) */
+.contact-page-padding>h1.section-title {
+    font-family: "Poppins", sans-serif;
+    font-size: 36px;
+    font-weight: var(--font-bold);
+    text-align: center;
+    margin-bottom: 30px;
+    /* Прибираємо стилі градієнту та анімації */
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: unset;
+    color: var(--color-dark);
+    /* Повертаємо стандартний темний колір */
+    animation: none;
 }
 
 /* --- Contact Page --- */
@@ -755,16 +870,12 @@ img.about-image-placeholder {
 
 /* Стилізація обгортки форми */
 .form-wrapper {
-    max-width: 680px;
-    /* Трохи ширше за форму */
-    margin: 0 auto;
-    padding: 40px;
-    border-radius: 8px;
-    background-color: var(--color-primary);
-    /* Колір лого */
-    box-shadow: var(--shadow-lg);
-    /* Додамо виразнішу тінь */
-    /* Анімаційні стилі переїхали сюди з contact_form.html */
+    background-color: #6BCBC4;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
+    margin-top: 30px;
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 1s ease-out, transform 1s ease-out;
@@ -778,15 +889,11 @@ img.about-image-placeholder {
 /* Прибираємо зайве у самої форми всередині обгортки */
 .form-wrapper .contact-form {
     max-width: none;
-    /* Знімаємо обмеження ширини */
     margin: 0;
     padding: 0;
-    /* Прибираємо внутрішні відступи, вони тепер у обгортки */
     border-radius: 0;
     background-color: transparent;
-    /* Робимо прозорою */
     box-shadow: none;
-    /* Тінь тепер на обгортці */
 }
 
 /* Робимо написи всередині обгортки білими */
@@ -797,15 +904,12 @@ img.about-image-placeholder {
 /* Стилізуємо групу інпутів всередині обгортки */
 .form-wrapper .input-group {
     gap: 15px;
-    /* Збільшено відступ між полями */
 }
 
 /* Додаємо заокруглення та box-sizing для інпутів всередині обгортки */
 .form-wrapper .form-control {
     border-radius: 8px;
-    /* Таке ж, як у обгортки */
     box-sizing: border-box;
-    /* Для надійного розрахунку розмірів */
 }
 
 /* Робимо текст "або" білим і вирівнюємо */
@@ -813,25 +917,18 @@ img.about-image-placeholder {
     color: var(--color-background);
     opacity: 0.85;
     line-height: 1.8;
-    /* Спробуємо підігнати під висоту інпутів */
-    /* align-self: center; -- вже є align-items: center у батька */
 }
 
 /* Стилізуємо кнопку "Надіслати" всередині обгортки */
 .form-wrapper .contact-submit-btn {
     background-color: var(--color-background);
-    /* Білий фон */
-    color: var(--color-primary);
-    /* Бірюзовий текст */
+    color: var(--color-dark);
 }
 
 .form-wrapper .contact-submit-btn:hover {
     background-color: var(--color-light);
-    /* Світло-пісочний фон при наведенні */
     color: var(--color-dark);
-    /* Темний текст при наведенні */
     box-shadow: 0 5px 15px rgba(243, 231, 207, 0.4);
-    /* Тінь під колір */
 }
 
 /* Покращений focus для полів форми */
@@ -839,13 +936,11 @@ img.about-image-placeholder {
     outline: none;
     border-color: var(--color-primary);
     box-shadow: 0 0 8px rgba(58, 185, 177, 0.4), 0 0 0 1px var(--color-primary);
-    /* Яскравіша тінь + обводка */
 }
 
 /* Кнопка відправки */
 .contact-submit-btn {
     padding: 12px 30px;
-    /* Трохи більші падінги */
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -858,7 +953,6 @@ img.about-image-placeholder {
 
 .contact-submit-btn:hover {
     background-color: var(--color-primary);
-    /* Змінюємо колір */
     color: var(--color-dark);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(58, 185, 177, 0.4);
@@ -866,60 +960,46 @@ img.about-image-placeholder {
 
 .contact-submit-btn:hover i {
     transform: translateX(3px);
-    /* Рухаємо іконку */
 }
 
-/* --- Catalog Page --- */
+/* === Catalog Page --- */
 .category-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     /* Адаптивна сітка папок */
     gap: 40px;
     margin-top: 40px;
-    /* Відступ від підзаголовка */
     margin-bottom: 60px;
-    /* ДОДАНО: Відступ знизу, щоб не прилипало до футера */
 }
 
 .category-folder {
     display: block;
-    /* Щоб <a> був блочним */
     text-decoration: none;
     border-radius: 16px;
     overflow: hidden;
-    /* Обрізаємо все, що виходить за межі */
     box-shadow: var(--shadow-md);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
-    /* Для позиціонування внутрішніх елементів */
 }
 
 .category-folder:hover {
     transform: translateY(-10px);
-    /* Ефект підняття */
     box-shadow: var(--shadow-lg);
 }
 
 /* Зображення/плейсхолдер всередині папки */
 .category-image-placeholder {
     height: 400px;
-    /* Висота папки */
     background-color: var(--color-accent-3);
-    /* Базовий фон, якщо немає картинки */
     background-size: cover;
-    /* Масштабування фонового зображення */
     background-position: center;
     transition: transform 0.4s ease-out;
-    /* Анімація зуму */
     position: relative;
-    /* Для позиціонування ::before */
     overflow: hidden;
-    /* Щоб патерн не вилазив при зумі зображення */
 }
 
 .category-folder:hover .category-image-placeholder {
     transform: scale(1.05);
-    /* Зум фону при наведенні на папку */
 }
 
 /* Псевдоелемент для фонового патерну */
@@ -932,19 +1012,14 @@ img.about-image-placeholder {
     bottom: 0;
     background-repeat: repeat;
     background-size: 25px 25px;
-    /* Розмір іконок патерну */
     opacity: 0.35;
-    /* Прозорість патерну */
     z-index: 0;
-    /* Патерн під емоджі */
     transition: opacity 0.4s ease-out;
     pointer-events: none;
-    /* Не перехоплює кліки */
 }
 
 .category-folder:hover .category-image-placeholder::before {
     opacity: 0.5;
-    /* Патерн стає яскравішим */
 }
 
 /* Патерни для конкретних категорій */
@@ -975,21 +1050,16 @@ img.about-image-placeholder {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -60%);
-    /* Центруємо і трохи піднімаємо */
     z-index: 1;
-    /* Над патерном */
     font-size: 100px;
     line-height: 1;
     text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-    /* Тінь для об'єму */
     transition: transform 0.4s ease-out;
     pointer-events: none;
-    /* Не перехоплює кліки */
 }
 
 .category-folder:hover .category-emoji {
     transform: translate(-50%, -60%) scale(1.15);
-    /* Збільшуємо емоджі */
 }
 
 /* Заголовок категорії */
@@ -999,7 +1069,6 @@ img.about-image-placeholder {
     left: 0;
     width: 100%;
     background: linear-gradient(to top, rgba(59, 78, 81, 0.9) 10%, rgba(59, 78, 81, 0) 100%);
-    /* Градієнт знизу */
     color: var(--color-background);
     padding: 25px 20px 15px 20px;
     margin: 0;
@@ -1007,77 +1076,10 @@ img.about-image-placeholder {
     font-weight: var(--font-bold);
     text-align: center;
     box-sizing: border-box;
-    /* Щоб падінг не впливав на ширину */
 }
 
 .category-title span {
-    /* Відступ для емоджі в заголовку */
     margin-right: 8px;
-}
-
-/* --- Стилізація вступного тексту на сторінці "Про нас" --- */
-.about-intro-text {
-    font-family: "Poppins", sans-serif;
-    font-size: var(--text-md);
-    line-height: 1.7;
-    text-align: justify;
-    max-width: 800px;
-    margin: 0.5em auto 2.5em auto;
-
-    /* Магія градієнтного тексту (тепер рухомі смуги) */
-    /* Градієнт: темний фон зі смугами бірюзового та помаранчевого */
-    background: linear-gradient(90deg,
-            var(--color-dark) 25%,
-            var(--color-accent-1) 40%,
-            /* Світло-бірюзова смуга */
-            var(--color-secondary) 60%,
-            /* Помаранчева смуга */
-            var(--color-dark) 75%);
-    background-size: 400% 100%;
-    /* Значно ширший фон */
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    animation: animate-stripes 7s linear infinite;
-    /* Використовуємо нову анімацію */
-}
-
-/* --- Стилізація головного заголовка H1 ТІЛЬКИ на сторінках типу "Про нас", "Контакти" --- */
-.contact-page-padding>h1.section-title {
-    font-family: "Poppins", sans-serif;
-    font-size: 36px;
-    font-weight: var(--font-bold);
-    text-align: center;
-    margin-bottom: 30px;
-    /* Градієнт та анімація, як у .about-intro-text (тепер рухомі смуги) */
-    background: linear-gradient(90deg,
-            var(--color-dark) 25%,
-            var(--color-accent-1) 40%,
-            var(--color-secondary) 60%,
-            var(--color-dark) 75%);
-    background-size: 400% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    animation: animate-stripes 7s linear infinite;
-    /* Використовуємо нову анімацію */
-}
-
-/* --- Ключові кадри для анімації РУХОМИХ СМУГ --- */
-@keyframes animate-stripes {
-    0% {
-        background-position: 100% 50%;
-        /* Початкова позиція (зміщено вправо) */
-    }
-
-    100% {
-        background-position: 0% 50%;
-        /* Кінцева позиція (зміщено вліво, що рухає хвилю вправо) */
-    }
-
-    /* Анімація зациклюється */
 }
 
 /* === MEDIA QUERIES (Adaptability) === */
@@ -1088,17 +1090,14 @@ img.about-image-placeholder {
     /* Header & Navigation */
     header .container {
         padding: 0 12px;
-        /* Скидаємо відступ для лого */
         padding-left: 12px;
     }
 
     .main-nav {
-        /* Приховуємо десктопну навігацію */
         display: none;
     }
 
     .burger-menu {
-        /* Показуємо бургер */
         display: flex;
     }
 
@@ -1118,26 +1117,17 @@ img.about-image-placeholder {
 @media (max-width: 768px) {
 
     /* Titles */
-    /* #brand-title { font-size: 60px; } Залишаємо великим */
     .section-title {
         font-size: 28px;
     }
 
-    /* Зменшуємо заголовок секції */
     .section-subtitle {
         font-size: var(--text-sm);
     }
 
-    /* Зменшуємо підзаголовок */
-
     /* Buttons */
-    /* Коментар про .btn-primary: /* Вже змінено на 1024px */
-    /* Видалено зайву дужку звідси */
-
-    /* Правило для .btn-primary на мобільних */
     .btn-primary {
         padding: 10px 18px;
-        /* Трохи менший падінг */
     }
 
     /* Product Card */
@@ -1145,70 +1135,86 @@ img.about-image-placeholder {
         padding: 16px;
     }
 
-    /* About Us Page - Переносимо стилі сюди */
     body .about-section,
     body .about-section.image-right {
         flex-direction: column;
-        /* БЕЗ !important */
         gap: 20px;
         text-align: center;
     }
 
-    /* Оновлені стилі для img на мобільних */
     img.about-image-placeholder {
         height: 200px;
-        /* Зменшена висота на мобільних */
         width: 100%;
-        /* Завжди на всю ширину колонки */
-        /* Прибираємо складну логіку позиціонування (left, transform) та calc для ширини */
         border-radius: 12px;
-        /* Залишаємо заокруглення (або 0, якщо треба на всю ширину) */
         margin-bottom: 15px;
-        /* Залишаємо відступ */
         object-fit: cover;
-        /* Залишаємо */
     }
 
     .about-text h2 {
         font-size: 28px;
-        /* Зменшуємо заголовок в секції */
     }
 
-    /* Contact Page */
     .quick-contact-buttons {
-        /* Кнопки швидких контактів */
         flex-direction: column;
-        /* Одна під одною */
         align-items: center;
         gap: 10px;
     }
 
     .btn-contact {
-        /* Робимо кнопки ширшими */
         width: 80%;
         max-width: 300px;
     }
 
-    /* Catalog Page */
     .category-grid {
         grid-template-columns: 1fr;
-        /* Одна папка в ряд */
         gap: 25px;
     }
 
     .category-image-placeholder {
         height: 300px;
-        /* Зменшуємо висоту папки */
     }
 
     .category-emoji {
         font-size: 80px;
-        /* Зменшуємо емоджі */
     }
 
     .category-title {
         font-size: var(--text-lg);
-        /* Зменшуємо заголовок категорії */
+    }
+
+    .about-highlight-block {
+        flex-direction: column;
+        /* Стеком на мобільних */
+        text-align: center;
+        /* Центруємо все */
+        padding: 30px;
+        gap: 20px;
+    }
+
+    .highlight-icon-area {
+        flex-basis: auto;
+        /* Автоматична висота/ширина */
+        margin-bottom: 10px;
+        /* Відступ від тексту */
+        font-size: 50px;
+        /* Трохи менша іконка */
+    }
+
+    .highlight-text-area {
+        width: 100%;
+        /* На всю ширину */
+    }
+
+    .about-highlight-block h1.section-title,
+    .about-highlight-block h2,
+    .about-highlight-block p {
+        text-align: center;
+        /* Центруємо текст */
+    }
+
+    .about-highlight-block h1.section-title {
+        font-size: 28px;
+        /* Трохи менший заголовок */
     }
 }
 
@@ -1216,33 +1222,26 @@ img.about-image-placeholder {
 @media (max-width: 480px) {
     #brand-title {
         font-size: 56px;
-        /* Ще трохи зменшуємо лого */
     }
 
     header .container {
         padding-left: 120px;
-        /* Зменшуємо відступ для меншого лого, якщо потрібно */
     }
 
     .logo img {
         height: 100px;
-        /* Менший логотип */
-        /* top: -20px; /* Менший винос - вирішив залишити як є */
     }
 
     .category-image-placeholder {
         height: 250px;
-        /* Ще менша папка */
     }
 
     .category-emoji {
         font-size: 60px;
-        /* Ще менший емоджі */
     }
 
     .contact-form {
         padding: 20px;
-        /* Менші падінги у форми */
     }
 }
 
@@ -1261,14 +1260,11 @@ img.about-image-placeholder {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    /* Перенос на маленьких екранах */
 }
 
 .filters-form .filter-group {
     flex: 1;
-    /* Групи займають рівний простір */
     min-width: 180px;
-    /* Мінімальна ширина для переносів */
 }
 
 .filters-form .price-filter-group {
@@ -1287,46 +1283,37 @@ img.about-image-placeholder {
 /* Стилізація select */
 .filter-select {
     appearance: none;
-    /* Прибираємо стандартний вигляд */
     -webkit-appearance: none;
     -moz-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%233B4E51' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
-    /* Своя стрілка */
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 16px 16px;
     padding-right: 40px;
-    /* Місце для стрілки */
 }
 
 /* Стилізація input[type=number] */
 .price-input {
-    /* Прибираємо стрілки в Chrome, Safari, Edge, Opera */
     -webkit-appearance: none;
     margin: 0;
-    /* Прибираємо стрілки в Firefox */
     -moz-appearance: textfield;
 }
 
 .filter-actions {
     display: flex;
     justify-content: center;
-    /* Центруємо */
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
     margin-top: 10px;
-    /* Невеликий відступ зверху */
 }
 
 .filter-submit-btn {
     min-width: 150px;
-    /* Мінімальна ширина кнопки */
 }
 
 .filter-reset-link {
     color: var(--color-secondary);
-    /* Колір як у заголовків */
     text-decoration: underline;
     font-size: var(--text-sm);
     transition: color 0.3s ease;
@@ -1337,22 +1324,18 @@ img.about-image-placeholder {
     text-decoration: none;
 }
 
-/* Адаптивність для фільтрів */
 @media (max-width: 768px) {
     .filter-row {
         gap: 15px;
-        /* Менший відступ на мобільних */
     }
 
     .filters-form .filter-group,
     .filters-form .price-filter-group {
         min-width: 150px;
-        /* Трохи менша мін. ширина */
     }
 
     .filter-actions {
         flex-direction: column;
-        /* Кнопка та посилання одне під одним */
         gap: 15px;
     }
 }
@@ -1360,23 +1343,17 @@ img.about-image-placeholder {
 /* === Modal Styles === */
 .modal {
     display: none;
-    /* Приховано за замовчуванням */
     position: fixed;
-    /* Фіксоване позиціонування відносно viewport */
     z-index: 1050;
-    /* Високий індекс, щоб бути поверх усього */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    /* Додаємо скрол, якщо контент не влазить */
 }
 
-/* Клас для показу модального вікна */
 .modal.is-open {
     display: flex;
-    /* Використовуємо flex для центрування .modal-content */
     justify-content: center;
     align-items: center;
 }
@@ -1388,27 +1365,19 @@ img.about-image-placeholder {
     width: 100%;
     height: 100%;
     background-color: rgba(59, 78, 81, 0.7);
-    /* Напівпрозорий темний фон */
     z-index: 1040;
-    /* Під контентом модального вікна, але над рештою сторінки */
 }
 
 .modal-content {
     position: relative;
-    /* Для позиціонування кнопки закриття */
     background-color: var(--color-background);
     margin: auto;
-    /* Автоматичні відступи для центрування (хоча flex вже допомагає) */
     padding: 30px 40px;
     border-radius: 16px;
     width: 90%;
-    /* Ширина відносно батьківського елемента (.modal) */
     max-width: 650px;
-    /* Максимальна ширина контенту */
     z-index: 1050;
-    /* Поверх .modal-backdrop */
     animation: modal-appear 0.4s ease-out;
-    /* Анімація появи */
 }
 
 .close-modal-btn {
@@ -1416,7 +1385,6 @@ img.about-image-placeholder {
     top: 10px;
     right: 15px;
     font-size: 2.5rem;
-    /* Велика кнопка закриття */
     font-weight: bold;
     line-height: 1;
     color: var(--color-dark);
@@ -1433,22 +1401,17 @@ img.about-image-placeholder {
 
 .modal-title {
     margin-top: 0;
-    /* Прибираємо верхній відступ за замовчуванням */
     margin-bottom: 25px;
     font-size: var(--text-xl);
-    /* Розмір як у заголовків категорій */
     color: var(--color-secondary);
 }
 
-/* Переносимо стилі для самої форми сюди (без тіні та відступу) */
 .modal-content .filters-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    /* Забираємо background, padding, border-radius, border, бо вони тепер у .modal-content */
 }
 
-/* Анімація появи модального вікна */
 @keyframes modal-appear {
     from {
         opacity: 0;
@@ -1461,19 +1424,15 @@ img.about-image-placeholder {
     }
 }
 
-/* Адаптивність для модального вікна */
 @media (max-width: 768px) {
     .modal-content {
         padding: 20px 25px;
         width: 95%;
-        /* Ширше на мобільних */
         max-width: none;
-        /* Знімаємо обмеження макс. ширини */
     }
 
     .modal-title {
         font-size: var(--text-lg);
-        /* Трохи менший заголовок */
     }
 
     .close-modal-btn {
@@ -1487,7 +1446,6 @@ img.about-image-placeholder {
 .messages-container {
     padding: 15px;
     margin-bottom: 15px;
-    /* Відступ від основного контенту */
 }
 
 .alert {
@@ -1495,7 +1453,6 @@ img.about-image-placeholder {
     margin-bottom: 10px;
     border-radius: 8px;
     color: var(--color-background);
-    /* Білий текст за замовчуванням */
     position: relative;
     text-align: center;
     font-weight: var(--font-bold);
@@ -1506,26 +1463,20 @@ img.about-image-placeholder {
 /* Стилі для різних типів повідомлень */
 .alert-success {
     background-color: var(--color-primary);
-    /* Бірюзовий для успіху */
 }
 
 .alert-error {
     background-color: var(--color-secondary);
-    /* Теракотовий для помилки */
 }
 
 .alert-warning {
     background-color: #ffc107;
-    /* Стандартний жовтий для попереджень */
     color: var(--color-dark);
-    /* Темний текст для кращої читабельності */
 }
 
 .alert-info {
     background-color: var(--color-accent-1);
-    /* Світло-бірюзовий для інформації */
     color: var(--color-dark);
-    /* Темний текст */
 }
 
 /* Опціональна кнопка закриття (якщо розкоментуєш в HTML) */
@@ -1539,7 +1490,6 @@ img.about-image-placeholder {
     font-size: 1.5rem;
     line-height: 1;
     color: inherit;
-    /* Колір тексту повідомлення */
     opacity: 0.7;
     cursor: pointer;
     transition: opacity 0.2s ease;

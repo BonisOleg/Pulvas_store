@@ -23,7 +23,7 @@ def contact_view(request: HttpRequest) -> HttpResponse:
                 telegram_phone=telegram_phone if telegram_phone != '+380' else '', # Зберігаємо порожнім, якщо тільки префікс
                 message=message_text
             )
-            messages.success(request, 'Дякуємо! Ваше повідомлення успішно надіслано.')
+            # messages.success(request, 'Дякуємо! Ваше повідомлення успішно надіслано.') # Закоментували повідомлення про успіх
             return redirect('shop:contact') # Перенаправляємо на цю ж сторінку
         else:
             # Якщо валідація не пройшла
