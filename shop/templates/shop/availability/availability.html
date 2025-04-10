@@ -24,7 +24,6 @@
             <h2 class="modal-title text-center">Фільтри товарів</h2>
             {# --- Форма фільтрів (переміщена сюди) --- #}
             <form method="get" action="{% url 'shop:availability' %}" class="filters-form">
-                {# Форма залишається майже без змін, але без тіні та зовнішнього відступу #}
                 <div class="filter-row">
                     {# Фільтр за сезоном #}
                     <div class="form-group filter-group">
@@ -32,7 +31,9 @@
                         <select name="season" id="season-select" class="form-control filter-select">
                             <option value="">Всі сезони</option>
                             {% for season_val, season_label in seasons %}
-                            <option value="{{ season_val }}"{% if selected_season == season_val|stringformat:"s" %} selected{% endif %}>{{ season_label }}</option>
+                            <option value="{{ season_val }}">
+                                {{ season_label }}
+                            </option>
                             {% endfor %}
                         </select>
                     </div>
@@ -43,7 +44,9 @@
                         <select name="gender" id="gender-select" class="form-control filter-select">
                             <option value="">Всі типи</option>
                             {% for gender_val, gender_label in genders %}
-                            <option value="{{ gender_val }}"{% if selected_gender == gender_val|stringformat:"s" %} selected{% endif %}>{{ gender_label }}</option>
+                            <option value="{{ gender_val }}">
+                                {{ gender_label }}
+                            </option>
                             {% endfor %}
                         </select>
                     </div>
@@ -84,9 +87,8 @@
     <div class="product-grid mb-40">
         {% for product in products %}
         {# Включаємо шаблон картки товару, передаючи продукт #}
-        {# Можна додати логіку для чергування кольорів карток, якщо потрібно #}
-        {% include "shop/includes/product_card.html" with product=product card_color_class="bg-accent-3" %}
-        {# Поки використовуємо bg-accent-3 для всіх #}
+        {# ТЕПЕР ВИКОРИСТОВУЄМО ДИНАМІЧНИЙ КЛАС КОЛЬОРУ #}
+        {% include "shop/includes/product_card.html" with product=product card_color_class=product.color_class %}
         {% endfor %}
     </div>
     {% else %}

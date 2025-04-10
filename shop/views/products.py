@@ -3,6 +3,7 @@
 from django.shortcuts import render # Видалено get_object_or_404, поки не використовується
 from django.http import HttpRequest, HttpResponse
 from typing import List, Dict, Any
+from ..utils.card_utils import _assign_color_classes # Додано імпорт
 
 # Тестові дані (можна винести в окремий файл/сервіс пізніше)
 TEST_PRODUCTS_DATA: List[Dict[str, Any]] = [
@@ -14,27 +15,28 @@ TEST_PRODUCTS_DATA: List[Dict[str, Any]] = [
     {'id': 6, 'name': 'Товар 6', 'description': 'Опис товару 6', 'price': 360},
 ]
 
-def _assign_color_classes(products: List[Dict[str, Any]], num_columns: int = 3) -> List[Dict[str, Any]]:
-    """Допоміжна функція для динамічного призначення класів кольорів карткам.
-
-    Args:
-        products: Список словників з даними товарів.
-        num_columns: Очікувана кількість колонок у сітці для розрахунку патерну.
-
-    Returns:
-        Список товарів з доданим ключем 'color_class'.
-    """
-    color_classes = ['bg-primary', 'bg-accent-2', 'bg-accent-3']
-    num_colors = len(color_classes)
-    products_with_color = []
-    for i, product_data in enumerate(products):
-        # Розрахунок індексу кольору для зміщення в кожному рядку
-        row = i // num_columns
-        col = i % num_columns
-        color_index = (col + row) % num_colors
-        product_data['color_class'] = color_classes[color_index]
-        products_with_color.append(product_data)
-    return products_with_color
+# Функцію _assign_color_classes перенесено до shop/utils/card_utils.py
+# def _assign_color_classes(products: List[Dict[str, Any]], num_columns: int = 3) -> List[Dict[str, Any]]:
+#     """Допоміжна функція для динамічного призначення класів кольорів карткам.
+# 
+#     Args:
+#         products: Список словників з даними товарів.
+#         num_columns: Очікувана кількість колонок у сітці для розрахунку патерну.
+# 
+#     Returns:
+#         Список товарів з доданим ключем 'color_class'.
+#     """
+#     color_classes = ['bg-primary', 'bg-accent-2', 'bg-accent-3']
+#     num_colors = len(color_classes)
+#     products_with_color = []
+#     for i, product_data in enumerate(products):
+#         # Розрахунок індексу кольору для зміщення в кожному рядку
+#         row = i // num_columns
+#         col = i % num_columns
+#         color_index = (col + row) % num_colors
+#         product_data['color_class'] = color_classes[color_index]
+#         products_with_color.append(product_data)
+#     return products_with_color
 
 def product_list_view(request: HttpRequest) -> HttpResponse:
     """Відображає головну сторінку зі списком товарів.
@@ -43,7 +45,7 @@ def product_list_view(request: HttpRequest) -> HttpResponse:
     """
     # Копіюємо тестові дані, щоб не змінювати оригінал
     products_data = [p.copy() for p in TEST_PRODUCTS_DATA] 
-    products_with_color = _assign_color_classes(products_data)
+    products_with_color = _assign_color_classes(products_data) # Використовуємо імпортовану функцію
     
     context = {
         'products': products_with_color
@@ -65,19 +67,3 @@ def product_detail_view(request: HttpRequest, product_id: int) -> HttpResponse:
         'product': product
     }
     return render(request, 'shop/products/product_detail.html', context) 
-
-# НОВА ФУНКЦІЯ
-def availability_view(request: HttpRequest) -> HttpResponse:
-    """Відображає сторінку з товарами, які є в наявності (поки що всі тестові).
-    
-    Використовує ті ж тестові дані, що й головна сторінка.
-    """
-    # TODO: Замінити на реальне отримання товарів В НАЯВНОСТІ з бази даних
-    products_data = [p.copy() for p in TEST_PRODUCTS_DATA]
-    products_with_color = _assign_color_classes(products_data)
-
-    context = {
-        'products': products_with_color,
-        'page_title': "Товари в наявності" # Можна передати заголовок
-    }
-    return render(request, 'shop/availability/availability.html', context) 

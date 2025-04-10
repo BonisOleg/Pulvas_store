@@ -2,6 +2,7 @@
 
 <!-- product_card.html -->
 {# Приймає 'product' та 'card_color_class' (наприклад, 'bg-accent-1') як контекст #}
+{# ВАЖЛИВО: Очікує, що product має атрибут/ключ 'id' #}
 <div class="product-card {{ card_color_class|default:'bg-accent-1' }}">
     {# Зображення товару #}
     {% if product.image %}
@@ -15,7 +16,6 @@
     {# Тут можна додати розмір, якщо потрібно #}
     <p class="product-price">Ціна: {{ product.price|default:'100' }} грн</p>
 
-    {# Кнопка "Детальніше" #}
-    <a href="#" class="btn-primary">Детальніше</a> {# Placeholder link - пізніше замінити на {% url 'product_detail'
-    product.id %} #}
+    {# Кнопка "Детальніше" - ВИПРАВЛЕНО ПОСИЛАННЯ #}
+    <a href="{% url 'shop:product_detail' product_id=product.id %}" class="btn-primary">Детальніше</a>
 </div>

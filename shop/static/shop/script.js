@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ensure preloader is visible initially if JS is enabled
     body.classList.remove('loaded');
 
-    // --- Визначаємо, чи це мобільний пристрій (за шириною вікна) --- 
-    const isMobile = window.innerWidth < 768;
-
     window.addEventListener('load', () => {
         const loadTime = Date.now();
         const elapsedTime = loadTime - startTime;

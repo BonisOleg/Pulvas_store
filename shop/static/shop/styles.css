@@ -1498,3 +1498,97 @@ img.about-image-placeholder {
 .close-alert:hover {
     opacity: 1;
 }
+
+/* === Product Detail Page === */
+.product-detail-layout {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    /* Додаємо wrap для адаптивності */
+}
+
+.product-detail-column {
+    flex: 1;
+    min-width: 280px;
+    /* Мінімальна ширина для колонки на маленьких екранах */
+}
+
+.product-detail-image-placeholder {
+    height: 400px;
+    background-color: var(--color-accent-3);
+    /* Використовуємо колір з палітри */
+    border-radius: 12px;
+    /* Трохи більше заокруглення */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Щоб зображення не вилазило */
+    color: var(--color-dark);
+    /* Колір тексту плейсхолдера */
+    font-size: var(--text-md);
+}
+
+.product-detail-image-placeholder img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Масштабуємо зображення, зберігаючи пропорції */
+}
+
+.product-detail-column h2 {
+    /* Стиль для заголовка "Опис" */
+    font-size: var(--text-xl);
+    /* Зробимо трохи більшим */
+    font-weight: var(--font-bold);
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--color-secondary);
+    /* Використаємо акцентний колір */
+}
+
+.product-detail-column p {
+    /* Стиль для тексту опису */
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.product-detail-price {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    margin-top: 20px;
+    margin-bottom: 25px;
+    /* Збільшимо відступ перед кнопками */
+    color: var(--color-primary);
+    /* Виділимо ціну */
+}
+
+.product-detail-actions {
+    margin-top: 20px;
+    /* Додаємо відступ для контейнера кнопок */
+}
+
+/* Адаптивність для сторінки деталей */
+@media (max-width: 768px) {
+    .product-detail-layout {
+        gap: 20px;
+        /* Зменшуємо відступ на мобільних */
+        margin-top: 20px;
+    }
+
+    .product-detail-image-placeholder {
+        height: 300px;
+        /* Зменшуємо висоту зображення */
+    }
+
+    .product-detail-column h2 {
+        font-size: var(--text-lg);
+    }
+
+    .product-detail-price {
+        font-size: var(--text-md);
+        margin-bottom: 20px;
+    }
+}
