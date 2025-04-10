@@ -20,4 +20,6 @@ __all__ = [
     'about_us_view',
     'catalog_view',
     'availability_view',
-] 
+]
+
+# Test comment to check if editing works now. 

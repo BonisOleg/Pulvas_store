@@ -1,7 +1,7 @@
 # admin.py
 
 from django.contrib import admin
-from .models import Category, Product
+from .models import Category, Product, ContactMessage
 
 # Register your models here.
 
@@ -35,3 +35,25 @@ class ProductAdmin(admin.ModelAdmin):
 
     # Можна також використовувати readonly_fields, щоб приховати системні поля
     # readonly_fields = ('created', 'updated') # Якщо потрібно приховати їх зовсім 
+
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'telegram_username', 'telegram_phone', 'created_at', 'is_viewed')
+    list_filter = ('is_viewed', 'created_at')
+    search_fields = ('name', 'telegram_username', 'telegram_phone', 'message')
+    list_editable = ('is_viewed',) # Дозволяємо змінювати статус перегляду прямо у списку
+    readonly_fields = ('name', 'telegram_username', 'telegram_phone', 'message', 'created_at') # Робимо поля тільки для читання на сторінці редагування
+
+    # Можна розділити на секції для кращої читабельності
+    fieldsets = (
+        ('Відправник', {
+            'fields': ('name', 'telegram_username', 'telegram_phone')
+        }),
+        ('Повідомлення', {
+            'fields': ('message',)
+        }),
+        ('Статус', {
+            'fields': ('created_at', 'is_viewed')
+        }),
+    ) 

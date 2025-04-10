@@ -71,4 +71,23 @@ class Product(models.Model):
         ]
 
     def __str__(self):
-        return self.name 
+        return self.name
+
+class ContactMessage(models.Model):
+    """Модель для зберігання повідомлень з контактної форми."""
+    name = models.CharField(max_length=100, verbose_name="Ім'я")
+    # Зберігаємо обидва варіанти, хоча б один має бути заповнений (валідація у view/form)
+    telegram_username = models.CharField(max_length=100, blank=True, verbose_name="Telegram Username")
+    telegram_phone = models.CharField(max_length=20, blank=True, verbose_name="Telegram Phone")
+    message = models.TextField(verbose_name="Повідомлення")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата відправки")
+    is_viewed = models.BooleanField(default=False, verbose_name="Переглянуто") # Для позначки в адмінці
+
+    class Meta:
+        verbose_name = "Повідомлення з контактої форми"
+        verbose_name_plural = "Повідомлення з контактої форми"
+        ordering = ['-created_at'] # Спочатку новіші
+
+    def __str__(self):
+        # Показуємо ім'я та початок повідомлення для зручності
+        return f"Повідомлення від {self.name} ({self.created_at.strftime('%Y-%m-%d %H:%M')})" 

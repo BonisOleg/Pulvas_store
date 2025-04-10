@@ -3,48 +3,57 @@
 {% block title %}Контакти - Pulvas Store{% endblock %}
 
 {% block content %}
+{# Прибираємо клас animate-background #}
 <div class="container contact-page-padding">
     <h1 class="section-title">Контакти</h1>
     <p class="text-center mb-40">Маєте питання? Зв'яжіться з нами!</p>
 
     {# Блок швидких посилань #}
     <div class="quick-contact-buttons text-center mb-40">
-        <a href="https://t.me/DanaAfanasenko" class="btn-primary btn-contact" target="_blank">
-            <i class="fab fa-telegram-plane"></i> Telegram (@DanaAfanasenko)
+        <a href="https://t.me/DanaAfanasenko" class="btn-primary btn-contact btn-telegram" target="_blank">
+            <i class="fab fa-telegram-plane"></i><span>Telegram</span>
         </a>
-        {# Можливо, додати кнопку для номера телефону в Telegram?
-        <a href="https://t.me/+380969068633" class="btn-primary btn-contact" target="_blank">
-            <i class="fab fa-telegram-plane"></i> Telegram (+380 96...)
-        </a>
-        #}
         <a href="viber://chat?number=%2B380982709679" class="btn-primary btn-contact btn-viber">
-            <i class="fab fa-viber"></i> Viber
+            <i class="fab fa-viber"></i><span>Viber</span> {# Обгортаємо текст в span #}
         </a>
         <a href="https://wa.me/380982709679" class="btn-primary btn-contact btn-whatsapp" target="_blank">
-            <i class="fab fa-whatsapp"></i> WhatsApp
+            <i class="fab fa-whatsapp"></i><span>WhatsApp</span> {# Обгортаємо текст в span #}
         </a>
     </div>
 
-    {# Форма зворотного зв'язку #}
-    <form method="post" class="contact-form">
-        {% csrf_token %}
-        {# Тут будуть поля форми, коли ми їх додамо #}
-        <div class="form-group">
-            <label for="name">Ім'я:</label>
-            <input type="text" id="name" name="name" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="message">Повідомлення:</label>
-            <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
-        </div>
-        <div class="text-center">
-            <button type="submit" class="btn-primary">Надіслати</button>
-        </div>
-    </form>
+    {# Огортаємо форму в div.form-wrapper і переносимо клас анімації сюди #}
+    <div class="form-wrapper contact-form-animate">
+        {# Забираємо клас анімації з форми #}
+        <form method="post" class="contact-form">
+            {% csrf_token %}
+            {# Тут будуть поля форми, коли ми їх додамо #}
+            <div class="form-group">
+                <label for="name">Ім'я:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            {# Розділяємо поле Telegram на два: username та phone #}
+            <div class="form-group">
+                <label for="telegram_username">Telegram:</label> {# Залишаємо один label #}
+                <div class="input-group">
+                    <input type="text" id="telegram_username" name="telegram_username" class="form-control"
+                        placeholder="@username" value="@">
+                    <span class="input-group-text">або</span> {# Роздільник #}
+                    <input type="tel" id="telegram_phone" name="telegram_phone" class="form-control"
+                        placeholder="+380........." value="+380">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="message">Повідомлення:</label>
+                <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
+            </div>
+            <div class="text-center">
+                {# Додаємо іконку до кнопки #}
+                <button type="submit" class="btn-primary contact-submit-btn">
+                    <i class="fas fa-paper-plane"></i> Надіслати
+                </button>
+            </div>
+        </form>
+    </div> {# Кінець .form-wrapper #}
 
 </div>
 {% endblock %}

@@ -76,9 +76,8 @@ body {
     text-align: center;
 }
 
-/* .mb-30 { Використовується? Якщо ні, можна видалити
-    margin-bottom: 30px;
-} */
+
+
 .mb-40 {
     margin-bottom: 40px;
 }
@@ -245,17 +244,17 @@ nav a:hover {
 /* Burger Menu (Hidden on Desktop) */
 .burger-menu {
     display: none;
-    /* Переконуємось, що приховано за замовчуванням */
     width: 36px;
+    height: 24px;
+    /* Додаємо фіксовану висоту для стабільності анімації */
     cursor: pointer;
     margin-left: auto;
-    /* Притискаємо до правого краю */
     margin-right: 10px;
     padding: 5px;
-    /* Зона кліку */
     position: relative;
     flex-direction: column;
-    /* Лінії одна під одною */
+    justify-content: space-between;
+    /* Розподіляємо лінії по висоті */
 }
 
 .burger-menu span {
@@ -264,54 +263,90 @@ nav a:hover {
     height: 3px;
     background-color: var(--color-background);
     border-radius: 3px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
+    /* Змінюємо timing function */
+    transform-origin: center;
+    /* Встановлюємо центр трансформації */
 }
 
-.burger-menu span:not(:last-child) {
-    margin-bottom: 5px;
-    /* Відстань між лініями */
+/* Анімація бургера в хрестик */
+.burger-menu.is-open span:nth-child(1) {
+    transform: translateY(10.5px) rotate(45deg);
+    /* Піднімаємо та обертаємо */
+}
+
+.burger-menu.is-open span:nth-child(2) {
+    opacity: 0;
+    /* Приховуємо середню лінію */
+    transform: scale(0.8);
+}
+
+.burger-menu.is-open span:nth-child(3) {
+    transform: translateY(-10.5px) rotate(-45deg);
+    /* Опускаємо та обертаємо */
 }
 
 /* Mobile Navigation (Hidden on Desktop) */
 .mobile-nav {
-    display: none;
-    /* Приховано за замовчуванням */
+    /* display: none; Замінюємо на opacity/visibility/transform */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    /* Починаємо трохи вище */
     position: absolute;
     top: 100%;
-    /* Під хедером */
     left: 0;
     width: 100%;
-    background-color: rgba(59, 78, 81, 0.95);
-    /* Напівпрозорий темний фон */
+    background-color: var(--color-dark);
+    /* Робимо фон солідним */
     z-index: 1000;
-    padding: 15px 0;
+    padding: 20px 0 30px 0;
+    /* Збільшуємо вертикальні падінги */
     box-shadow: var(--shadow-md);
+    transition: opacity 0.3s ease-out, visibility 0.3s step-end, transform 0.3s ease-out;
+    /* Додаємо transition, visibility змінюється миттєво в кінці */
 }
 
 .mobile-nav.is-open {
-    display: block;
-    /* Показуємо при відкритті */
+    /* display: block; Замінюємо */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.3s ease-out, visibility 0.3s step-start, transform 0.3s ease-out;
 }
 
 .mobile-nav ul {
     text-align: center;
-    /* Центруємо посилання */
     display: block;
-    /* Перебиваємо flex */
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .mobile-nav li {
-    margin: 15px 0;
-    /* Вертикальні відступи */
+    margin: 0;
     margin-left: 0;
-    /* Скидаємо відступ */
 }
 
 .mobile-nav a {
     font-size: var(--text-lg);
     display: block;
-    /* Посилання на всю ширину */
-    padding: 5px 0;
+    padding: 15px 20px;
+    /* Збільшуємо падінги для кращої зони кліку */
+    color: var(--color-background);
+    /* Переконуємось, що колір тексту світлий */
+    transition: background-color 0.2s ease, color 0.2s ease;
+    text-decoration: none !important;
+    /* ЯВНО ПРИБИРАЄМО ПІДКРЕСЛЕННЯ */
+}
+
+.mobile-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Легкий білий фон при наведенні */
+    color: var(--color-primary);
+    /* Акцентний колір тексту при наведенні */
+    text-decoration: none !important;
+    /* Також прибираємо на hover */
 }
 
 /* --- Footer --- */
@@ -443,6 +478,46 @@ textarea.form-control {
     /* Мінімальна висота */
 }
 
+/* Стилі для групи інпутів (Telegram username + phone) */
+.input-group {
+    display: flex;
+    align-items: center;
+    /* Вирівнюємо елементи по вертикалі */
+    gap: 10px;
+    /* Відступ між інпутами та текстом */
+}
+
+.input-group .form-control {
+    flex: 1;
+    /* Інпути займають доступний простір */
+    min-width: 0;
+    /* Дозволяє інпутам звужуватися */
+}
+
+.input-group-text {
+    font-size: var(--text-sm);
+    color: var(--color-dark);
+    opacity: 0.7;
+}
+
+/* Адаптивність для групи інпутів */
+@media (max-width: 480px) {
+
+    /* На маленьких екранах */
+    .input-group {
+        flex-direction: column;
+        /* Поля одне під одним */
+        align-items: stretch;
+        /* Розтягуємо елементи на всю ширину */
+    }
+
+    .input-group-text {
+        text-align: center;
+        /* Центруємо текст "або" */
+        margin: 5px 0;
+        /* Додаємо невеликий вертикальний відступ */
+    }
+}
 
 /* === PAGE SPECIFIC STYLES === */
 
@@ -527,9 +602,6 @@ textarea.form-control {
     /* Вертикальні відступи */
 }
 
-/* .products-section .section-subtitle { /* Немає потреби перебивати колір */
-/* Видалено зайву дужку */
-*/
 
 /* --- About Us Page --- */
 /* Відступи для сторінки (використовується і для Контактів) */
@@ -554,9 +626,10 @@ textarea.form-control {
     transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-/* Модифікатор для повільної анімації (перші секції) */
-.about-section.animate-slow {
-    transition-duration: 2.8s;
+/* Модифікатор для повільної анімації (для різних елементів) */
+.animate-slow {
+    transition-duration: 2.8s !important;
+    /* Зробимо важливим, щоб перебило інші тривалості */
 }
 
 /* Модифікатор для зображення справа (анімація справа) */
@@ -603,53 +676,197 @@ img.about-image-placeholder {
     border-radius: 12px;
     /* Заокруглення кутів */
     object-fit: cover;
-    /* Масштабування із збереженням пропорцій */
-    /* Прибираємо непотрібні стилі для div:
-       background-color, display: flex, justify-content, align-items, color, font-weight
-    */
 }
 
 /* --- Contact Page --- */
 /* Стилі для самої форми .contact-form див. у секції Forms */
+
 /* Блок швидких контактів */
 .quick-contact-buttons {
     display: flex;
     flex-wrap: wrap;
-    /* Перенос на мобільних */
     justify-content: center;
-    gap: 15px;
-    /* Відстань між кнопками */
-    margin-bottom: 40px;
+    gap: 20px;
+    /* Збільшимо відступ */
+    margin-bottom: 50px;
+    /* Збільшимо відступ */
 }
 
 .btn-contact {
-    /* Стилізація кнопок контактів */
     display: inline-flex;
-    /* Для вирівнювання іконки і тексту */
     align-items: center;
-    gap: 8px;
-    /* Відстань між іконкою і текстом */
-    min-width: 150px;
+    gap: 10px;
+    /* Трохи збільшимо */
+    min-width: 180px;
+    /* Зробимо трохи ширшими */
     justify-content: center;
+    overflow: hidden;
+    /* Для ефекту з span */
+    position: relative;
+    /* Для ефекту з span */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Довший і плавніший перехід */
 }
 
 .btn-contact i {
-    /* Іконки Font Awesome всередині кнопок */
-    font-size: 1.2em;
+    font-size: 1.3em;
     /* Трохи більша іконка */
+    transition: transform 0.3s ease-out;
+    /* Анімація для іконки */
 }
 
-/* Кастомні кольори при наведенні */
+.btn-contact span {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-contact:hover {
+    transform: translateY(-3px);
+    /* Легке підняття */
+    box-shadow: var(--shadow-md);
+    /* Додаємо тінь при наведенні */
+}
+
+.btn-contact:hover i {
+    transform: scale(1.1) rotate(-5deg);
+    /* Анімація іконки при наведенні */
+}
+
+/* Кастомні кольори при наведенні - додаємо плавний перехід тіні */
+.btn-telegram:hover {
+    background-color: #2AABEE;
+    /* Фірмовий синій Telegram */
+    color: white;
+    box-shadow: 0 8px 20px rgba(42, 171, 238, 0.3);
+    /* Тінь під колір */
+}
+
 .btn-viber:hover {
     background-color: #7360F2;
-    /* Фіолетовий Viber */
     color: white;
+    box-shadow: 0 8px 20px rgba(115, 96, 242, 0.3);
 }
 
 .btn-whatsapp:hover {
     background-color: #25D366;
-    /* Зелений WhatsApp */
     color: white;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+}
+
+/* Стилізація обгортки форми */
+.form-wrapper {
+    max-width: 680px;
+    /* Трохи ширше за форму */
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 8px;
+    background-color: var(--color-primary);
+    /* Колір лого */
+    box-shadow: var(--shadow-lg);
+    /* Додамо виразнішу тінь */
+    /* Анімаційні стилі переїхали сюди з contact_form.html */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.form-wrapper.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Прибираємо зайве у самої форми всередині обгортки */
+.form-wrapper .contact-form {
+    max-width: none;
+    /* Знімаємо обмеження ширини */
+    margin: 0;
+    padding: 0;
+    /* Прибираємо внутрішні відступи, вони тепер у обгортки */
+    border-radius: 0;
+    background-color: transparent;
+    /* Робимо прозорою */
+    box-shadow: none;
+    /* Тінь тепер на обгортці */
+}
+
+/* Робимо написи всередині обгортки білими */
+.form-wrapper label {
+    color: var(--color-background);
+}
+
+/* Стилізуємо групу інпутів всередині обгортки */
+.form-wrapper .input-group {
+    gap: 15px;
+    /* Збільшено відступ між полями */
+}
+
+/* Додаємо заокруглення та box-sizing для інпутів всередині обгортки */
+.form-wrapper .form-control {
+    border-radius: 8px;
+    /* Таке ж, як у обгортки */
+    box-sizing: border-box;
+    /* Для надійного розрахунку розмірів */
+}
+
+/* Робимо текст "або" білим і вирівнюємо */
+.form-wrapper .input-group-text {
+    color: var(--color-background);
+    opacity: 0.85;
+    line-height: 1.8;
+    /* Спробуємо підігнати під висоту інпутів */
+    /* align-self: center; -- вже є align-items: center у батька */
+}
+
+/* Стилізуємо кнопку "Надіслати" всередині обгортки */
+.form-wrapper .contact-submit-btn {
+    background-color: var(--color-background);
+    /* Білий фон */
+    color: var(--color-primary);
+    /* Бірюзовий текст */
+}
+
+.form-wrapper .contact-submit-btn:hover {
+    background-color: var(--color-light);
+    /* Світло-пісочний фон при наведенні */
+    color: var(--color-dark);
+    /* Темний текст при наведенні */
+    box-shadow: 0 5px 15px rgba(243, 231, 207, 0.4);
+    /* Тінь під колір */
+}
+
+/* Покращений focus для полів форми */
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 8px rgba(58, 185, 177, 0.4), 0 0 0 1px var(--color-primary);
+    /* Яскравіша тінь + обводка */
+}
+
+/* Кнопка відправки */
+.contact-submit-btn {
+    padding: 12px 30px;
+    /* Трохи більші падінги */
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.contact-submit-btn i {
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.contact-submit-btn:hover {
+    background-color: var(--color-primary);
+    /* Змінюємо колір */
+    color: var(--color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(58, 185, 177, 0.4);
+}
+
+.contact-submit-btn:hover i {
+    transform: translateX(3px);
+    /* Рухаємо іконку */
 }
 
 /* --- Catalog Page --- */
@@ -1264,4 +1481,70 @@ img.about-image-placeholder {
         top: 5px;
         right: 10px;
     }
+}
+
+/* === Django Messages Styles === */
+.messages-container {
+    padding: 15px;
+    margin-bottom: 15px;
+    /* Відступ від основного контенту */
+}
+
+.alert {
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: var(--color-background);
+    /* Білий текст за замовчуванням */
+    position: relative;
+    text-align: center;
+    font-weight: var(--font-bold);
+    font-size: var(--text-md);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Стилі для різних типів повідомлень */
+.alert-success {
+    background-color: var(--color-primary);
+    /* Бірюзовий для успіху */
+}
+
+.alert-error {
+    background-color: var(--color-secondary);
+    /* Теракотовий для помилки */
+}
+
+.alert-warning {
+    background-color: #ffc107;
+    /* Стандартний жовтий для попереджень */
+    color: var(--color-dark);
+    /* Темний текст для кращої читабельності */
+}
+
+.alert-info {
+    background-color: var(--color-accent-1);
+    /* Світло-бірюзовий для інформації */
+    color: var(--color-dark);
+    /* Темний текст */
+}
+
+/* Опціональна кнопка закриття (якщо розкоментуєш в HTML) */
+.close-alert {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: inherit;
+    /* Колір тексту повідомлення */
+    opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.close-alert:hover {
+    opacity: 1;
 }

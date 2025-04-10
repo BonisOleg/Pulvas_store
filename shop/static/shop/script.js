@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const minDisplayTime = 1715; // Reduced minimum display time further by 30% (2450 * 0.7)
     const fadeOutDelay = 200; // Small delay before starting fade out
 
+    // --- Знаходимо форму контактів --- 
+    const contactForm = document.querySelector('.contact-form-animate');
+
     // Ensure preloader is visible initially if JS is enabled
     body.classList.remove('loaded');
 
@@ -45,17 +48,46 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // --- Кінець запуску анімації --- 
 
+            // --- Запуск анімації ФОРМИ КОНТАКТІВ (якщо вона є) ПІСЛЯ прелоадера --- 
+            if (contactForm) {
+                contactForm.classList.add('animate-slow'); // Додаємо повільну анімацію
+                setTimeout(() => {
+                    contactForm.classList.add('is-visible'); // Робимо видимою
+                }, 0); // Затримка 0, щоб відбулося після додавання класу анімації
+            }
+            // --- Кінець анімації форми --- 
+
         }, delayNeeded + fadeOutDelay);
     });
 
-    const burger = document.querySelector('.burger-menu');
+    // --- Mobile Navigation Toggle ---
+    const burgerMenu = document.querySelector('.burger-menu');
     const mobileNav = document.querySelector('.mobile-nav');
 
-    if (burger && mobileNav) {
-        burger.addEventListener('click', () => {
+    if (burgerMenu && mobileNav) {
+        burgerMenu.addEventListener('click', function () {
+            // Додаємо/прибираємо клас is-open і для навігації, і для іконки бургера
             mobileNav.classList.toggle('is-open');
+            burgerMenu.classList.toggle('is-open');
+
+            // Блокуємо/розблоковуємо скрол сторінки
+            if (mobileNav.classList.contains('is-open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Закриття меню при кліку на посилання (якщо потрібно)
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('is-open');
+                burgerMenu.classList.remove('is-open');
+                document.body.style.overflow = '';
+            });
         });
     }
+    // --- End Mobile Navigation Toggle ---
 
     // --- Typewriter effect for subtitle ON THE HOME PAGE ONLY --- 
     // Шукаємо підзаголовок ТІЛЬКИ всередині секції товарів
@@ -129,6 +161,16 @@ document.addEventListener('DOMContentLoaded', () => {
             intersectionObserver.observe(section);
         }
     });
+
+    // --- ВИДАЛЯЄМО СПОСТЕРЕЖЕННЯ ЗА ФОРМОЮ КОНТАКТІВ --- 
+    /* 
+    const contactForm = document.querySelector('.contact-form-animate');
+    if (contactForm) {
+        intersectionObserver.observe(contactForm);
+    }
+    */
+    // --- Кінець видалення спостереження ---
+
     // --- End Intersection Observer ---
 
     const openModalBtn = document.getElementById('open-filter-modal-btn');
@@ -171,4 +213,50 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!closeModalBtn) console.warn('Close button .close-modal-btn not found inside modal.');
         if (!modalBackdrop) console.warn('Backdrop .modal-backdrop not found inside modal.');
     }
+
+    // --- Логіка для фіксованих префіксів в полях Telegram --- 
+    const telegramUsernameInput = document.getElementById('telegram_username');
+    const telegramPhoneInput = document.getElementById('telegram_phone');
+
+    const handleInput = (input, prefix) => {
+        if (!input.value.startsWith(prefix)) {
+            input.value = prefix;
+        }
+    };
+
+    const handleKeydown = (event, prefix) => {
+        const input = event.target;
+        // Забороняємо видалення префіксу через Backspace/Delete
+        if ((event.key === 'Backspace' || event.key === 'Delete') && input.selectionStart <= prefix.length && input.selectionEnd <= prefix.length && input.value === prefix) {
+            event.preventDefault();
+        } else if ((event.key === 'Backspace' || event.key === 'Delete') && input.selectionStart === prefix.length && input.selectionEnd === prefix.length) {
+            // Додаткова перевірка: забороняємо видалення, якщо курсор стоїть одразу після префіксу
+            event.preventDefault();
+        }
+    };
+
+    if (telegramUsernameInput) {
+        telegramUsernameInput.addEventListener('input', () => handleInput(telegramUsernameInput, '@'));
+        telegramUsernameInput.addEventListener('keydown', (e) => handleKeydown(e, '@'));
+        // Встановлюємо початковий курсор після префіксу при фокусі
+        telegramUsernameInput.addEventListener('focus', () => {
+            if (telegramUsernameInput.value === '@') {
+                // Невеликий хак з setTimeout, щоб обійти можливі проблеми з встановленням курсору одразу
+                setTimeout(() => telegramUsernameInput.setSelectionRange(1, 1), 0);
+            }
+        });
+    }
+
+    if (telegramPhoneInput) {
+        telegramPhoneInput.addEventListener('input', () => handleInput(telegramPhoneInput, '+380'));
+        telegramPhoneInput.addEventListener('keydown', (e) => handleKeydown(e, '+380'));
+        // Встановлюємо початковий курсор після префіксу при фокусі
+        telegramPhoneInput.addEventListener('focus', () => {
+            if (telegramPhoneInput.value === '+380') {
+                setTimeout(() => telegramPhoneInput.setSelectionRange(4, 4), 0);
+            }
+        });
+    }
+    // --- Кінець логіки префіксів ---
+
 }); 
