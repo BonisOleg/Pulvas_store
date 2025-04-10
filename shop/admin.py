@@ -13,8 +13,25 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'category', 'price', 'size', 'available', 'updated']
-    list_filter = ['available', 'created', 'updated', 'category']
-    list_editable = ['price', 'available'] # Дозволяємо редагувати ціну та наявність прямо зі списку
+    list_display = ['name', 'category', 'price', 'size', 'season', 'gender', 'available', 'updated']
+    list_filter = ['available', 'season', 'gender', 'category', 'updated']
+    list_editable = ['price', 'size', 'season', 'gender', 'available']
     search_fields = ['name', 'description']
-    prepopulated_fields = {'description': ('name',)} # Приклад: можна прибрати, якщо не треба автозаповнення опису 
+
+    fieldsets = (
+        ('Основна інформація', {
+            'fields': ('name', 'category', 'price', 'size')
+        }),
+        ('Класифікація', {
+            'fields': ('season', 'gender')
+        }),
+        ('Опис та Зображення', {
+            'fields': ('description', 'image')
+        }),
+        ('Статус', {
+            'fields': ('available',)
+        }),
+    )
+
+    # Можна також використовувати readonly_fields, щоб приховати системні поля
+    # readonly_fields = ('created', 'updated') # Якщо потрібно приховати їх зовсім 

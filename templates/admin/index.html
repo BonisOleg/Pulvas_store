@@ -1,0 +1,99 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+{# Додаємо мінімальні стилі для наших кнопок #}
+<style>
+    .admin-dashboard-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 40px 0;
+    }
+
+    .admin-dashboard-buttons .btn-admin-action {
+        display: inline-block;
+        padding: 15px 30px;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #fff;
+        background-color: var(--header-bg, #3B4E51);
+        /* Використовуємо колір з admin-interface або дефолтний */
+        border: none;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        min-width: 300px;
+        /* Мінімальна ширина кнопки */
+        text-align: center;
+    }
+
+    .admin-dashboard-buttons .btn-admin-action:hover {
+        background-color: var(--header-link-hover-color, #3AB9B1);
+    }
+</style>
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block content_title %}{% trans 'Dashboard' %}{% endblock %}
+
+{% block content %}
+{% if user.is_superuser %}
+{# Для суперкористувача показуємо стандартний вміст #}
+<div id="content-main">
+    {% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}
+</div>
+{% else %}
+{# Для звичайного адміна показуємо спрощений інтерфейс #}
+<div id="content-main">
+    <h2 style="text-align: center; margin-bottom: 30px;">Керування товарами в наявності</h2>
+    <div class="admin-dashboard-buttons">
+        <a href="{% url 'admin:shop_product_add' %}" class="btn-admin-action">Додати новий товар</a>
+        <a href="{% url 'admin:shop_product_changelist' %}" class="btn-admin-action">Переглянути/Редагувати товари</a>
+        {# Можна додати кнопку для категорій, якщо потрібно #}
+        {# <a href="{% url 'admin:shop_category_changelist' %}" class="btn-admin-action">Керувати категоріями</a> #}
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block sidebar %}
+{% if user.is_superuser %}
+{# Для суперкористувача показуємо стандартний сайдбар #}
+<div id="content-related">
+    <div class="module" id="recent-actions-module">
+        <h2>{% trans 'Recent actions' %}</h2>
+        <h3>{% trans 'My actions' %}</h3>
+        {% load log %}
+        {% get_admin_log 10 as admin_log for_user user %}
+        {% if not admin_log %}
+        <p>{% trans 'None available' %}</p>
+        {% else %}
+        <ul class="actionlist">
+            {% for entry in admin_log %}
+            <li
+                class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                {% if entry.is_deletion or not entry.get_admin_url %}
+                {{ entry.object_repr }}
+                {% else %}
+                <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                {% endif %}
+                <br>
+                {% if entry.content_type %}
+                <span class="mini quiet">{% filter capfirst %}{{ entry.content_type.name }}{% endfilter %}</span>
+                {% else %}
+                <span class="mini quiet">{% trans 'Unknown content' %}</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+{% else %}
+{# Для звичайного адміна сайдбар приховано #}
+{% endif %}
+{% endblock %}

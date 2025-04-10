@@ -131,4 +131,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     // --- End Intersection Observer ---
 
+    const openModalBtn = document.getElementById('open-filter-modal-btn');
+    const modal = document.getElementById('filter-modal');
+    const closeModalBtn = modal ? modal.querySelector('.close-modal-btn') : null;
+    const modalBackdrop = modal ? modal.querySelector('.modal-backdrop') : null;
+
+    // Перевіряємо, чи всі елементи знайдені
+    if (openModalBtn && modal && closeModalBtn && modalBackdrop) {
+        // Відкриття модального вікна
+        openModalBtn.addEventListener('click', () => {
+            modal.classList.add('is-open');
+            document.body.style.overflow = 'hidden'; // Забороняємо скрол сторінки під вікном
+        });
+
+        // Закриття модального вікна по кнопці
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('is-open');
+            document.body.style.overflow = ''; // Дозволяємо скрол сторінки
+        });
+
+        // Закриття модального вікна по кліку на фон
+        modalBackdrop.addEventListener('click', () => {
+            modal.classList.remove('is-open');
+            document.body.style.overflow = '';
+        });
+
+        // Закриття модального вікна по кнопці Escape
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+                modal.classList.remove('is-open');
+                document.body.style.overflow = '';
+            }
+        });
+    } else {
+        // Якщо якийсь елемент не знайдено, виводимо попередження (для відладки)
+        // console.warn('Filter modal elements not found. Modal functionality disabled.');
+        if (!openModalBtn) console.warn('Button #open-filter-modal-btn not found.');
+        if (!modal) console.warn('Modal #filter-modal not found.');
+        if (!closeModalBtn) console.warn('Close button .close-modal-btn not found inside modal.');
+        if (!modalBackdrop) console.warn('Backdrop .modal-backdrop not found inside modal.');
+    }
 }); 

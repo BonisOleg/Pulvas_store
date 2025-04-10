@@ -14,6 +14,19 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+# --- Константи для вибору --- >
+class ProductSeason(models.TextChoices):
+    WINTER = 'winter', 'Зима'
+    SUMMER = 'summer', 'Літо'
+    DEMI = 'demi-season', 'Весна/Осінь'
+    ACCESSORY = 'accessory', 'Аксесуари' # Додано для аксесуарів
+
+class ProductGender(models.TextChoices):
+    MALE = 'male', 'Чоловіче'
+    FEMALE = 'female', 'Жіноче'
+    UNISEX = 'unisex', 'Унісекс'
+    ACCESSORY = 'accessory', 'Аксесуари' # Співпадає з сезоном
+# < --- Константи для вибору ---
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Категорія")
@@ -22,6 +35,24 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Ціна")
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True, verbose_name="Зображення")
     size = models.CharField(max_length=50, blank=True, verbose_name="Розмір") # Можливо, потім зробимо складнішим (SizeVariant?)
+    # --- Нові поля --- >
+    season = models.CharField(
+        max_length=20,
+        choices=ProductSeason.choices,
+        default=None, # Або якийсь дефолт?
+        null=True,
+        blank=True,
+        verbose_name="Сезон"
+    )
+    gender = models.CharField( # Перейменував з gender_type для стислості
+        max_length=20,
+        choices=ProductGender.choices,
+        default=None,
+        null=True,
+        blank=True,
+        verbose_name="Стать/Тип"
+    )
+    # < --- Нові поля ---
     available = models.BooleanField(default=True, verbose_name="В наявності")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Створено")
     updated = models.DateTimeField(auto_now=True, verbose_name="Оновлено")
@@ -35,6 +66,8 @@ class Product(models.Model):
             models.Index(fields=['id', 'available']),
             models.Index(fields=['name']),
             models.Index(fields=['-created']),
+            models.Index(fields=['season']), # Додано індекс
+            models.Index(fields=['gender']), # Додано індекс
         ]
 
     def __str__(self):

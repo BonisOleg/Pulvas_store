@@ -1028,3 +1028,240 @@ img.about-image-placeholder {
         /* Менші падінги у форми */
     }
 }
+
+/* === Filters Form (Availability Page) === */
+.filters-form {
+    background-color: var(--color-background);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid var(--color-accent-3);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    /* Перенос на маленьких екранах */
+}
+
+.filters-form .filter-group {
+    flex: 1;
+    /* Групи займають рівний простір */
+    min-width: 180px;
+    /* Мінімальна ширина для переносів */
+}
+
+.filters-form .price-filter-group {
+    flex: 1;
+    min-width: 120px;
+}
+
+.filters-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    color: var(--color-dark);
+}
+
+/* Стилізація select */
+.filter-select {
+    appearance: none;
+    /* Прибираємо стандартний вигляд */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%233B4E51' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    /* Своя стрілка */
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px 16px;
+    padding-right: 40px;
+    /* Місце для стрілки */
+}
+
+/* Стилізація input[type=number] */
+.price-input {
+    /* Прибираємо стрілки в Chrome, Safari, Edge, Opera */
+    -webkit-appearance: none;
+    margin: 0;
+    /* Прибираємо стрілки в Firefox */
+    -moz-appearance: textfield;
+}
+
+.filter-actions {
+    display: flex;
+    justify-content: center;
+    /* Центруємо */
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    /* Невеликий відступ зверху */
+}
+
+.filter-submit-btn {
+    min-width: 150px;
+    /* Мінімальна ширина кнопки */
+}
+
+.filter-reset-link {
+    color: var(--color-secondary);
+    /* Колір як у заголовків */
+    text-decoration: underline;
+    font-size: var(--text-sm);
+    transition: color 0.3s ease;
+}
+
+.filter-reset-link:hover {
+    color: var(--color-dark);
+    text-decoration: none;
+}
+
+/* Адаптивність для фільтрів */
+@media (max-width: 768px) {
+    .filter-row {
+        gap: 15px;
+        /* Менший відступ на мобільних */
+    }
+
+    .filters-form .filter-group,
+    .filters-form .price-filter-group {
+        min-width: 150px;
+        /* Трохи менша мін. ширина */
+    }
+
+    .filter-actions {
+        flex-direction: column;
+        /* Кнопка та посилання одне під одним */
+        gap: 15px;
+    }
+}
+
+/* === Modal Styles === */
+.modal {
+    display: none;
+    /* Приховано за замовчуванням */
+    position: fixed;
+    /* Фіксоване позиціонування відносно viewport */
+    z-index: 1050;
+    /* Високий індекс, щоб бути поверх усього */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* Додаємо скрол, якщо контент не влазить */
+}
+
+/* Клас для показу модального вікна */
+.modal.is-open {
+    display: flex;
+    /* Використовуємо flex для центрування .modal-content */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-backdrop {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(59, 78, 81, 0.7);
+    /* Напівпрозорий темний фон */
+    z-index: 1040;
+    /* Під контентом модального вікна, але над рештою сторінки */
+}
+
+.modal-content {
+    position: relative;
+    /* Для позиціонування кнопки закриття */
+    background-color: var(--color-background);
+    margin: auto;
+    /* Автоматичні відступи для центрування (хоча flex вже допомагає) */
+    padding: 30px 40px;
+    border-radius: 16px;
+    width: 90%;
+    /* Ширина відносно батьківського елемента (.modal) */
+    max-width: 650px;
+    /* Максимальна ширина контенту */
+    z-index: 1050;
+    /* Поверх .modal-backdrop */
+    animation: modal-appear 0.4s ease-out;
+    /* Анімація появи */
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2.5rem;
+    /* Велика кнопка закриття */
+    font-weight: bold;
+    line-height: 1;
+    color: var(--color-dark);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.close-modal-btn:hover {
+    opacity: 1;
+}
+
+.modal-title {
+    margin-top: 0;
+    /* Прибираємо верхній відступ за замовчуванням */
+    margin-bottom: 25px;
+    font-size: var(--text-xl);
+    /* Розмір як у заголовків категорій */
+    color: var(--color-secondary);
+}
+
+/* Переносимо стилі для самої форми сюди (без тіні та відступу) */
+.modal-content .filters-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Забираємо background, padding, border-radius, border, бо вони тепер у .modal-content */
+}
+
+/* Анімація появи модального вікна */
+@keyframes modal-appear {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Адаптивність для модального вікна */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 20px 25px;
+        width: 95%;
+        /* Ширше на мобільних */
+        max-width: none;
+        /* Знімаємо обмеження макс. ширини */
+    }
+
+    .modal-title {
+        font-size: var(--text-lg);
+        /* Трохи менший заголовок */
+    }
+
+    .close-modal-btn {
+        font-size: 2rem;
+        top: 5px;
+        right: 10px;
+    }
+}
