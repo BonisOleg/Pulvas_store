@@ -2,6 +2,7 @@
 
 from django.shortcuts import render, get_object_or_404 # Додано get_object_or_404
 from django.http import HttpRequest, HttpResponse
+from django.db.models import F # <-- ДОДАНО ІМПОРТ F
 from typing import List, Dict, Any
 from ..utils.card_utils import _assign_color_classes # Додано імпорт
 from ..models import Product, ProductImage # Додаємо ProductImage
@@ -35,13 +36,15 @@ from ..models import Product, ProductImage # Додаємо ProductImage
 def product_list_view(request: HttpRequest) -> HttpResponse:
     """Відображає головну сторінку зі списком товарів.
     
-    Отримує реальні товари з бази даних та призначає карткам кольори.
+    Отримує 6 найпопулярніших (за кількістю кліків) товарів з бази даних 
+    та призначає карткам кольори.
     """
-    # Отримуємо доступні товари з бази даних, сортуємо за датою створення (новіші спочатку)
-    all_available_products = Product.objects.filter(available=True).order_by('-created')
+    # Отримуємо 6 найпопулярніших доступних товарів
+    # Сортуємо за кількістю кліків (спадання), потім за ID (спадання) для стабільності
+    top_products = Product.objects.filter(available=True).order_by('-clicks', '-id')[:6] 
     
-    # Призначаємо кольори карткам
-    products_with_color = _assign_color_classes(all_available_products) # Передаємо QuerySet
+    # Призначаємо кольори карткам для вибраних товарів
+    products_with_color = _assign_color_classes(top_products) # Використовуємо top_products
     
     context = {
         'products': products_with_color
@@ -51,6 +54,15 @@ def product_list_view(request: HttpRequest) -> HttpResponse:
 def product_detail_view(request: HttpRequest, product_id: int) -> HttpResponse:
     """Відображає сторінку з детальною інформацією про товар та галереєю фото."""
     product = get_object_or_404(Product, pk=product_id)
+
+    # --- ЛІЧИЛЬНИК КЛІКІВ --- >
+    # Атомарно збільшуємо лічильник переглядів на 1
+    product.clicks = F('clicks') + 1
+    product.save(update_fields=['clicks'])
+    # Опціонально: оновити об'єкт з бази даних, якщо потрібно актуальне значення clicks далі у view
+    # product.refresh_from_db()
+    # < --- КІНЕЦЬ ЛІЧИЛЬНИКА ---    
+    
     # Отримуємо всі зображення для цього товару, відсортовані за полем order
     # .select_related('product') тут не потрібен, бо ми вже маємо product
     product_images = product.images.all() # Використовуємо related_name='images'

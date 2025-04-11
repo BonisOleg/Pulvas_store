@@ -54,6 +54,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True, verbose_name="В наявності")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Створено")
     updated = models.DateTimeField(auto_now=True, verbose_name="Оновлено")
+    clicks = models.PositiveIntegerField(default=0, editable=False, db_index=True, verbose_name="Кількість переглядів")
 
     class Meta:
         verbose_name = "Товар"
@@ -65,6 +66,7 @@ class Product(models.Model):
             models.Index(fields=['-created']),
             models.Index(fields=['season']),
             models.Index(fields=['gender']),
+            models.Index(fields=['-clicks', '-id']),
         ]
 
     def __str__(self):
