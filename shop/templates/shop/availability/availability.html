@@ -1,0 +1,93 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title|default:"Наявність" }} - Pulvas{% endblock %}
+
+{% block content %}
+<div class="container contact-page-padding">
+    {# Використовуємо той самий стиль заголовка, як на "Про Нас" #}
+    <h1 class="section-title">Товари в наявності</h1>
+    <p class="section-subtitle text-center">
+        Тут ви знайдете товари, які готові до відправки вже сьогодні!
+    </p>
+
+    {# --- Кнопка відкриття фільтрів --- #}
+    <div class="filter-trigger-container mb-40 text-center">
+        <button id="open-filter-modal-btn" class="btn-primary">Фільтри <i class="fas fa-filter"></i></button>
+    </div>
+
+    {# --- Модальне вікно фільтрів --- #}
+    <div id="filter-modal" class="modal">
+        <div class="modal-backdrop"></div> {# Фон-оверлей #}
+        <div class="modal-content shadow-lg">
+            <button class="close-modal-btn" aria-label="Закрити фільтри">&times;</button>
+            <h2 class="modal-title text-center">Фільтри товарів</h2>
+            {# --- Форма фільтрів (переміщена сюди) --- #}
+            <form method="get" action="{% url 'shop:availability' %}" class="filters-form">
+                <div class="filter-row">
+                    {# Фільтр за сезоном #}
+                    <div class="form-group filter-group">
+                        <label for="season-select">Сезон:</label>
+                        <select name="season" id="season-select" class="form-control filter-select">
+                            <option value="">Всі сезони</option>
+                            {% for season_val, season_label in seasons %}
+                            <option value="{{ season_val }}">
+                                {{ season_label }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    {# Фільтр за статтю/типом #}
+                    <div class="form-group filter-group">
+                        <label for="gender-select">Тип:</label>
+                        <select name="gender" id="gender-select" class="form-control filter-select">
+                            <option value="">Всі типи</option>
+                            {% for gender_val, gender_label in genders %}
+                            <option value="{{ gender_val }}">
+                                {{ gender_label }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-row">
+                    {# Фільтр за ціною #}
+                    <div class="form-group price-filter-group">
+                        <label for="price-min">Ціна від:</label>
+                        <input type="number" name="price_min" id="price-min" value="{{ selected_price_min|default:'' }}"
+                            class="form-control price-input" placeholder="0" min="0">
+                    </div>
+                    <div class="form-group price-filter-group">
+                        <label for="price-max">Ціна до:</label>
+                        <input type="number" name="price_max" id="price-max" value="{{ selected_price_max|default:'' }}"
+                            class="form-control price-input" placeholder="10000" min="0">
+                    </div>
+                </div>
+
+                <div class="filter-actions">
+                    <button type="submit" class="btn-primary filter-submit-btn">Застосувати</button>
+                    <a href="{% url 'shop:availability' %}" class="filter-reset-link">Скинути фільтри</a>
+                </div>
+            </form>
+            {# --- Кінець форми фільтрів --- #}
+        </div>
+    </div>
+    {# --- Кінець модального вікна фільтрів --- #}
+
+    {# Сітка товарів #}
+    {% if products %}
+    <div class="product-grid mb-40">
+        {% for product in products %}
+        {# Включаємо шаблон картки товару, передаючи продукт #}
+        {# ТЕПЕР ВИКОРИСТОВУЄМО ДИНАМІЧНИЙ КЛАС КОЛЬОРУ #}
+        {% include "shop/includes/product_card.html" with product=product card_color_class=product.color_class %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center mb-40">Наразі немає товарів у наявності, що відповідають вашим фільтрам.</p>
+    {% endif %}
+
+</div>
+{% endblock %}

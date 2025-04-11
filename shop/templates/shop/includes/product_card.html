@@ -1,16 +1,25 @@
 {% load static %}
 
 <!-- product_card.html -->
-{# Приймає 'product' та 'card_color_class' (наприклад, 'bg-accent-1') як контекст #}
+{# Приймає 'product' (словник) та 'card_color_class' #}
+{# Очікує, що product має ключі 'id', 'name', 'description', 'price', 'image_obj' #}
 <div class="product-card {{ card_color_class|default:'bg-accent-1' }}">
-    {# Плейсхолдер для зображення, можна замінити на img tag #}
-    <div class="product-image-placeholder"></div>
-    {# Можна додати сюди <img src="{{ product.image.url }}" alt="{{ product.name }}"> #}
+    {# Зображення товару - використовуємо product.image_obj #}
+    {% with main_image=product.image_obj %}
+    {% if main_image and main_image.image %}
+    <div class="product-image-placeholder">
+        <img src="{{ main_image.image.url }}" alt="{{ product.name }}">
+    </div>
+    {% else %}
+    <div class="product-image-placeholder"><span>Фото відсутнє</span></div>
+    {% endif %}
+    {% endwith %}
 
     <h3 class="product-title">{{ product.name|default:'Назва товару' }}</h3>
     <p class="product-description">{{ product.description|truncatewords:10|default:'Короткий опис товару...' }}</p>
+    {# Тут можна додати розмір, якщо потрібно #}
     <p class="product-price">Ціна: {{ product.price|default:'100' }} грн</p>
 
-    {# Кнопка "Детальніше" #}
-    <a href="#" class="btn-primary">Детальніше</a> {# Placeholder link #}
+    {# Кнопка "Детальніше" - ВИПРАВЛЕНО ПОСИЛАННЯ #}
+    <a href="{% url 'shop:product_detail' product_id=product.id %}" class="btn-primary">Детальніше</a>
 </div>

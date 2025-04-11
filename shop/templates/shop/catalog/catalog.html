@@ -1,0 +1,31 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+{# Використовуємо той самий клас, що й для інших сторінок #}
+<div class="container contact-page-padding">
+    <h1 class="section-title">Каталог Товарів</h1>
+    {# Використовуємо класи для центрування та відступу #}
+    <p class="text-center mb-40">Оберіть розділ:</p>
+
+    {# Контейнер для категорій #}
+    <div class="category-grid">
+        {# Жіночий розділ #}
+        <a href="https://t.me/Pulvas_store_women" class="category-folder female" target="_blank">
+            <div class="category-emoji">👩</div>
+            <div class="category-image-placeholder"></div>
+            <h2 class="category-title"><span>Жіноче</span> 👗</h2>
+        </a>
+
+        {# Чоловічий розділ #}
+        <a href="https://t.me/Pulvas_store" class="category-folder male" target="_blank">
+            <div class="category-emoji">👨</div>
+            <div class="category-image-placeholder"></div>
+            <h2 class="category-title"><span>Чоловіче</span> 👕</h2>
+        </a>
+    </div>
+
+    {# Місце для майбутньої сітки товарів #}
+    {# <div class="product-grid"> ... </div> #}
+
+</div>
+{% endblock %}

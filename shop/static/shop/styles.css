@@ -1,15 +1,16 @@
+/* === IMPORTS & VARIABLES === */
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;700&display=swap');
 
 :root {
-    /* === Colors === */
+    /* --- Colors --- */
     --color-primary: #3AB9B1;
     /* Бірюзовий */
     --color-secondary: #D08D6A;
     /* Пильний теракотовий */
     --color-light: #F3E7CF;
     /* Пісочно-бежевий */
-    --color-background: #FDF9F0;
-    /* Теплий білий */
+    --color-background: #FFFFFF;
+    /* Чистий білий */
     --color-dark: #3B4E51;
     /* Графітовий сірий */
     --color-accent-1: #9FDCE0;
@@ -19,7 +20,7 @@
     --color-accent-3: #ECEAD4;
     /* Дуже світлий пісочний */
 
-    /* === Fonts === */
+    /* --- Fonts --- */
     --font-thin: 300;
     --font-regular: 400;
     --font-bold: 700;
@@ -27,11 +28,14 @@
     --text-xs: 12px;
     --text-sm: 14px;
     --text-md: 16px;
+    /* Базовий */
     --text-lg: 20px;
+    /* Посилання в хедері / Заголовки карток */
     --text-xl: 28px;
-    --text-xxl: 40px;
+    /* Заголовки категорій */
 }
 
+/* === BASE & RESET === */
 body {
     font-family: "Poppins", sans-serif;
     background-color: var(--color-background);
@@ -48,290 +52,35 @@ body {
     box-sizing: inherit;
 }
 
-/* === Buttons === */
-.btn-primary {
-    background-color: var(--color-dark);
-    color: var(--color-background);
-    border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-weight: var(--font-bold);
-    font-family: "Poppins", sans-serif;
-    font-size: var(--text-md);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    /* Added for <a> tags used as buttons */
-    display: inline-block;
-    /* Added for proper padding/margin */
-}
+/* === UTILITIES === */
 
-.btn-primary:hover {
-    background-color: var(--color-primary);
-    color: var(--color-dark);
-}
-
-/* === Product Card === */
-.product-card {
-    /* background-color: var(--color-light); /* Removed default background */
-    border-radius: 16px;
-    padding: 24px;
-    /* box-shadow: var(--shadow-sm); /* Removed default shadow */
-    transition: transform 0.4s ease;
-    /* Styles for content alignment, etc. can be added here */
-}
-
-.product-card:hover {
-    /* transform: scale(1.02); /* Keep or adjust hover effect? */
-    /* Maybe add shadow on hover? */
-    /* box-shadow: var(--shadow-md); */
-}
-
-.product-card .product-image-placeholder {
-    height: 150px;
-    /* Example height, adjust as needed */
-    border-radius: 8px;
-    /* Match design */
-    margin-bottom: 16px;
-    /* Background color will be set inline or via modifier classes */
-    background-color: rgba(0, 0, 0, 0.05);
-    /* Light overlay */
-}
-
-/* Example modifier classes for card backgrounds based on design */
-.product-card.bg-accent-1 {
-    background-color: var(--color-accent-1);
-}
-
-.product-card.bg-accent-2 {
-    background-color: var(--color-accent-2);
-}
-
-.product-card.bg-accent-3 {
-    background-color: var(--color-accent-3);
-}
-
-/* New modifier for primary background color */
-.product-card.bg-primary {
-    background-color: var(--color-primary);
-}
-
-/* Styles for text inside the card */
-.product-card .product-title {
-    font-size: var(--text-lg);
-    font-weight: var(--font-bold);
-    color: var(--color-dark);
-    /* Ensure dark text on light background */
-    margin-top: 0;
-    margin-bottom: 8px;
-}
-
-.product-card .product-description {
-    font-size: var(--text-sm);
-    color: var(--color-dark);
-    margin-bottom: 12px;
-    line-height: 1.4;
-}
-
-.product-card .product-price {
-    font-size: var(--text-sm);
-    font-weight: var(--font-regular);
-    color: var(--color-dark);
-    margin-bottom: 16px;
-}
-
-/* === Shadows (Utilities) === */
+/* --- Shadows --- */
 .shadow-sm {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .shadow-md {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    /* Використовується для моб. меню та форм */
 }
 
 .shadow-lg {
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    /* Використовується для hover папок категорій */
 }
 
-/* === Container === */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 16px;
-}
-
-/* === Header === */
-header {
-    background-color: var(--color-dark);
-    /* From design */
-    padding: 15px 0;
-    /* Restored padding */
-    color: var(--color-background);
-    position: relative;
-    /* Added back for mobile nav positioning */
-}
-
-header .container {
-    display: flex;
-    align-items: center;
-    position: relative;
-    min-height: 50px;
-    padding: 0 16px;
-    /* Increased left padding again for larger logo */
-    padding-left: 160px;
-}
-
-.logo {
-    position: absolute;
-    left: 16px;
-    top: -30px;
-    /* Increased overlap slightly more */
-    z-index: 10;
-    line-height: 0;
-}
-
-.logo img {
-    height: 120px;
-    /* Made logo significantly larger */
-    width: auto;
-    display: block;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-
-/* Keep display: flex for main-nav on desktop */
-.main-nav ul {
-    display: flex;
-}
-
-/* Added styles for positioning the main navigation */
-.main-nav {
-    margin-left: auto;
-    /* Push nav to the right */
-    margin-right: 5%;
-}
-
-nav li {
-    margin-left: 25px;
-}
-
-nav a {
-    color: var(--color-background);
-    text-decoration: none;
-    font-size: var(--text-lg);
-    /* Increased font size */
-    transition: color 0.3s ease;
-}
-
-nav a:hover {
-    color: var(--color-primary);
-}
-
-.burger-menu {
-    display: none;
-    /* Keep it hidden on desktop by default */
-    width: 36px;
-    /* Made icon wider */
-    /* height: 22px; */
-    cursor: pointer;
-    margin-left: auto;
-    margin-right: 10px;
-    /* Added margin to push it left from the edge */
-    padding: 5px;
-    position: relative;
-    /* display: flex; */
-    /* Removed flex from default state again! */
-    flex-direction: column;
-}
-
-/* Styles for the lines inside the burger */
-.burger-menu span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: var(--color-background);
-    border-radius: 3px;
-    transition: all 0.3s ease;
-}
-
-/* Add margin to create space between lines */
-.burger-menu span:not(:last-child) {
-    margin-bottom: 5px;
-    /* Adjust this value for desired gap */
-}
-
-/* === Mobile Navigation === */
-.mobile-nav {
-    display: none;
-    /* Hidden by default */
-    position: absolute;
-    top: 100%;
-    /* Should now position correctly below the header */
-    left: 0;
-    width: 100%;
-    background-color: rgba(59, 78, 81, 0.95);
-    /* Slightly darker/transparent dark color */
-    z-index: 1000;
-    padding: 15px 0;
-    box-shadow: var(--shadow-md);
-    /* Add shadow for separation */
-}
-
-.mobile-nav.is-open {
-    display: block;
-    /* Show when open */
-}
-
-.mobile-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+/* --- Text Alignment & Margin --- */
+.text-center {
     text-align: center;
-    /* Center links */
 }
 
-.mobile-nav li {
-    margin: 15px 0;
-    /* Vertical spacing */
+
+
+.mb-40 {
+    margin-bottom: 40px;
 }
 
-.mobile-nav a {
-    color: var(--color-background);
-    text-decoration: none;
-    font-size: var(--text-lg);
-    /* Slightly larger text for mobile */
-    display: block;
-    /* Make links full width */
-    padding: 5px 0;
-}
-
-.mobile-nav a:hover {
-    color: var(--color-primary);
-}
-
-/* === Footer === */
-footer {
-    background-color: var(--color-dark);
-    /* From design */
-    color: var(--color-light);
-    /* Light text on dark background */
-    padding: 20px 0;
-    /* margin-top: 40px; */
-    /* Removed top margin */
-}
-
-footer p {
-    text-align: center;
-    margin: 0;
-    font-size: var(--text-sm);
-}
-
-/* === Utility Classes === */
+/* --- Font Size & Weight --- */
 .text-lg {
     font-size: var(--text-lg);
 }
@@ -344,138 +93,39 @@ footer p {
     font-weight: var(--font-bold);
 }
 
-/* === Basic Product Grid === */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    /* Responsive grid */
-    gap: 30px;
-    /* Spacing between cards */
-    /* padding: 40px 0; /* Padding for the section - Moved to .products-section */
+/* === CORE COMPONENTS === */
+
+/* --- Container --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
 }
 
-/* === Titles === */
-.section-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: 80px;
+/* --- Buttons --- */
+.btn-primary {
+    background-color: var(--color-dark);
+    color: var(--color-background);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
     font-weight: var(--font-bold);
-    color: var(--color-light);
-    text-align: center;
-    margin-bottom: 10px;
-    /* border: 1px solid var(--color-dark); */
-    /* Removed box border */
-    -webkit-text-stroke: 0.5px var(--color-dark);
-    /* Made text stroke thinner */
-    text-stroke: 0.5px var(--color-dark);
-    /* Standard property (less support) */
-}
-
-.section-subtitle {
+    font-family: "Poppins", sans-serif;
     font-size: var(--text-md);
-    color: var(--color-light);
-    /* Matching design text color */
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-/* Blinking cursor effect for typewriter */
-.section-subtitle::after {
-    content: '|';
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
     display: inline-block;
-    animation: blink 1s step-start infinite;
-    opacity: 1;
-    margin-left: 2px;
+    /* Для правильних відступів та використання з <a> */
 }
 
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
+.btn-primary:hover {
+    background-color: #6c7a7c;
+    /* Трохи світліший сірий при наведенні */
+    color: var(--color-background);
 }
 
-/* Removed class .title-section-bg as the background is now on .products-section */
-/* .title-section-bg {
-    background-color: var(--color-accent-1);
-    padding: 40px 0;
-    margin-bottom: 30px;
-    border-radius: 16px;
-} */
-
-/* New style for the entire products section background */
-.products-section {
-    background-color: var(--color-accent-1);
-    padding: 40px 0 40px 0;
-    /* Top and bottom padding for the whole section */
-    /* border-radius: 16px; */
-    /* Removed rounded corners */
-    /* margin-bottom: 40px; */
-    /* Removed bottom margin */
-}
-
-/* Ensure section titles inside this background are dark - removed title from this rule */
-/* .products-section .section-title, */
-.products-section .section-subtitle {
-    color: var(--color-dark);
-    /* Subtitle remains dark */
-}
-
-/* === Adaptability (Example from stylerules, adjust as needed) === */
-@media (max-width: 1024px) {
-    header .container {
-        padding: 0 12px;
-        /* Reset padding for mobile */
-        padding-left: 12px;
-    }
-
-    .btn-primary {
-        font-size: var(--text-sm);
-        padding: 10px 20px;
-    }
-
-    .product-card {
-        padding: 20px;
-    }
-
-    /* Hide main nav on tablet/mobile */
-    .main-nav {
-        display: none;
-        margin-left: 0;
-        /* Reset margin */
-    }
-
-    /* nav ul { 
-        display: none; /* Hide nav links */
-    /* } */
-
-    .burger-menu {
-        display: flex;
-        /* Change from block to flex to show correctly */
-        /* Show burger */
-    }
-}
-
-@media (max-width: 768px) {
-    .btn-primary {
-        font-size: var(--text-sm);
-        /* Keep sm or make xs? */
-        padding: 10px 18px;
-        /* Adjust padding */
-    }
-
-    .product-card {
-        padding: 16px;
-    }
-
-    .section-title {
-        font-size: 60px;
-    }
-
-    .section-subtitle {
-        font-size: var(--text-sm);
-    }
-}
-
-/* === Preloader Styles === */
+/* --- Preloader --- */
 #preloader {
     position: fixed;
     top: 0;
@@ -493,7 +143,6 @@ footer p {
 
 #preloader img {
     width: 150px;
-    /* Adjust size as needed */
     height: auto;
     animation: pulse 2s infinite ease-in-out;
 }
@@ -515,9 +164,1558 @@ footer p {
     }
 }
 
-/* Style to hide preloader when body has 'loaded' class */
 body.loaded #preloader {
     opacity: 0;
     pointer-events: none;
-    /* Disable interactions */
+    /* Вимикаємо взаємодію після зникнення */
+}
+
+/* --- Header & Navigation --- */
+header {
+    background-color: var(--color-dark);
+    padding: 15px 0;
+    color: var(--color-background);
+    position: relative;
+    /* Для позиціонування лого та моб. меню */
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* Для абсолютного позиціонування лого */
+    min-height: 50px;
+    padding: 0 16px;
+    padding-left: 160px;
+    /* Відступ зліва для великого лого */
+}
+
+.logo {
+    position: absolute;
+    left: 16px;
+    top: -30px;
+    /* Винос логотипу вгору */
+    z-index: 10;
+    line-height: 0;
+    /* Прибираємо зайву висоту */
+}
+
+.logo img {
+    height: 120px;
+    /* Великий логотип */
+    width: auto;
+    display: block;
+}
+
+/* Desktop Navigation */
+.main-nav {
+    margin-left: auto;
+    /* Притискаємо до правого краю */
+    margin-right: 5%;
+}
+
+nav ul {
+    /* Стилі для всіх списків навігації */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    /* Горизонтальне розташування */
+}
+
+nav li {
+    margin-left: 25px;
+    /* Відстань між пунктами */
+}
+
+nav a {
+    color: var(--color-background);
+    text-decoration: none;
+    font-size: var(--text-lg);
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--color-primary);
+}
+
+/* Burger Menu (Hidden on Desktop) */
+.burger-menu {
+    display: none;
+    width: 36px;
+    height: 24px;
+    /* Додаємо фіксовану висоту для стабільності анімації */
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: 10px;
+    padding: 5px;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Розподіляємо лінії по висоті */
+}
+
+.burger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-background);
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+    /* Змінюємо timing function */
+    transform-origin: center;
+    /* Встановлюємо центр трансформації */
+}
+
+/* Анімація бургера в хрестик */
+.burger-menu.is-open span:nth-child(1) {
+    transform: translateY(10.5px) rotate(45deg);
+    /* Піднімаємо та обертаємо */
+}
+
+.burger-menu.is-open span:nth-child(2) {
+    opacity: 0;
+    /* Приховуємо середню лінію */
+    transform: scale(0.8);
+}
+
+.burger-menu.is-open span:nth-child(3) {
+    transform: translateY(-10.5px) rotate(-45deg);
+    /* Опускаємо та обертаємо */
+}
+
+/* Mobile Navigation (Hidden on Desktop) */
+.mobile-nav {
+    /* display: none; Замінюємо на opacity/visibility/transform */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    /* Починаємо трохи вище */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-dark);
+    /* Робимо фон солідним */
+    z-index: 1000;
+    padding: 20px 0 30px 0;
+    /* Збільшуємо вертикальні падінги */
+    box-shadow: var(--shadow-md);
+    transition: opacity 0.3s ease-out, visibility 0.3s step-end, transform 0.3s ease-out;
+    /* Додаємо transition, visibility змінюється миттєво в кінці */
+}
+
+.mobile-nav.is-open {
+    /* display: block; Замінюємо */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.3s ease-out, visibility 0.3s step-start, transform 0.3s ease-out;
+}
+
+.mobile-nav ul {
+    text-align: center;
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav li {
+    margin: 0;
+    margin-left: 0;
+}
+
+.mobile-nav a {
+    font-size: var(--text-lg);
+    display: block;
+    padding: 15px 20px;
+    /* Збільшуємо падінги для кращої зони кліку */
+    color: var(--color-background);
+    /* Переконуємось, що колір тексту світлий */
+    transition: background-color 0.2s ease, color 0.2s ease;
+    text-decoration: none !important;
+    /* ЯВНО ПРИБИРАЄМО ПІДКРЕСЛЕННЯ */
+}
+
+.mobile-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Легкий білий фон при наведенні */
+    color: var(--color-primary);
+    /* Акцентний колір тексту при наведенні */
+    text-decoration: none !important;
+    /* Також прибираємо на hover */
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    padding: 20px 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: var(--text-sm);
+}
+
+/* --- Product Card & Grid --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Адаптивна сітка */
+    gap: 30px;
+    /* Відстань між картками */
+    justify-content: center;
+    justify-items: center;
+}
+
+.product-card {
+    border-radius: 16px;
+    padding: 24px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    text-align: center;
+    max-width: 340px;
+    width: 100%;
+}
+
+.product-card:hover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-md);
+}
+
+.product-card .product-image-placeholder {
+    height: 390px;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    background-color: rgba(0, 0, 0, 0.05);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+}
+
+/* Стиль для самого зображення всередині плейсхолдера картки */
+.product-card .product-image-placeholder img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+/* Фонові кольори для карток */
+.product-card.bg-accent-1 {
+    background-color: var(--color-accent-1);
+}
+
+.product-card.bg-accent-2 {
+    background-color: var(--color-accent-2);
+}
+
+.product-card.bg-accent-3 {
+    background-color: var(--color-accent-3);
+}
+
+.product-card.bg-primary {
+    background-color: var(--color-primary);
+}
+
+/* Текст всередині картки */
+.product-card .product-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    color: var(--color-dark);
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.product-card .product-description {
+    font-size: var(--text-sm);
+    color: var(--color-dark);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.product-card .product-price {
+    font-size: var(--text-sm);
+    font-weight: var(--font-regular);
+    /* Змінено на regular */
+    color: var(--color-dark);
+    margin-bottom: 16px;
+}
+
+/* --- Forms --- */
+.contact-form {
+    /* Використовується на contact_form.html */
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 16px;
+    background-color: var(--color-background);
+    box-shadow: var(--shadow-md);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: var(--font-bold);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-accent-3);
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--text-md);
+    background-color: var(--color-background);
+    color: var(--color-dark);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    /* Додано перехід */
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(58, 185, 177, 0.2);
+}
+
+textarea.form-control {
+    resize: vertical;
+    /* Дозволяємо змінювати висоту */
+    min-height: 100px;
+    /* Мінімальна висота */
+}
+
+/* Стилі для групи інпутів (Telegram username + phone) */
+.input-group {
+    display: flex;
+    align-items: center;
+    /* Вирівнюємо елементи по вертикалі */
+    gap: 10px;
+    /* Відступ між інпутами та текстом */
+}
+
+.input-group .form-control {
+    flex: 1;
+    /* Інпути займають доступний простір */
+    min-width: 0;
+    /* Дозволяє інпутам звужуватися */
+}
+
+.input-group-text {
+    font-size: var(--text-sm);
+    color: var(--color-dark);
+    opacity: 0.7;
+}
+
+/* Адаптивність для групи інпутів */
+@media (max-width: 480px) {
+
+    /* На маленьких екранах */
+    .input-group {
+        flex-direction: column;
+        /* Поля одне під одним */
+        align-items: stretch;
+        /* Розтягуємо елементи на всю ширину */
+    }
+
+    .input-group-text {
+        text-align: center;
+        /* Центруємо текст "або" */
+        margin: 5px 0;
+        /* Додаємо невеликий вертикальний відступ */
+    }
+}
+
+/* === PAGE SPECIFIC STYLES === */
+
+/* --- Загальні стилі для заголовків сторінок/секцій --- */
+/* Заголовок логотипу (Great Vibes) */
+#brand-title {
+    font-family: "Great Vibes", cursive;
+    font-size: 72px;
+    /* Дуже великий */
+    text-align: center;
+    color: var(--color-dark);
+    margin-bottom: 10px;
+    font-weight: normal;
+    /* Курсивні шрифти часто краще виглядають з normal */
+}
+
+/* Заголовок секції (Poppins) */
+.section-title {
+    font-family: "Poppins", sans-serif;
+    /* Переконуємось, що це Poppins */
+    font-size: 32px;
+    /* Великий, але менший за бренд */
+    font-weight: var(--font-bold);
+    color: var(--color-dark);
+    text-align: center;
+    margin-bottom: 20px;
+    /* Стандартний відступ для заголовка секції */
+}
+
+/* Підзаголовок секції */
+.section-subtitle {
+    font-size: var(--text-md);
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--color-dark);
+}
+
+/* Додаємо більш специфічне правило для сторінки Про нас */
+.contact-page-padding>.section-subtitle {
+    font-size: var(--text-md) !important;
+    /* Примусово встановлюємо розмір */
+    color: var(--color-dark) !important;
+    /* Примусово встановлюємо колір */
+    opacity: 1 !important;
+    /* Переконуємось, що не прозорий */
+    display: block !important;
+    /* Переконуємось, що відображається */
+}
+
+/* Приховуємо миготливий курсор ТІЛЬКИ для підзаголовка на сторінці "Про нас" */
+.contact-page-padding>.section-subtitle::after {
+    display: none !important;
+}
+
+/* Стилізація ТІЛЬКИ першого вступного абзацу (зменшуємо відступ знизу) */
+.section-subtitle.about-intro-text {
+    margin-bottom: 0.5em;
+    /* ЗМЕНШЕНО ВІДСТУП ЗНИЗУ */
+}
+
+/* Миготливий курсор для ефекту друкарської машинки (використовується в script.js) */
+.section-subtitle::after {
+    content: '|';
+    display: inline-block;
+    animation: blink 1s step-start infinite;
+    opacity: 1;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* --- Products Page (Home) --- */
+.products-section {
+    /* Контейнер для сітки товарів */
+    background-color: var(--color-background);
+    /* Збігається з фоном body */
+    padding: 40px 0;
+    /* Вертикальні відступи */
+}
+
+
+/* --- About Us Page --- */
+/* Відступи для сторінки (використовується і для Контактів) */
+.contact-page-padding {
+    padding-top: 80px;
+    /* ЗБІЛЬШЕНО ВІДСТУП ЗВЕРХУ */
+    padding-bottom: 60px;
+}
+
+.about-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+    /* Більший відступ між секціями */
+    gap: 40px;
+    /* Анімація появи (оновлено) */
+    opacity: 0;
+    transform: translateX(-80px);
+    transition-property: opacity, transform;
+    transition-duration: 0.8s;
+    /* ЗРОБЛЕНО ШВИДШЕ */
+    transition-timing-function: ease-out;
+    /* СТАНДАРТНА ФУНКЦІЯ */
+}
+
+/* Модифікатор для зображення справа (анімація справа) */
+.about-section.image-right {
+    transform: translateX(80px);
+}
+
+/* Клас, що додається JS, коли секція видима */
+.about-section.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.about-column {
+    flex: 1;
+    /* Колонки займають рівний простір */
+}
+
+.about-text h2 {
+    font-family: "Poppins", sans-serif;
+    /* Явно вказуємо шрифт */
+    font-size: 36px;
+    font-weight: var(--font-bold);
+    color: var(--color-secondary);
+    /* Акцентний колір для заголовків */
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.about-text p {
+    line-height: 1.7;
+    color: var(--color-dark);
+    text-align: justify;
+}
+
+/* Замінюємо стилі для div-плейсхолдера на стилі для img */
+img.about-image-placeholder {
+    display: block;
+    /* Робимо блочним елементом */
+    width: 100%;
+    /* Займає всю ширину колонки */
+    height: 300px;
+    /* Зберігаємо висоту з десктопа */
+    border-radius: 12px;
+    /* Заокруглення кутів */
+    object-fit: cover;
+}
+
+/* === Стилі для виділеного блоку "Про нас" (перероблено під стиль .about-section) === */
+.about-highlight-block {
+    display: flex;
+    /* Використовуємо Flexbox як .about-section */
+    align-items: center;
+    /* Вирівнюємо по центру вертикально */
+    gap: 40px;
+    /* Відступ між колонками */
+    background-color: var(--color-background);
+    /* Стандартний білий фон */
+    color: var(--color-dark);
+    /* Стандартний темний колір тексту */
+    padding: 0;
+    /* Прибираємо внутрішні падінги блоку, вони будуть у колонок */
+    border-radius: 0;
+    /* Прибираємо заокруглення блоку */
+    border: none;
+    /* ПРИБРАНО РАМКУ */
+    margin-bottom: 60px;
+    /* Зберігаємо відступ знизу */
+    box-shadow: none;
+    /* ПРИБРАНО ТІНЬ */
+    /* Анімація появи (синхронізовано з .about-section) */
+    opacity: 0;
+    transform: translateX(80px);
+    /* Починаємо справа */
+    transition-property: opacity, transform;
+    /* Додано для ясності */
+    transition-duration: 0.8s;
+    /* ТАКА Ж ШВИДКІСТЬ */
+    transition-timing-function: ease-out;
+    /* ТАКА Ж ФУНКЦІЯ */
+}
+
+.about-highlight-block.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ВИДАЛЕНО стилі для .highlight-icon-area та .highlight-text-area */
+
+/* Стилі для ЗАГОЛОВКУ H1 всередині (стандартні, але застосовуються до h1) */
+.about-highlight-block .about-text h1.section-title {
+    color: var(--color-secondary);
+    /* Зробимо як інші заголовки секцій - теракотовий */
+    text-shadow: none;
+    text-align: left;
+    margin-bottom: 15px;
+    font-size: 36px;
+    /* Повертаємо більший розмір, як у h2 в інших секціях */
+    font-family: "Poppins", sans-serif;
+    /* На всяк випадок */
+    font-weight: var(--font-bold);
+    margin-top: 0;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Стилі для ПАРАГРАФІВ всередині (стандартні) */
+.about-highlight-block .about-text p {
+    color: var(--color-dark);
+    opacity: 1;
+    font-weight: var(--font-regular);
+    font-size: var(--text-md);
+    line-height: 1.7;
+    max-width: 100%;
+    margin: 0 0 1em 0;
+    text-align: justify;
+}
+
+/* Прибираємо миготливий курсор */
+.about-highlight-block .about-text p::after {
+    display: none !important;
+}
+
+/* Стилі для ЗАГОЛОВКІВ H2 всередині (якщо будуть) */
+.about-highlight-block .about-text h2 {
+    color: var(--color-secondary);
+    font-size: 24px;
+    text-align: left;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+}
+
+/* Прибираємо анімацію з інтро-тексту і повертаємо колір (ЦЕ СТОСУЄТЬСЯ ТЕКСТУ ПОЗА БЛОКОМ) */
+.about-intro-text {
+    font-family: "Poppins", sans-serif;
+    font-size: var(--text-md);
+    line-height: 1.7;
+    text-align: justify;
+    max-width: 800px;
+    margin: 0.5em auto 2.5em auto;
+    /* Прибираємо стилі градієнту та анімації */
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: unset;
+    color: var(--color-dark);
+    /* Повертаємо стандартний темний колір */
+    animation: none;
+}
+
+/* Прибираємо анімацію з заголовка H1 (СТОСУЄТЬСЯ H1 ПОЗА БЛОКОМ) */
+.contact-page-padding>h1.section-title {
+    font-family: "Poppins", sans-serif;
+    font-size: 36px;
+    font-weight: var(--font-bold);
+    text-align: center;
+    margin-bottom: 30px;
+    /* Прибираємо стилі градієнту та анімації */
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: unset;
+    color: var(--color-dark);
+    /* Повертаємо стандартний темний колір */
+    animation: none;
+}
+
+/* --- Contact Page --- */
+/* Стилі для самої форми .contact-form див. у секції Forms */
+
+/* Блок швидких контактів */
+.quick-contact-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    /* Збільшимо відступ */
+    margin-bottom: 50px;
+    /* Збільшимо відступ */
+}
+
+.btn-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    /* Трохи збільшимо */
+    min-width: 180px;
+    /* Зробимо трохи ширшими */
+    justify-content: center;
+    overflow: hidden;
+    /* Для ефекту з span */
+    position: relative;
+    /* Для ефекту з span */
+    /* Базові стилі кнопки (font, padding, border-radius, etc.) успадковуються з .btn-primary */
+    /* Специфічний transition для .btn-contact */
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Додаємо плавний перехід і для тіні */
+}
+
+.btn-contact i {
+    font-size: 1.3em;
+    /* Трохи більша іконка */
+    transition: transform 0.3s ease-out;
+    /* Анімація для іконки */
+}
+
+.btn-contact span {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-contact:hover {
+    transform: translateY(-3px);
+    /* Легке підняття */
+    box-shadow: var(--shadow-md);
+    /* Додаємо тінь при наведенні */
+}
+
+.btn-contact:hover i {
+    transform: scale(1.1) rotate(-5deg);
+    /* Анімація іконки при наведенні */
+}
+
+/* Кастомні кольори при наведенні - додаємо плавний перехід тіні */
+.btn-telegram:hover {
+    background-color: #2AABEE;
+    /* Фірмовий синій Telegram */
+    color: white;
+    box-shadow: 0 8px 20px rgba(42, 171, 238, 0.3);
+    /* Тінь під колір */
+}
+
+.btn-viber:hover {
+    background-color: #7360F2;
+    color: white;
+    box-shadow: 0 8px 20px rgba(115, 96, 242, 0.3);
+}
+
+.btn-whatsapp:hover {
+    background-color: #25D366;
+    color: white;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+}
+
+/* Стилізація обгортки форми */
+.form-wrapper {
+    background-color: #6BCBC4;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
+    margin-top: 30px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.form-wrapper.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Прибираємо зайве у самої форми всередині обгортки */
+.form-wrapper .contact-form {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+/* Робимо написи всередині обгортки білими */
+.form-wrapper label {
+    color: var(--color-background);
+}
+
+/* Стилізуємо групу інпутів всередині обгортки */
+.form-wrapper .input-group {
+    gap: 15px;
+}
+
+/* Додаємо заокруглення та box-sizing для інпутів всередині обгортки */
+.form-wrapper .form-control {
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* Робимо текст "або" білим і вирівнюємо */
+.form-wrapper .input-group-text {
+    color: var(--color-background);
+    opacity: 0.85;
+    line-height: 1.8;
+}
+
+/* Стилізуємо кнопку "Надіслати" всередині обгортки */
+.form-wrapper .contact-submit-btn {
+    background-color: var(--color-background);
+    color: var(--color-dark);
+}
+
+.form-wrapper .contact-submit-btn:hover {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    box-shadow: 0 5px 15px rgba(243, 231, 207, 0.4);
+}
+
+/* Покращений focus для полів форми */
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 8px rgba(58, 185, 177, 0.4), 0 0 0 1px var(--color-primary);
+}
+
+/* Кнопка відправки */
+.contact-submit-btn {
+    padding: 12px 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.contact-submit-btn i {
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.contact-submit-btn:hover {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(58, 185, 177, 0.4);
+}
+
+.contact-submit-btn:hover i {
+    transform: translateX(3px);
+}
+
+/* === Catalog Page --- */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Адаптивна сітка папок */
+    gap: 40px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.category-folder {
+    display: block;
+    text-decoration: none;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.category-folder:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Зображення/плейсхолдер всередині папки */
+.category-image-placeholder {
+    height: 400px;
+    background-color: var(--color-accent-3);
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.4s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-folder:hover .category-image-placeholder {
+    transform: scale(1.05);
+}
+
+/* Псевдоелемент для фонового патерну */
+.category-image-placeholder::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-repeat: repeat;
+    background-size: 25px 25px;
+    opacity: 0.35;
+    z-index: 0;
+    transition: opacity 0.4s ease-out;
+    pointer-events: none;
+}
+
+.category-folder:hover .category-image-placeholder::before {
+    opacity: 0.5;
+}
+
+/* Патерни для конкретних категорій */
+.category-folder.female .category-image-placeholder::before {
+    /* Спрощений SVG Венери ♀️ */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cline x1='12' y1='17' x2='12' y2='22'/%3E%3Cline x1='9' y1='19' x2='15' y2='19'/%3E%3C/svg%3E");
+}
+
+.category-folder.male .category-image-placeholder::before {
+    /* Спрощений SVG Марса ♂️ */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='5'/%3E%3Cline x1='16.2' y1='7.8' x2='21' y2='3'/%3E%3Cpolyline points='17 3 21 3 21 7'/%3E%3C/svg%3E");
+}
+
+/* Фонові кольори папок (якщо немає зображень) */
+.category-folder.female .category-image-placeholder {
+    background-color: var(--color-accent-2);
+    /* Рожевий фон */
+}
+
+.category-folder.male .category-image-placeholder {
+    background-color: var(--color-accent-1);
+    /* Бірюзовий фон */
+}
+
+/* Центральний емоджі */
+.category-emoji {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    z-index: 1;
+    font-size: 100px;
+    line-height: 1;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease-out;
+    pointer-events: none;
+}
+
+.category-folder:hover .category-emoji {
+    transform: translate(-50%, -60%) scale(1.15);
+}
+
+/* Заголовок категорії */
+.category-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(59, 78, 81, 0.9) 10%, rgba(59, 78, 81, 0) 100%);
+    color: var(--color-background);
+    padding: 25px 20px 15px 20px;
+    margin: 0;
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.category-title span {
+    margin-right: 8px;
+}
+
+/* === MEDIA QUERIES (Adaptability) === */
+
+/* --- Tablet (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+
+    /* Header & Navigation */
+    header .container {
+        padding: 0 12px;
+        padding-left: 12px;
+    }
+
+    .main-nav {
+        display: none;
+    }
+
+    .burger-menu {
+        display: flex;
+    }
+
+    /* Buttons */
+    .btn-primary {
+        font-size: var(--text-sm);
+        padding: 10px 20px;
+    }
+
+    /* Product Card */
+    .product-card {
+        padding: 20px;
+    }
+}
+
+/* --- Mobile (max-width: 768px) --- */
+@media (max-width: 768px) {
+
+    /* Titles */
+    .section-title {
+        font-size: 28px;
+    }
+
+    .section-subtitle {
+        font-size: var(--text-sm);
+    }
+
+    /* Buttons */
+    .btn-primary {
+        padding: 10px 18px;
+    }
+
+    /* Product Card */
+    .product-card {
+        padding: 16px;
+    }
+
+    .about-section,
+    .about-section.image-right {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    img.about-image-placeholder {
+        height: 200px;
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        object-fit: cover;
+    }
+
+    .about-text h2 {
+        font-size: 28px;
+    }
+
+    .quick-contact-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-contact {
+        width: 80%;
+        max-width: 300px;
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .category-image-placeholder {
+        height: 300px;
+    }
+
+    .category-emoji {
+        font-size: 80px;
+    }
+
+    .category-title {
+        font-size: var(--text-lg);
+    }
+
+    .about-highlight-block {
+        flex-direction: column;
+        /* Стеком на мобільних */
+        text-align: center;
+        /* Центруємо все */
+        padding: 30px;
+        gap: 20px;
+    }
+
+    .highlight-icon-area {
+        flex-basis: auto;
+        /* Автоматична висота/ширина */
+        margin-bottom: 10px;
+        /* Відступ від тексту */
+        font-size: 50px;
+        /* Трохи менша іконка */
+    }
+
+    .highlight-text-area {
+        width: 100%;
+        /* На всю ширину */
+    }
+
+    .about-highlight-block h1.section-title,
+    .about-highlight-block h2,
+    .about-highlight-block p {
+        text-align: center;
+        /* Центруємо текст */
+    }
+
+    .about-highlight-block h1.section-title {
+        font-size: 28px;
+        /* Трохи менший заголовок */
+    }
+}
+
+/* --- Smaller Mobile (Optional, e.g., max-width: 480px) --- */
+@media (max-width: 480px) {
+    #brand-title {
+        font-size: 56px;
+    }
+
+    header .container {
+        padding-left: 120px;
+    }
+
+    .logo img {
+        height: 100px;
+    }
+
+    .category-image-placeholder {
+        height: 250px;
+    }
+
+    .category-emoji {
+        font-size: 60px;
+    }
+
+    .contact-form {
+        padding: 20px;
+    }
+}
+
+/* === Filters Form (Availability Page) === */
+.filters-form {
+    background-color: var(--color-background);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid var(--color-accent-3);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filters-form .filter-group {
+    flex: 0 1 calc(50% - 10px);
+    min-width: 180px;
+}
+
+.filters-form .price-filter-group {
+    flex: 0 1 calc(50% - 10px);
+    min-width: 120px;
+    display: flex;
+    align-items: baseline;
+}
+
+.filters-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    color: var(--color-dark);
+}
+
+/* ДОДАНО: Фіксуємо ширину мітки ціни */
+.filters-form .price-filter-group label {
+    width: 70px;
+    flex-shrink: 0;
+    margin-bottom: 0;
+    margin-right: 8px;
+    text-align: left;
+}
+
+/* Стилізація select */
+.filter-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%233B4E51' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px 16px;
+    padding-right: 40px;
+}
+
+/* Стилізація input[type=number] */
+.price-input {
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.filter-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.filter-submit-btn {
+    min-width: 150px;
+}
+
+.filter-reset-link {
+    color: var(--color-secondary);
+    text-decoration: underline;
+    font-size: var(--text-sm);
+    transition: color 0.3s ease;
+}
+
+.filter-reset-link:hover {
+    color: var(--color-dark);
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .filter-row {
+        gap: 15px;
+    }
+
+    .filters-form .filter-group,
+    .filters-form .price-filter-group {
+        min-width: 150px;
+    }
+
+    .filter-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* === Modal Styles === */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.modal.is-open {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-backdrop {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(59, 78, 81, 0.7);
+    z-index: 1040;
+}
+
+.modal-content {
+    position: relative;
+    background-color: var(--color-background);
+    margin: auto;
+    padding: 30px 40px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 650px;
+    z-index: 1050;
+    animation: modal-appear 0.4s ease-out;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1;
+    color: var(--color-dark);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.close-modal-btn:hover {
+    opacity: 1;
+}
+
+.modal-title {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: var(--text-xl);
+    color: var(--color-secondary);
+}
+
+.modal-content .filters-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@keyframes modal-appear {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 20px 25px;
+        width: 95%;
+        max-width: none;
+    }
+
+    .modal-title {
+        font-size: var(--text-lg);
+    }
+
+    .close-modal-btn {
+        font-size: 2rem;
+        top: 5px;
+        right: 10px;
+    }
+}
+
+/* === Django Messages Styles === */
+.messages-container {
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.alert {
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: var(--color-background);
+    position: relative;
+    text-align: center;
+    font-weight: var(--font-bold);
+    font-size: var(--text-md);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Стилі для різних типів повідомлень */
+.alert-success {
+    background-color: var(--color-primary);
+}
+
+.alert-error {
+    background-color: var(--color-secondary);
+}
+
+.alert-warning {
+    background-color: #ffc107;
+    color: var(--color-dark);
+}
+
+.alert-info {
+    background-color: var(--color-accent-1);
+    color: var(--color-dark);
+}
+
+/* Опціональна кнопка закриття (якщо розкоментуєш в HTML) */
+.close-alert {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: inherit;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.close-alert:hover {
+    opacity: 1;
+}
+
+/* === Product Detail Page (НОВИЙ МАКЕТ) === */
+
+/* Обгортка всієї сторінки */
+.product-detail-wrapper {
+    padding: 40px 0;
+    /* Вертикальні відступи */
+    background-color: var(--color-secondary);
+    /* <-- ЗМІНЕНО НА ПОМАРАНЧЕВИЙ */
+}
+
+/* Внутрішній контейнер для обмеження ширини контенту */
+.product-detail-wrapper .container {
+    max-width: 900px;
+    /* Можна підібрати ширину */
+    margin: 0 auto;
+    padding: 30px;
+    /* Внутрішні відступи для контенту */
+    background-color: var(--color-background);
+    /* Білий фон для самого контенту */
+    border-radius: 16px;
+    /* Заокруглення */
+    box-shadow: var(--shadow-md);
+    /* Тінь */
+    text-align: center;
+    /* Центруємо текст за замовчуванням */
+}
+
+/* Заголовок товару */
+.product-detail-wrapper .section-title {
+    margin-bottom: 30px;
+}
+
+/* Галерея мініатюр */
+.product-thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    /* Відступ ПІСЛЯ мініатюр, ПЕРЕД головним фото */
+}
+
+.thumbnail-item {
+    width: 60px;
+    /* Трохи менші мініатюри */
+    height: 60px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    /* Менше заокруглення */
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.thumbnail-item:hover {
+    transform: scale(1.1);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail-item.active {
+    border-color: var(--color-primary);
+    transform: scale(1.05);
+}
+
+.thumbnail-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Головне зображення */
+.product-main-image {
+    position: relative;
+    width: 100%;
+    /* Займає всю ширину контейнера */
+    overflow: hidden;
+    /* Залишаємо про всяк випадок, хоча не має бути видимим */
+    margin-bottom: 30px;
+    /* Відступ ПІСЛЯ головного фото */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-main-image img {
+    display: block;
+    max-width: 80vw;
+    /* Не ширше 80% екрану */
+    max-height: 70vh;
+    /* Не вище 70% екрану */
+    width: auto;
+    /* Авто-ширина для пропорцій */
+    height: auto;
+    /* Авто-висота для пропорцій */
+    object-fit: contain;
+    /* Вписуємо без обрізки */
+    border-radius: 8px;
+    /* Невелике заокруглення для самого фото (ЗАЛИШЕНО, бо стосується фото) */
+}
+
+/* Контент під фото */
+.product-info-content {
+    margin-top: 30px;
+}
+
+/* Заголовок "Опис" */
+.product-info-content h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--color-secondary);
+}
+
+/* Текст опису */
+.product-info-content p {
+    line-height: 1.7;
+    margin-bottom: 20px;
+    /* text-align: left; */
+    /* <-- ВИДАЛЕНО/ЗАКОМЕНТОВАНО, щоб успадкувати центрування */
+}
+
+/* Ціна */
+.product-detail-price {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    margin-top: 20px;
+    margin-bottom: 25px;
+    color: var(--color-primary);
+}
+
+/* Блок з кнопками */
+.product-detail-actions {
+    margin-top: 20px;
+    border-top: 1px solid var(--color-accent-3);
+    /* Розділювач */
+    padding-top: 25px;
+    /* Відступ над інструкцією */
+}
+
+/* Інструкція */
+.order-instruction {
+    margin-bottom: 15px;
+    font-size: var(--text-sm);
+    text-align: center;
+    color: var(--color-dark);
+}
+
+/* Контейнер кнопок */
+.quick-contact-buttons.align-start {
+    justify-content: center;
+    /* Центруємо кнопки під фото */
+    gap: 15px;
+}
+
+/* АДАПТИВНІСТЬ ДЛЯ НОВОГО МАКЕТУ */
+@media (max-width: 768px) {
+
+    /* Оновлення для нового wrapper */
+    .product-detail-wrapper .container {
+        padding: 20px;
+        /* Менші відступи на мобільному */
+        max-width: 95%;
+        /* Трохи ширше */
+    }
+
+    .product-info-content h2 {
+        font-size: var(--text-lg);
+    }
+
+    .product-detail-price {
+        font-size: var(--text-md);
+    }
+
+    .quick-contact-buttons.align-start {
+        flex-direction: column;
+        /* Кнопки одна під одною */
+        align-items: center;
+        /* Центруємо їх */
+        gap: 10px;
+    }
+
+    .quick-contact-buttons.align-start .btn-contact {
+        width: 80%;
+        /* Ширина кнопок */
+        max-width: 280px;
+    }
 }

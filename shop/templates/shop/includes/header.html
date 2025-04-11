@@ -7,22 +7,24 @@
         </a>
         <nav class="main-nav">
             <ul>
-                <li><a href="#">Про нас</a></li> {# Placeholder links #}
-                <li><a href="#">Товари</a></li>
-                <li><a href="#">Контакти</a></li>
+                <li><a href="{% url 'shop:about_us' %}">Про нас</a></li>
+                <li><a href="{% url 'shop:catalog' %}">Каталог</a></li>
+                <li><a href="{% url 'shop:availability' %}">В наявності</a></li>
+                <li><a href="{% url 'shop:contact' %}">Контакти</a></li>
             </ul>
         </nav>
-        <div class="burger-menu">
+        <div class="burger-menu" id="burger-menu">
             <span></span>
             <span></span>
             <span></span>
         </div> {# Замінено символ на три span #}
     </div>
-    <div class="mobile-nav">
+    <div class="mobile-nav" id="mobile-nav">
         <ul>
-            <li><a href="#">Про нас</a></li>
-            <li><a href="#">Товари</a></li>
-            <li><a href="#">Контакти</a></li>
+            <li><a href="{% url 'shop:about_us' %}">Про нас</a></li>
+            <li><a href="{% url 'shop:catalog' %}">Каталог</a></li>
+            <li><a href="{% url 'shop:availability' %}">В наявності</a></li>
+            <li><a href="{% url 'shop:contact' %}">Контакти</a></li>
         </ul>
     </div>
 </header>

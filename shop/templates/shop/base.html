@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Магазин</title>
     <link rel="stylesheet" href="{% static 'shop/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -16,6 +19,21 @@
         <img src="{% static 'shop/img/logo.png' %}" alt="Loading...">
     </div>
     {# Preloader End #}
+
+    {# --- Блок для повідомлень Django --- #}
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+            {# Можна додати кнопку закриття, якщо потрібно #}
+            {# <button type="button" class="close-alert"
+                onclick="this.parentElement.style.display='none'">&times;</button> #}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {# --- Кінець блоку повідомлень --- #}
 
     {% include 'shop/includes/header.html' %}
 
