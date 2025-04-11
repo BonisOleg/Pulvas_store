@@ -228,4 +228,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // --- Кінець логіки префіксів ---
 
-}); 
+});
+
+// --- Галерея зображень на сторінці товару --- 
+function changeMainImage(newImageUrl, thumbnailElement) {
+    const mainImage = document.getElementById('mainProductImage');
+    if (mainImage) {
+        mainImage.src = newImageUrl;
+    }
+
+    const currentActive = document.querySelector('.thumbnail-item.active');
+    if (currentActive) {
+        currentActive.classList.remove('active');
+    }
+    // Перевіряємо, що thumbnailElement існує і має батьківський елемент .thumbnail-item
+    if (thumbnailElement && thumbnailElement.closest('.thumbnail-item')) {
+        thumbnailElement.closest('.thumbnail-item').classList.add('active');
+    }
+} 

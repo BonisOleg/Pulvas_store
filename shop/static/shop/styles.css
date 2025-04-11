@@ -33,8 +33,6 @@
     /* Посилання в хедері / Заголовки карток */
     --text-xl: 28px;
     /* Заголовки категорій */
-    --text-xxl: 40px;
-    /* Старий розмір заголовка секції */
 }
 
 /* === BASE & RESET === */
@@ -357,7 +355,6 @@ footer {
 }
 
 footer p {
-    text-align: center;
     margin: 0;
     font-size: var(--text-sm);
 }
@@ -837,8 +834,10 @@ img.about-image-placeholder {
     /* Для ефекту з span */
     position: relative;
     /* Для ефекту з span */
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    /* Довший і плавніший перехід */
+    /* Базові стилі кнопки (font, padding, border-radius, etc.) успадковуються з .btn-primary */
+    /* Специфічний transition для .btn-contact */
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Додаємо плавний перехід і для тіні */
 }
 
 .btn-contact i {
@@ -1153,8 +1152,8 @@ img.about-image-placeholder {
         padding: 16px;
     }
 
-    body .about-section,
-    body .about-section.image-right {
+    .about-section,
+    .about-section.image-right {
         flex-direction: column;
         gap: 20px;
         text-align: center;
