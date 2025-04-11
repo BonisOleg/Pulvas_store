@@ -13,8 +13,8 @@ urlpatterns = [
     # Каталог товарів (нова сторінка)
     path('catalog/', views.catalog_view, name='catalog'),
 
-    # Відгуки
-    path('reviews/', views.reviews_view, name='reviews'),
+    # Відгуки - ВИДАЛЕНО
+    # path('reviews/', views.reviews_view, name='reviews'),
     # Маршрут для додавання відгуку поки не активний
     # path('reviews/add/', views.add_review_view, name='add_review'), 
 

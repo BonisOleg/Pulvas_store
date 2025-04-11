@@ -2,7 +2,7 @@
 
 # Імпортуємо функції view з кожного модуля
 from .products import product_list_view, product_detail_view
-from .reviews import reviews_view 
+# from .reviews import reviews_view # ВИДАЛЕНО
 from .contact import contact_view
 # Модуль availability видалено
 from .general import about_us_view
@@ -13,7 +13,7 @@ from .availability import availability_view
 __all__ = [
     'product_list_view',
     'product_detail_view',
-    'reviews_view',
+    # 'reviews_view', # ВИДАЛЕНО
     'contact_view',
     # Функція check_availability_view видалена
     'about_us_view',

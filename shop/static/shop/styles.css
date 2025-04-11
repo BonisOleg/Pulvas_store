@@ -378,6 +378,8 @@ footer p {
     padding: 24px;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     text-align: center;
+    max-width: 340px;
+    width: 100%;
 }
 
 .product-card:hover {
@@ -387,6 +389,7 @@ footer p {
 
 .product-card .product-image-placeholder {
     height: 390px;
+    width: 100%;
     border-radius: 8px;
     margin-bottom: 16px;
     background-color: rgba(0, 0, 0, 0.05);
@@ -1278,13 +1281,15 @@ img.about-image-placeholder {
 }
 
 .filters-form .filter-group {
-    flex: 1;
+    flex: 0 1 calc(50% - 10px);
     min-width: 180px;
 }
 
 .filters-form .price-filter-group {
-    flex: 1;
+    flex: 0 1 calc(50% - 10px);
     min-width: 120px;
+    display: flex;
+    align-items: baseline;
 }
 
 .filters-form label {
@@ -1293,6 +1298,15 @@ img.about-image-placeholder {
     font-size: var(--text-sm);
     font-weight: var(--font-bold);
     color: var(--color-dark);
+}
+
+/* ДОДАНО: Фіксуємо ширину мітки ціни */
+.filters-form .price-filter-group label {
+    width: 70px;
+    flex-shrink: 0;
+    margin-bottom: 0;
+    margin-right: 8px;
+    text-align: left;
 }
 
 /* Стилізація select */
@@ -1309,9 +1323,12 @@ img.about-image-placeholder {
 
 /* Стилізація input[type=number] */
 .price-input {
+    appearance: none;
     -webkit-appearance: none;
     margin: 0;
     -moz-appearance: textfield;
+    text-align: left;
+    flex-grow: 1;
 }
 
 .filter-actions {
