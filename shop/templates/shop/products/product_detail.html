@@ -2,44 +2,50 @@
 {% load static %}
 
 {% block content %}
-<div class="container contact-page-padding">
-    <h1 class="section-title">{{ product.name }}</h1>
+{# Отримуємо колірний клас товару (з utils або прямо тут, якщо логіка проста) #}
+{# Припускаємо, що 'product.color_class' вже існує і містить щось на кшталт 'bg-accent-1' #}
+<div class="product-detail-wrapper {{ product.color_class }}">
+    <div class="container"> {# Додамо внутрішній контейнер для обмеження ширини контенту #}
+        <h1 class="section-title">{{ product.name }}</h1>
 
-    <div class="product-detail-layout">
-        <div class="product-detail-column product-gallery-column">
-            <div class="product-main-image">
-                {% with main_image=product.get_main_image %}
-                {% if main_image and main_image.image %}
-                <img id="mainProductImage" src="{{ main_image.image.url }}" alt="{{ product.name }} - Головне фото">
-                {% else %}
-                <div class="product-detail-image-placeholder"><span>Фото відсутнє</span></div>
-                {% endif %}
-                {% endwith %}
-            </div>
-
-            {% if product_images|length > 1 %}
-            <div class="product-thumbnails">
-                {% for img_obj in product_images %}
-                {% if img_obj.image %}
-                <div class="thumbnail-item {% if img_obj.is_main %}active{% endif %}">
-                    <img src="{{ img_obj.image.url }}" alt="{{ product.name }} - фото {{ forloop.counter }}"
-                        onclick="changeMainImage('{{ img_obj.image.url }}', this)">
-                </div>
-                {% endif %}
-                {% endfor %}
+        {# Галерея мініатюр (тільки якщо їх більше 1) #}
+        {% if product_images|length > 1 %}
+        <div class="product-thumbnails">
+            {% for img_obj in product_images %}
+            {% if img_obj.image %}
+            <div class="thumbnail-item {% if img_obj.is_main %}active{% endif %}">
+                <img src="{{ img_obj.image.url }}" alt="{{ product.name }} - фото {{ forloop.counter }}"
+                    onclick="changeMainImage('{{ img_obj.image.url }}', this)">
             </div>
             {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {# Головне зображення #}
+        <div class="product-main-image">
+            {% with main_image=product.get_main_image %}
+            {% if main_image and main_image.image %}
+            <img id="mainProductImage" src="{{ main_image.image.url }}" alt="{{ product.name }} - Головне фото">
+            {% else %}
+            {# Залишимо простий плейсхолдер, бо фон вже є у wrapper #}
+            <span>Фото відсутнє</span>
+            {% endif %}
+            {% endwith %}
         </div>
 
-        <div class="product-detail-column product-info-column">
+        {# Інформація про товар #}
+        <div class="product-info-content">
             <h2>Опис</h2>
             <p>{{ product.description }}</p>
             <h3 class="product-detail-price">Ціна: {{ product.price }} грн</h3>
 
+            {# Дії / Кнопки #}
             <div class="product-detail-actions">
                 <p class="order-instruction">
                     Для замовлення зробіть скріншот сторінки і відправте нам:
                 </p>
+                {# Кнопки залишаємо як є, тільки в новій структурі #}
                 <div class="quick-contact-buttons align-start">
                     <a href="https://t.me/DanaAfanasenko" target="_blank" class="btn-primary btn-contact btn-telegram">
                         <i class="fab fa-telegram-plane"></i>
@@ -56,11 +62,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> {# Кінець .container #}
+</div> {# Кінець .product-detail-wrapper #}
 
-</div>
 
 <script>
+    // JS для зміни головного зображення залишається без змін
     function changeMainImage(newImageUrl, thumbnailElement) {
         const mainImage = document.getElementById('mainProductImage');
         if (mainImage) {
@@ -71,8 +78,9 @@
         if (currentActive) {
             currentActive.classList.remove('active');
         }
-        if (thumbnailElement && thumbnailElement.parentElement.classList.contains('thumbnail-item')) {
-            thumbnailElement.parentElement.classList.add('active');
+        // Перевіряємо, що thumbnailElement існує і має батьківський елемент .thumbnail-item
+        if (thumbnailElement && thumbnailElement.closest('.thumbnail-item')) {
+            thumbnailElement.closest('.thumbnail-item').classList.add('active');
         }
     }
 </script>

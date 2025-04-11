@@ -49,8 +49,8 @@ body {
 }
 
 *,
-\n*::before,
-\n*::after {
+*::before,
+*::after {
     box-sizing: inherit;
 }
 
@@ -1531,127 +1531,68 @@ img.about-image-placeholder {
     opacity: 1;
 }
 
-/* === Product Detail Page === */
-.product-detail-layout {
-    display: flex;
-    gap: 50px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-    /* Додаємо wrap для адаптивності */
+/* === Product Detail Page (НОВИЙ МАКЕТ) === */
+
+/* Обгортка всієї сторінки */
+.product-detail-wrapper {
+    padding: 40px 0;
+    /* Вертикальні відступи */
+    background-color: var(--color-secondary);
+    /* <-- ЗМІНЕНО НА ПОМАРАНЧЕВИЙ */
 }
 
-.product-detail-column {
-    /* flex: 1;  ВИДАЛЕНО: Замість цього використовуємо flex-basis/max-width */
-    min-width: 280px;
-    /* Мінімальна ширина для колонки на маленьких екранах */
+/* Внутрішній контейнер для обмеження ширини контенту */
+.product-detail-wrapper .container {
+    max-width: 900px;
+    /* Можна підібрати ширину */
+    margin: 0 auto;
+    padding: 30px;
+    /* Внутрішні відступи для контенту */
+    background-color: var(--color-background);
+    /* Білий фон для самого контенту */
+    border-radius: 16px;
+    /* Заокруглення */
+    box-shadow: var(--shadow-md);
+    /* Тінь */
+    text-align: center;
+    /* Центруємо текст за замовчуванням */
 }
 
-/* Нові правила для ширини колонок */
-.product-gallery-column {
-    flex: 1 1 45%;
-    /* Дозволяє зменшуватись, базовий розмір 45% */
-    max-width: 45%;
+/* Заголовок товару */
+.product-detail-wrapper .section-title {
+    margin-bottom: 30px;
 }
 
-.product-info-column {
-    flex: 1 1 55%;
-    /* Дозволяє зменшуватись, базовий розмір 55% */
-    max-width: 55%;
-}
-
-/* Замінюємо стилі для заголовка h1 на сторінці деталей товару */
-.product-detail-column h2 {
-    /* Стиль для заголовка "Опис" */
-    font-size: var(--text-xl);
-    /* Зробимо трохи більшим */
-    font-weight: var(--font-bold);
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: var(--color-secondary);
-    /* Використаємо акцентний колір */
-}
-
-.product-detail-column p {
-    /* Стиль для тексту опису */
-    line-height: 1.7;
-    margin-bottom: 20px;
-}
-
-.product-detail-price {
-    font-size: var(--text-lg);
-    font-weight: var(--font-bold);
-    margin-top: 20px;
-    margin-bottom: 25px;
-    /* Збільшимо відступ перед кнопками */
-    color: var(--color-primary);
-    /* Виділимо ціну */
-}
-
-.product-detail-actions {
-    margin-top: 20px;
-    /* Додаємо відступ для контейнера кнопок */
-}
-
-/* --- Галерея на сторінці деталей товару --- */
-.product-main-image {
-    /* Контейнер для головного фото */
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    /* Робимо контейнер квадратним, можна змінити */
-    background-color: var(--color-accent-3);
-    /* Фон, якщо немає фото */
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 15px;
-    /* Відступ до мініатюр */
-    display: flex;
-    /* Для центрування плейсхолдера, якщо фото немає */
-    align-items: center;
-    justify-content: center;
-}
-
-.product-main-image img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Або contain */
-}
-
+/* Галерея мініатюр */
 .product-thumbnails {
-    /* Контейнер для мініатюр */
     display: flex;
     flex-wrap: wrap;
-    /* Дозволяємо переноситись */
     gap: 10px;
-    /* Відступ між мініатюрами */
     justify-content: center;
-    /* Центруємо мініатюри */
+    margin-bottom: 20px;
+    /* Відступ ПІСЛЯ мініатюр, ПЕРЕД головним фото */
 }
 
 .thumbnail-item {
-    /* Контейнер однієї мініатюри */
-    width: 70px;
-    /* Фіксована ширина мініатюри */
-    height: 70px;
-    /* Фіксована висота мініатюри */
+    width: 60px;
+    /* Трохи менші мініатюри */
+    height: 60px;
     border: 2px solid transparent;
-    /* Рамка для виділення активної */
-    border-radius: 8px;
+    border-radius: 6px;
+    /* Менше заокруглення */
     overflow: hidden;
     cursor: pointer;
-    transition: border-color 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .thumbnail-item:hover {
-    transform: scale(1.05);
-    /* Збільшення при наведенні */
+    transform: scale(1.1);
+    border-color: rgba(0, 0, 0, 0.1);
 }
 
 .thumbnail-item.active {
     border-color: var(--color-primary);
-    /* Виділяємо активну мініатюру */
+    transform: scale(1.05);
 }
 
 .thumbnail-item img {
@@ -1661,59 +1602,121 @@ img.about-image-placeholder {
     object-fit: cover;
 }
 
-/* Адаптивність для сторінки деталей (включаючи галерею) */
+/* Головне зображення */
+.product-main-image {
+    position: relative;
+    width: 100%;
+    /* Займає всю ширину контейнера */
+    overflow: hidden;
+    /* Залишаємо про всяк випадок, хоча не має бути видимим */
+    margin-bottom: 30px;
+    /* Відступ ПІСЛЯ головного фото */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-main-image img {
+    display: block;
+    max-width: 80vw;
+    /* Не ширше 80% екрану */
+    max-height: 70vh;
+    /* Не вище 70% екрану */
+    width: auto;
+    /* Авто-ширина для пропорцій */
+    height: auto;
+    /* Авто-висота для пропорцій */
+    object-fit: contain;
+    /* Вписуємо без обрізки */
+    border-radius: 8px;
+    /* Невелике заокруглення для самого фото (ЗАЛИШЕНО, бо стосується фото) */
+}
+
+/* Контент під фото */
+.product-info-content {
+    margin-top: 30px;
+}
+
+/* Заголовок "Опис" */
+.product-info-content h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--color-secondary);
+}
+
+/* Текст опису */
+.product-info-content p {
+    line-height: 1.7;
+    margin-bottom: 20px;
+    /* text-align: left; */
+    /* <-- ВИДАЛЕНО/ЗАКОМЕНТОВАНО, щоб успадкувати центрування */
+}
+
+/* Ціна */
+.product-detail-price {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    margin-top: 20px;
+    margin-bottom: 25px;
+    color: var(--color-primary);
+}
+
+/* Блок з кнопками */
+.product-detail-actions {
+    margin-top: 20px;
+    border-top: 1px solid var(--color-accent-3);
+    /* Розділювач */
+    padding-top: 25px;
+    /* Відступ над інструкцією */
+}
+
+/* Інструкція */
+.order-instruction {
+    margin-bottom: 15px;
+    font-size: var(--text-sm);
+    text-align: center;
+    color: var(--color-dark);
+}
+
+/* Контейнер кнопок */
+.quick-contact-buttons.align-start {
+    justify-content: center;
+    /* Центруємо кнопки під фото */
+    gap: 15px;
+}
+
+/* АДАПТИВНІСТЬ ДЛЯ НОВОГО МАКЕТУ */
 @media (max-width: 768px) {
-    .product-detail-layout {
-        gap: 20px;
-        margin-top: 20px;
+
+    /* Оновлення для нового wrapper */
+    .product-detail-wrapper .container {
+        padding: 20px;
+        /* Менші відступи на мобільному */
+        max-width: 95%;
+        /* Трохи ширше */
     }
 
-    /* На мобільних повертаємо колонкам можливість займати всю ширину */
-    .product-gallery-column,
-    .product-info-column {
-        flex-basis: 100%;
-        max-width: 100%;
-    }
-
-    .product-detail-image-placeholder,
-    /* Розмір старого плейсхолдера */
-    .product-main-image {
-        /* Розмір нового контейнера */
-        height: auto;
-        /* Забираємо фіксовану висоту */
-        aspect-ratio: 4 / 3;
-        /* Встановлюємо співвідношення сторін */
-    }
-
-    .thumbnail-item {
-        width: 60px;
-        height: 60px;
-    }
-
-    .product-detail-column h2 {
+    .product-info-content h2 {
         font-size: var(--text-lg);
     }
 
     .product-detail-price {
         font-size: var(--text-md);
-        margin-bottom: 20px;
     }
-}
 
-/* === Нові стилі для сторінки деталей товару === */
+    .quick-contact-buttons.align-start {
+        flex-direction: column;
+        /* Кнопки одна під одною */
+        align-items: center;
+        /* Центруємо їх */
+        gap: 10px;
+    }
 
-.order-instruction {
-    margin-bottom: 15px;
-    /* ЗБІЛЬШЕНО (було 10px) */
-    font-size: var(--text-sm);
-    text-align: center;
-    color: var(--color-dark);
-    /* Додамо колір на всяк випадок */
-}
-
-/* Модифікатор для вирівнювання кнопок по лівому краю в product_detail */
-.quick-contact-buttons.align-start {
-    justify-content: flex-start;
-    gap: 15px;
-    /* ДОДАНО: Відступ між кнопками */
+    .quick-contact-buttons.align-start .btn-contact {
+        width: 80%;
+        /* Ширина кнопок */
+        max-width: 280px;
+    }
 }
